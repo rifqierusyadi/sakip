@@ -30,14 +30,13 @@ class target extends CI_Controller {
 		$this->load->view('template/default', $data);
 	}
 	
-	public function created()
+	public function created($id=null)
 	{
-		$data['head'] 		= 'Tambah Target RPJMD';
-		$data['record'] 	= $this->data->get_new();
+		$data['head'] 		= 'Tambah Target Indikator RPJMD';
+		$data['record'] 	= $this->data->get_record_id($id);
 		$data['content'] 	= $this->folder.'form';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
-		$data['periode']	= $this->data->get_periode();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -45,8 +44,9 @@ class target extends CI_Controller {
 	public function updated($id=null)
 	{
 		
-		$data['head'] 		= 'Target Indikator RPJMD';
+		$data['head'] 		= 'Ubah Target Indikator RPJMD';
 		$data['record'] 	= $this->data->get_record_id($id);
+		$data['detail'] 	= $this->data->get_detail($id);
 		$data['content'] 	= $this->folder.'form_edit';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
@@ -89,61 +89,39 @@ class target extends CI_Controller {
 // 		echo json_encode($output);
 //     }
 	
-// 	public function ajax_save()
-//     {
-// //        $data = array(
-// //				'periode_id' => $this->input->post('periode_id'),
-// //				'visi_id' => $this->input->post('visi_id'),
-// //				'misi_id' => $this->input->post('misi_id'),
-// //				'tujuan_id' => $this->input->post('tujuan_id'),
-// //				'sasaran_id' => $this->input->post('sasaran_id'),
-// //				'target' => $this->input->post('target'),
-// //				'awal' => $this->input->post('awal'),
-// //				'akhir' => $this->input->post('akhir')
-// //            );      
-		
-//         if($this->validation()){
-// 			$target = $this->input->post('target');
-// 			$result = array();
-// 			foreach($target AS $key => $val){
-// 				if($_POST['target'][$key] != ''){
-// 					$result[] = array(
-// 					 "periode_id"  => $this->input->post('periode_id'),
-// 					 "visi_id"  => $this->input->post('visi_id'),
-// 					 "misi_id"  => $this->input->post('misi_id'),
-// 					 "tujuan_id"  => $_POST['tujuan'][$key],
-// 					 "sasaran_id"  => $_POST['sasaran'][$key],
-// 					 "target"  => $_POST['target'][$key],
-// 					 "satuan_id"  => $_POST['satuan_id'][$key],
-// 					);
-// 				}
-// 			}
-//             //$insert = $this->data->insert($data);
-// 			$this->db->insert_batch('target', $result);
-// 			helper_log("add", "Menambah Target RPJMD");
-//         }
-//     }
+	public function ajax_save($id=null)
+    {
+			if($this->validation($id)){
+				$tahun = $this->input->post('tahun');
+				$result = array();
+				foreach($tahun AS $key => $val){
+					$result[] = array(
+					"indikator_id"  => $this->input->post('indikator_id'),
+					"tahun"  => $_POST['tahun'][$key],
+					"target"  => $_POST['target'][$key],
+					);
+				}
+				$this->db->insert_batch('indikator_detail', $result);
+				helper_log("add", "Menambah Target RPJMD");
+			}
+    }
     
     public function ajax_update($id=null)
     {
-        // $data = array(
-		// 		'target' => $this->input->post('target'),
-		// 		'satuan_id' => $this->input->post('satuan_id')
-        //     ); 
-		
         if($this->validation($id)){
             // $update = $this->data->update($data, $id);
 			$tahun = $this->input->post('tahun');
 			$result = array();
 			foreach($tahun AS $key => $val){
 				$result[] = array(
+				 "id"  => $_POST['id'][$key],
 				 "indikator_id"  => $this->input->post('indikator_id'),
 				 "tahun"  => $_POST['tahun'][$key],
 				 "target"  => $_POST['target'][$key],
 				);
 			}
 			//$insert = $this->data->insert($data);
-			$this->db->insert_batch('indikator_detail', $result);
+			$this->db->update_batch('indikator_detail', $result, 'id');
 			helper_log("edit", "Merubah target RPJMD");
         }
     }
