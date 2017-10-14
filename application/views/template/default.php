@@ -24,7 +24,7 @@
 	
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
-<body class="hold-transition skin-blue layout-top-nav">
+<body class="hold-transition skin-red layout-top-nav">
 <div class="wrapper">
   <header class="main-header">
     <nav class="navbar navbar-static-top">
@@ -54,8 +54,11 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> OPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
-								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Anggaran OPD</a></li>
+                <li><a href="<?= site_url('pk/jpt'); ?>"><i class="fa fa-file-text-o"></i> PK JPT</a></li>
+                <li><a href="<?= site_url('pk/admin'); ?>"><i class="fa fa-file-text-o"></i> PK Administrator</a></li>
+                <li><a href="<?= site_url('pk/pengawas'); ?>"><i class="fa fa-file-text-o"></i> PK Pengawas</a></li>
+                <li class="divider"></li>
+               	<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Anggaran OPD</a></li>
 								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Kinerja OPD</a></li>
 								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja OPD</a></li>
               </ul>

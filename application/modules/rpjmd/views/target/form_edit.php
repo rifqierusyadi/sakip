@@ -33,53 +33,28 @@
 						</dl>
 						</div>
 					</div>
-					<?php $periode = $this->db->get_where('ref_periode', array('id'=>$record->periode_id))->row_array(); ?>
-					<?php if($periode){ ?>
-					<?php for($i = $periode['awal']-1; $i <= $periode['akhir']; $i++){ ?>
-						<?php if($i == $periode['awal']-1){ ?>
-							<div class="col-md-6">
-							<div class="form-group <?php echo form_error('target') ? 'has-error' : null; ?>">
-							<?php
-							echo form_label('Kondisi '.$i,'target');
-							$data = array('class'=>'form-control','name'=>'target[]','id'=>'target','type'=>'text','value'=>set_value('target[]'));
-							echo form_input($data);
-							echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';
-							?>
-							<input type="hidden" name="tahun[]" value="<?= $i; ?>" />
-							</div>
-							</div>
-						<?php }elseif($i == $periode['akhir']){ ?>
-							<div class="col-md-6">
-							<div class="form-group <?php echo form_error('target') ? 'has-error' : null; ?>">
-							<?php
-							echo form_label('Target Akhir '.$i,'target');
-							$data = array('class'=>'form-control','name'=>'target[]','id'=>'target','type'=>'text','value'=>set_value('target[]'));
-							echo form_input($data);
-							echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';
-							?>
-							<input type="hidden" name="tahun[]" value="<?= $i; ?>" />
-							</div>
-							</div>	
-						<?php }else{ ?>
-							<div class="col-md-6">
-							<div class="form-group <?php echo form_error('target') ? 'has-error' : null; ?>">
-							<?php
-							echo form_label('Target '.$i,'target');
-							$data = array('class'=>'form-control','name'=>'target[]','id'=>'target','type'=>'text','value'=>set_value('target[]'));
-							echo form_input($data);
-							echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';
-							?>
-							<input type="hidden" name="tahun[]" value="<?= $i; ?>" />
-							</div>
-							</div>
-						<?php } ?>
-					<?php } ?>
+					<?php if($detail){ ?>
+					<?php foreach($detail as $row){
+					?>
+					<div class="col-md-6">
+					<div class="form-group <?php echo form_error('target') ? 'has-error' : null; ?>">
+					<?php
+					echo form_label('Kondisi '.$row['tahun'],'target');
+					$data = array('class'=>'form-control','name'=>'target[]','id'=>'target','type'=>'text','value'=>set_value('target[]',$row['target']));
+					echo form_input($data);
+					echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';
+					?>
+					<input type="hidden" name="id[]" value="<?= $row['id']; ?>" />
+					<input type="hidden" name="tahun[]" value="<?= $row['tahun']; ?>" />
+					</div>
+					</div>
+					<?php	
+					} ?>
 					<?php } ?>
 				</div>
 			</div>
 			<!-- ./box-body -->
 			<div class="box-footer">
-				<button type="button" class="btn btn-sm btn-flat btn-success" onclick="save()"><i class="fa fa-save"></i> Simpan</button>
 				<button type="button" class="btn btn-sm btn-flat btn-info" onclick="saveout();"><i class="fa fa-save"></i> Simpan & Keluar</button>
 				<button type="reset" class="btn btn-sm btn-flat btn-warning"><i class="fa fa-refresh"></i> Reset</button>
 				<button type="button" class="btn btn-sm btn-flat btn-danger" onclick="back();"><i class="fa fa-close"></i> Keluar</button>

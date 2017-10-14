@@ -356,3 +356,21 @@ if (! function_exists('analisa'))
 		}
 	}
 }
+
+//analisa jabatan
+if (! function_exists('indikator'))
+{
+	function indikator($kode=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $kode);
+			$query = $CI->db->get('indikator_detail');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

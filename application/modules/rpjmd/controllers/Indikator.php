@@ -13,6 +13,7 @@ class Indikator extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('identitas_helper');
 		$this->load->model('indikator_m', 'data');
 		signin();
 		admin();
@@ -37,7 +38,8 @@ class Indikator extends CI_Controller {
 		$data['content'] 	= $this->folder.'form';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
-		$data['periode']	= $this->data->get_periode();
+		$$data['periode']	= $this->data->get_periode();
+		$data['satuan']		= $this->data->get_satuan();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -51,7 +53,7 @@ class Indikator extends CI_Controller {
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
-		$data['satuan']		= $this->data->get_Satuan();
+		$data['satuan']		= $this->data->get_satuan();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -76,8 +78,14 @@ class Indikator extends CI_Controller {
 			$col[] = $row->periode;
 			
 			//add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" href="'.site_url('rpjmd/target/updated/'.$row->id).'" data-toggle="tooltip" title="Target"><i class="glyphicon glyphicon-stats"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('rpjmd/indikator/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-                  <a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+			if(indikator($row->id)){
+				$col[] = '<a class="btn btn-xs btn-flat btn-success" href="'.site_url('rpjmd/target/updated/'.$row->id).'" data-toggle="tooltip" title="Target"><i class="glyphicon glyphicon-ok-circle"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('rpjmd/indikator/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+				<a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+			}else{
+				$col[] = '<a class="btn btn-xs btn-flat btn-danger" href="'.site_url('rpjmd/target/created/'.$row->id).'" data-toggle="tooltip" title="Target"><i class="glyphicon glyphicon-remove-circle"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('rpjmd/indikator/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+				<a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+		  
+			}
             $data[] = $col;
         }
  

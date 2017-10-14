@@ -119,6 +119,7 @@ function saveout()
 {
     var location = window.location.href;
     var process = location.substring(location.lastIndexOf('/')+1);
+    var n = location.search("created");
     
     if(process == 'created'){
 		var current = window.location.toString();
@@ -300,11 +301,13 @@ function back()
 
 function savebackout()
 {
+    
     var location = window.location.href;
     var process = location.substring(location.lastIndexOf('/')+1);
-    var id = $("#nip").val();
+    var n = location.search("created");
+    //alert(process);
     
-    if(process == 'created'){
+    if(n > 0){
 		var current = window.location.toString();
 		var url = current.replace(/created/, 'ajax_save');
     }else{
@@ -341,25 +344,17 @@ function savebackout()
 				var n = location.search("created");
 				
 				if(n > 0){
-					var base_url = window.location.origin;
-					var current = window.location.toString();
-					var lastIndex = location.substring(location.lastIndexOf('/')+1);
-					var url = current.replace(lastIndex, '');
-					var redirect = base_url+'/simpeg3/data/identitas/'+id;
-					//var redirect = base_url+'/simpeg3/data/identitas/'+lastIndex;
-					//var pathArray = window.location.pathname.split( '/' );
-					//alert(redirect);
-					window.location.href = redirect;
-					//reload_table();
+					  var current = window.location.toString();
+					  var lastIndex = location.substring(location.lastIndexOf('created')-1);
+					  var url = current.replace(lastIndex, '');
+					  window.location.href = url;
+					  reload_table();
 				}else{
-					var base_url = window.location.origin;
-					var current = window.location.toString();
-					var lastIndex = location.substring(location.lastIndexOf('/')+1);
-					var url = current.replace(lastIndex, '');
-					var redirect = base_url+'/simpeg3/data/identitas/'+id;
-					
-					window.location.href = redirect
-					//reload_table();
+					  var current = window.location.toString();
+					  var lastIndex = location.substring(location.lastIndexOf('updated')-1);
+					  var url = current.replace(lastIndex, '');
+					  window.location.href = url;
+					  reload_table();
 				}
             }else{
                 $.each(data.messages, function(key, value) {
@@ -378,34 +373,6 @@ function savebackout()
             alert('Ada kesalahan dalam proses penyimpanan/pembaharuan data.');
         }
     });
-}
-
-function backward()
-{
-    var location = window.location.href;
-    var n = location.search("created");
-    var id = $("#nip").val();
-    if(n > 0){
-		var base_url = window.location.origin;
-		var current = window.location.toString();
-		var lastIndex = location.substring(location.lastIndexOf('/')+1);
-		var url = current.replace(lastIndex, '');
-		var redirect = base_url+'/simpeg3/data/identitas/'+id;
-		//var redirect = base_url+'/simpeg3/data/identitas/'+lastIndex;
-		//var pathArray = window.location.pathname.split( '/' );
-		//alert(redirect);
-		window.location.href = redirect;
-		//reload_table();
-    }else{
-		var base_url = window.location.origin;
-		var current = window.location.toString();
-		var lastIndex = location.substring(location.lastIndexOf('/')+1);
-		var url = current.replace(lastIndex, '');
-		var redirect = base_url+'/simpeg3/data/identitas/'+id;
-		
-		window.location.href = redirect
-		//reload_table();
-    }
 }
 
 $(document).keypress(function(e) {

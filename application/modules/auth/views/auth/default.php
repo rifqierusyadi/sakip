@@ -22,7 +22,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>LOGIN</b>SAKIP</a>
+    <a href="../../index2.html"><b>E-</b>SAKIP</a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

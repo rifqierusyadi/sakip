@@ -146,7 +146,7 @@ class Target_m extends MY_Model
 		$this->db->where('deleted_at', NULL);
         $query = $this->db->get('indikator_detail');
 		if($query->num_rows() > 0){
-			return $query->result();	
+			return $query->result_array();	
 		}else{
 			//show_404();
 			return FALSE;
