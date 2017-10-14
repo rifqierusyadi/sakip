@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class target extends CI_Controller {
+class Target extends CI_Controller {
 
 	/**
 	 * code by rifqie rusyadi
