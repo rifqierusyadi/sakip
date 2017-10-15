@@ -374,3 +374,20 @@ if (! function_exists('indikator'))
 		}
 	}
 }
+
+if (! function_exists('makro'))
+{
+	function makro($kode=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('makro_id', $kode);
+			$query = $CI->db->get('makro_detail');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

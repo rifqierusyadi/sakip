@@ -38,7 +38,7 @@ class Indikator extends CI_Controller {
 		$data['content'] 	= $this->folder.'form';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
-		$$data['periode']	= $this->data->get_periode();
+		$data['periode']	= $this->data->get_periode();
 		$data['satuan']		= $this->data->get_satuan();
 		
 		$this->load->view('template/default', $data);

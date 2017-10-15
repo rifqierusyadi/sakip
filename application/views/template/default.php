@@ -48,15 +48,16 @@
 								<li><a href="<?= site_url('rpjmd/tujuan'); ?>"><i class="fa fa-file-text-o"></i> Tujuan RPJMD</a></li>
 								<li><a href="<?= site_url('rpjmd/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Sasaran/Kinerja Utama</a></li>
 								<li><a href="<?= site_url('rpjmd/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Sasaran/Kinerja Utama</a></li>
-								<li><a href="<?= site_url('rpjmd/opd'); ?>"><i class="fa fa-file-text-o"></i> OPD Penanggung Jawab</a></li>
+                <li><a href="<?= site_url('rpjmd/makro'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Makro</a></li>
+								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> OPD Penanggung Jawab</a></li>
               </ul>
             </li>
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> OPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/jpt'); ?>"><i class="fa fa-file-text-o"></i> PK JPT</a></li>
-                <li><a href="<?= site_url('pk/admin'); ?>"><i class="fa fa-file-text-o"></i> PK Administrator</a></li>
-                <li><a href="<?= site_url('pk/pengawas'); ?>"><i class="fa fa-file-text-o"></i> PK Pengawas</a></li>
+                <li><a href="<?= site_url('pk/jpt'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja JPT</a></li>
+                <li><a href="<?= site_url('pk/admin'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Administrator</a></li>
+                <li><a href="<?= site_url('pk/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Pengawas</a></li>
                 <li class="divider"></li>
                	<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Anggaran OPD</a></li>
 								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Kinerja OPD</a></li>
