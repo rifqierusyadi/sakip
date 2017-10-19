@@ -1,19 +1,20 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Jpt extends CI_Controller {
+class Program extends CI_Controller {
 
 	/**
 	 * code by rifqie rusyadi
 	 * email rifqie.rusyadi@gmail.com
 	 */
 	
-	public $folder = 'rpjmd/jpt/';
+	public $folder = 'sopd/program/';
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('jpt_m', 'data');
+		$this->load->helper('identitas_helper');
+		$this->load->model('program_m', 'data');
 		signin();
 		admin();
 	}
@@ -21,21 +22,24 @@ class Jpt extends CI_Controller {
 	//halaman index
 	public function index()
 	{
-		$data['head'] 		= 'Perjanjian Kinerja Tingkat JPT';
+		$data['head'] 		= 'Program dan Kegiatan SOPD';
 		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
+		
 		$this->load->view('template/default', $data);
 	}
 	
-	public function created($id=null)
+	public function created()
 	{
-		$data['head'] 		= 'Tambah Target Indikator RPJMD';
-		$data['record'] 	= $this->data->get_record_id($id);
+		$data['head'] 		= 'Tambah Program dan Kegiatan SOPD';
+		$data['record'] 	= $this->data->get_new();
 		$data['content'] 	= $this->folder.'form';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
+		$data['periode']	= $this->data->get_periode();
+		$data['satuan']		= $this->data->get_satuan();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -43,12 +47,13 @@ class Jpt extends CI_Controller {
 	public function updated($id=null)
 	{
 		
-		$data['head'] 		= 'Ubah Target Indikator RPJMD';
-		$data['record'] 	= $this->data->get_record_id($id);
-		$data['detail'] 	= $this->data->get_detail($id);
+		$data['head'] 		= 'Edit Program dan Kegiatan SOPD';
+		$data['record'] 	= $this->data->get_id($id);
 		$data['content'] 	= $this->folder.'form_edit';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
+		$data['periode']	= $this->data->get_periode();
+		$data['satuan']		= $this->data->get_satuan();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -60,21 +65,19 @@ class Jpt extends CI_Controller {
         $no 	= $_POST['start'];
 		
         foreach ($record as $row) {
-         	$no++;
-         	$col = array();
-         	$col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-				$col[] = $row->visi;
-				$col[] = $row->misi;
-				$col[] = $row->tujuan;
-				$col[] = $row->sasaran;
-				//$col[] = strip_tags($row->visi).'<br>--- '.strip_tags($row->misi).'<br>------'.$row->tujuan.'<br>---------'.$row->sasaran;
-				$col[] = $row->jpt;
-				$col[] = $row->satuan;
-				$col[] = $row->periode;
-			
-				//add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" href="'.site_url('rpjmd/jpt/jpt/'.$row->id).'" data-toggle="tooltip" title="Target"><i class="glyphicon glyphicon-stats"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('rpjmd/jpt/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-                  <a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+            $no++;
+            $col = array();
+            $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
+			$col[] = $row->periode;
+			$col[] = $row->kode;
+			$col[] = $row->program;
+			$col[] = number_format($row->total);
+			$col[] = $row->rekening;
+			$col[] = $row->kegiatan;
+			$col[] = number_format($row->nilai);
+			$col[] = '<a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('sopd/program/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+			<a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+	  
             $data[] = $col;
         }
  
@@ -88,47 +91,66 @@ class Jpt extends CI_Controller {
 		echo json_encode($output);
     }
 	
-	public function ajax_save($id=null)
+	public function ajax_save()
     {
-			if($this->validation($id)){
-				$tahun = $this->input->post('tahun');
-				$result = array();
-				foreach($tahun AS $key => $val){
+       $data = array(
+				'periode_id' => $this->input->post('periode_id'),
+				'kode' => $this->input->post('kode'),
+				'program' => $this->input->post('program'),
+				'total' => $this->input->post('total'),
+				'satker_id' => 'S00030'
+           );      
+		
+        if($this->validation()){
+			$insert = $this->data->insert($data);
+			$kegiatan = $this->input->post('kegiatan');
+			$result = array();
+			foreach($kegiatan AS $key => $val){
+				if($_POST['kegiatan'][$key] != ''){
 					$result[] = array(
-					"indikator_id"  => $this->input->post('indikator_id'),
-					"tahun"  => $_POST['tahun'][$key],
-					"jpt"  => $_POST['jpt'][$key],
+					 "periode_id"  => $this->input->post('periode_id'),
+					 "program_id"  => $insert,
+					 "rekening"  => $_POST['rekening'][$key],
+					 "kegiatan"  => $_POST['kegiatan'][$key],
+					 "nilai"  => $_POST['nilai'][$key],
+					 "satker_id"  => 'S00030'
 					);
 				}
-				$this->db->insert_batch('indikator_detail', $result);
-				helper_log("add", "Menambah Perjanjian Kinerja Tingkat JPT");
 			}
+            //$insert = $this->data->insert($data);
+			$this->db->insert_batch('kegiatan', $result);
+			helper_log("add", "Menambah Program dan Kegiatan SOPD");
+        }
     }
     
     public function ajax_update($id=null)
     {
+        $data = array(
+				'program' => $this->input->post('program'),
+				'satuan_id' => $this->input->post('satuan_id')
+            ); 
+		
         if($this->validation($id)){
             // $update = $this->data->update($data, $id);
-			$tahun = $this->input->post('tahun');
-			$result = array();
-			foreach($tahun AS $key => $val){
-				$result[] = array(
-				 "id"  => $_POST['id'][$key],
-				 "indikator_id"  => $this->input->post('indikator_id'),
-				 "tahun"  => $_POST['tahun'][$key],
-				 "jpt"  => $_POST['jpt'][$key],
-				);
-			}
+			// $nm = $this->input->post('target');
+			// $result = array();
+			// foreach($nm AS $key => $val){
+			// 	$result[] = array(
+			// 	 "id"  => $_POST['detail_id'][$key],
+			// 	 "tahun"  => $_POST['tahun'][$key],
+			// 	 "target"  => $_POST['target'][$key],
+			// 	);
+			// }
 			//$insert = $this->data->insert($data);
-			$this->db->update_batch('indikator_detail', $result, 'id');
-			helper_log("edit", "Merubah jpt RPJMD");
+			$this->data->update($data, $id);
+			helper_log("edit", "Merubah Program SOPD");
         }
     }
     
     public function ajax_delete($id=null)
     {
         $this->data->delete($id);
-		helper_log("trash", "Menghapus Perjanjian Kinerja Tingkat JPT");
+		helper_log("trash", "Menghapus Program SOPD");
         echo json_encode(array("status" => TRUE));
     }
     
@@ -137,7 +159,7 @@ class Jpt extends CI_Controller {
         $list_id = $this->input->post('id');
         foreach ($list_id as $id) {
             $this->data->delete($id);
-			helper_log("trash", "Menghapus Perjanjian Kinerja Tingkat JPT");
+			helper_log("trash", "Menghapus Program SOPD");
         }
         echo json_encode(array("status" => TRUE));
     }
@@ -146,7 +168,12 @@ class Jpt extends CI_Controller {
     {
         //$id = $this->input->post('id');
 		$data = array('success' => false, 'messages' => array());
-		$this->form_validation->set_rules("indikator_id", "Indikator RPJMD", "trim|required");
+			$this->form_validation->set_rules("periode_id", "Periode Anggaran", "trim|required");
+			$this->form_validation->set_rules("kode", "Kode Program", "trim|required");
+			$this->form_validation->set_rules("program", "Program", "trim|required");
+		//$this->form_validation->set_rules("tujuan_id", "Tujuan RPJMD", "trim|required");
+		//$this->form_validation->set_rules("sasaran_id", "Sasaran RPJMD", "trim|required");
+		//$this->form_validation->set_rules("program", "Program SOPD", "trim|required");
 		$this->form_validation->set_error_delimiters('<p class="text-danger">', '</p>');
         
         if($this->form_validation->run()){
@@ -237,7 +264,7 @@ class Jpt extends CI_Controller {
 						echo '<div id="wrapper'.$b->id.'"><div id="child"><input type="hidden" value="'.$b->tujuan_id.'" name="tujuan[]" id="tujuan'.$b->id.'"><input type="hidden" value="'.$b->id.'" name="sasaran[]" id="sasaran">';
 						echo '<div class="input-group input-group"><div class="input-group-btn"><button class="btn btn-info btn-flat add-button" data-number="'.$b->id.'" type="button" onclick="tambah(this.getAttribute(\'data-number\'))"><i class="fa fa-plus"></i></button></div>';
 						echo '<div class="col-md-8">';
-						$data = array('class'=>'form-control','name'=>'jpt[]','id'=>'jpt','type'=>'text','value'=>set_value('jpt[]'),'placeholder'=>'jpt Sasaran RPJMD');
+						$data = array('class'=>'form-control','name'=>'program[]','id'=>'program','type'=>'text','value'=>set_value('program[]'),'placeholder'=>'Indikator Sasaran RPJMD');
 						echo form_input($data);
 						echo '</div><div id="satuan"><div class="col-md-4">';
 						$selected = set_value('satuan_id');
@@ -252,14 +279,14 @@ class Jpt extends CI_Controller {
         }
 	}
 	
-	public function get_satuan(){
-		$tujuan_id = $this->input->post('tujuan_id');
-		$id = $this->input->post('id');
+	public function get_kegiatan(){
+		//$tujuan_id = $this->input->post('tujuan_id');
+		//$id = $this->input->post('id');
 
 		echo '<div class="child"><br><input type="hidden" value="'.$tujuan_id.'" name="tujuan[]" id="tujuan'.$id.'"><input type="hidden" value="'.$id.'" name="sasaran[]" id="sasaran">';
 		echo '<div class="input-group input-group"><div class="input-group-btn"><button class="btn btn-danger btn-flat add-button remove" data-number="'.$id.'" type="button" onclick="remove(this.getAttribute(\'data-number\'))"><i class="fa fa-minus"></i></button></div>';
 		echo '<div class="col-md-8">';
-		$data = array('class'=>'form-control','name'=>'jpt[]','id'=>'jpt','type'=>'text','value'=>set_value('jpt[]'),'placeholder'=>'jpt Sasaran RPJMD');
+		$data = array('class'=>'form-control','name'=>'program[]','id'=>'program','type'=>'text','value'=>set_value('program[]'),'placeholder'=>'Indikator Sasaran RPJMD');
 		echo form_input($data);
 		echo '</div><div class="col-md-4">';
 		$selected = set_value('satuan_id');

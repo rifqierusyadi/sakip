@@ -59,9 +59,15 @@
                 <li><a href="<?= site_url('pk/admin'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Administrator</a></li>
                 <li><a href="<?= site_url('pk/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Pengawas</a></li>
                 <li class="divider"></li>
-               	<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Anggaran OPD</a></li>
-								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Kinerja OPD</a></li>
-								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja OPD</a></li>
+               	 <li><a href="<?= site_url('kinerja/jpt'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja JPT</a></li>
+                <li><a href="<?= site_url('kinerja/admin'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja Administrator</a></li>
+                <li><a href="<?= site_url('kinerja/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja Pengawas</a></li>
+                <li class="divider"></li>
+                <li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja JPT</a></li>
+                <li><a href="<?= site_url('realisasi/admin'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Administrator</a></li>
+                <li><a href="<?= site_url('realisasi/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Pengawas</a></li>
+                <li class="divider"></li>
+                <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Anggaran SOPD</a></li>
               </ul>
             </li>
 						<li class="dropdown">
@@ -70,13 +76,12 @@
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Matrik RPJMD</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Capaian Kinerja</a></li>
 								<li class="divider"></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahun</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahunan</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Triwulan</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Tahun</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efektifitas</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li>
+								<li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efisiensi/Efektifitas</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Matriks Lakip BAB III</a></li>
               </ul>
             </li>
 						<li class="dropdown">
@@ -172,13 +177,13 @@
 <script src="<?= base_url('asset/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js'); ?>"></script>
-<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
 <script src="<?= base_url('asset/plugins/select2/select2.full.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/datepicker/bootstrap-datepicker.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.date.extensions.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/tinymce/tinymce.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/treetable/treeTable.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/number/jquery.number.min.js'); ?>"></script>
 <script src="<?= base_url('asset/app.js'); ?>"></script>
 <?= isset($js) ? $this->load->view($js) : ''; ?>
 

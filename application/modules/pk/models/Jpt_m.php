@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Jpt_m extends MY_Model
 {
-	public $table = 'indikator_detail'; // you MUST mention the table name
+	public $table = 'pohon'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
@@ -39,15 +39,15 @@ class Jpt_m extends MY_Model
 	//urusan lawan datatable
     private function _get_datatables_query()
     {
-        $this->db->select('a.*, b.periode, c.visi, d.misi, e.tujuan, f.sasaran, g.satuan');
-		$this->db->from('indikator a');
-		$this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
-		$this->db->join('visi c','a.visi_id = c.id','LEFT');
-		$this->db->join('misi d','a.misi_id = d.id','LEFT');
-		$this->db->join('tujuan e','a.tujuan_id = e.id','LEFT');
-		$this->db->join('sasaran f','a.sasaran_id = f.id','LEFT');
-		$this->db->join('ref_satuan g','a.satuan_id = g.id','LEFT');
-		//$this->db->from($this->table);
+        // $this->db->select('a.*, b.periode, c.visi, d.misi, e.tujuan, f.sasaran, g.satuan');
+		// $this->db->from('indikator a');
+		// $this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
+		// $this->db->join('visi c','a.visi_id = c.id','LEFT');
+		// $this->db->join('misi d','a.misi_id = d.id','LEFT');
+		// $this->db->join('tujuan e','a.tujuan_id = e.id','LEFT');
+		// $this->db->join('sasaran f','a.sasaran_id = f.id','LEFT');
+		// $this->db->join('ref_satuan g','a.satuan_id = g.id','LEFT');
+		$this->db->from($this->table);
         $i = 0;
         foreach ($this->column_search as $item) // loop column 
         {

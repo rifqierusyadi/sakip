@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => 'root',
 	'database' => 'sakip_dbase',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => 'simpeg_',
+	'dbprefix' => 'sakip_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,
