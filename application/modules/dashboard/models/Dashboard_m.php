@@ -82,7 +82,7 @@ class Dashboard_m extends MY_Model
 	
 	public function get_record()
 	{
-		$query = $this->db->query("Select a.visi, b.misi, c.tujuan, d.sasaran from simpeg_sasaran d LEFT JOIN simpeg_visi a ON a.id = d.visi_id LEFT JOIN simpeg_misi b ON b.id = d.misi_id LEFT JOIN simpeg_tujuan c ON c.id = d.tujuan_id WHERE d.deleted_at is NULL");
+		$query = $this->db->query("Select a.visi, b.misi, c.tujuan, d.sasaran from sakip_sasaran d LEFT JOIN sakip_visi a ON a.id = d.visi_id LEFT JOIN sakip_misi b ON b.id = d.misi_id LEFT JOIN sakip_tujuan c ON c.id = d.tujuan_id WHERE d.deleted_at is NULL");
 		if($query->num_rows() > 0){
 			return $query->result_array();
 		}else{

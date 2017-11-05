@@ -41,7 +41,7 @@ class Sotk extends CI_Controller {
 			$col[] = $row->satker;
 			$col[] = '';
             //add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="" href="#" data-toggle="tooltip" title="Lihat"><i class="fa fa-sitemap"></i></a>
+            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="" href="'.site_url('sotk/tree/'.$row->kode).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-sitemap"></i></a>
                   ';
  
             $data[] = $col;
@@ -60,15 +60,16 @@ class Sotk extends CI_Controller {
 	public function tree($id)
 	{
 		
-		$nunker = $this->data->get_nunker($id);
+		$satker = $this->data->get_satker($id);
 		
-		$data['head'] 		= $nunker ? 'SOTK - '.$nunker : 'SOTK';
+		$data['head'] 		= $satker ? 'SOTK - '.$satker : 'SOTK';
 		$data['record'] 	= $this->data->get_all();
-		$data['satker'] 	= $this->data->get_nested();
+		$data['satker'] 	= $this->data->get_nested($id);
 		$data['content'] 	= $this->folder.'tree';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		
+		var_dump($data['satker']);
 		$this->load->view('template/default', $data);
 	}
 }

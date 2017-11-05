@@ -81,30 +81,30 @@ class Sotk_m extends MY_Model
         return $query->result();
     }
 	
-	public function get_nunker($id=null)
+	public function get_satker($kode=null)
 	{
-		$query = $this->db->get_where('ref_unker',array('id'=>$id));
+		$query = $this->db->get_where('ref_satker',array('kode'=>$kode));
 		if($query->num_rows() > 0)
 		{
-			return $query->row('unker');
+			return $query->row('satker');
 		}else{
 			return FALSE;
 		}
 	}
 	
-	public function get_nested()
+	public function get_nested($kode=null)
 	{
-		$this->db->where('unker_id','32');
-		$this->db->order_by('parent','asc');
+		$this->db->where('kode',$kode);
+		$this->db->order_by('parent_id','asc');
 		$this->db->order_by('order_id','asc');
 		$satker = $this->db->get('ref_satker')->result_array();
 		
 		$array = array();
 		foreach ($satker as $row){
-			if(!$row['parent']){
+			if(!$row['parent_id']){
 				$array[$row['id']] = $row;
 			}else{
-				$array[$row['parent']]['children'][] = $row;
+				$array[$row['parent_id']]['children'][] = $row;
 			}
 		}
 		return $array;

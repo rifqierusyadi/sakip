@@ -28,11 +28,7 @@ function get_ol($array, $child = FALSE)
     $str = '';
 	
     if(count($array)){
-        $str .= $child == FALSE ? '<ol class="sortable">' : '<ol>';
-        //$str .= $child == FALSE ? '<li id="item_">' :'';
-        //$str .= $child == FALSE ? '<div>Beranda&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-default btn-xs btn-flat" href="#"><i class="fa fa-info"></i></a>&nbsp<a class="btn btn-default btn-xs btn-flat" href="#" class="btn btn-info btn-sm"><i class="fa fa-info"></i></a></div>' : '';
-        //$str .= $child == FALSE ? '<hr>' : '';
-        //$str .= $child == FALSE ? '</li>': '';
+        $str .= $child == FALSE ? '<ul class="sortable">' : '<ul>';
         foreach($array as $item){
             $str .= '<li id="item_'.$item['id'].'">';
             $str .= '<div>'. $item['satker'] .'</div>';
@@ -44,13 +40,13 @@ function get_ol($array, $child = FALSE)
             $str .= '</li>' . PHP_EOL;
         }
         
-        $str .= '</ol>' . PHP_EOL;
+        $str .= '</ul>' . PHP_EOL;
     }else{
-        $str = '<ol class="sortable">';
-        $str .= $child == FALSE ? '<li id="item_">' :'';
-        $str .= $child == FALSE ? '<div>Beranda&nbsp&nbsp&nbsp&nbsp&nbsp<a class="btn btn-default btn-sm" href="#"><i class="fa fa-info"></i></a>&nbsp<a class="btn btn-default btn-sm" href="#" class="btn btn-info btn-sm"><i class="fa fa-info"></i></a></div>' : '';
+        $str = '<ul class="sortable">';
+        $str .= $child == FALSE ? '<li>' :'';
+        $str .= $child == FALSE ? '<div>Beranda</div>' : '';
         $str .= $child == FALSE ? '<hr>' : '';
-        $str .= '</ol>';
+        $str .= '</ul>';
     }
     
     return $str;
