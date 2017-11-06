@@ -62,14 +62,15 @@ class Sotk extends CI_Controller {
 		
 		$satker = $this->data->get_satker($id);
 		
-		$data['head'] 		= $satker ? 'SOTK - '.$satker : 'SOTK';
-		$data['record'] 	= $this->data->get_all();
-		$data['satker'] 	= $this->data->get_nested($id);
-		$data['content'] 	= $this->folder.'tree';
-		$data['style'] 		= $this->folder.'style';
-		$data['js'] 		= $this->folder.'js';
-		
-		var_dump($data['satker']);
+		// $data['head'] 		= $satker ? 'SOTK - '.$satker : 'SOTK';
+		// $data['record'] 	= $this->data->get_all();
+		// $data['satker'] 	= $this->data->get_nested($id);
+		// $data['content'] 	= $this->folder.'tree';
+		// $data['style'] 		= $this->folder.'style';
+		// $data['js'] 		= $this->folder.'js';
+		$data['struktur'] = json_encode($this->data->get_record_by($id));
+
+		var_dump($data['struktur']);
 		$this->load->view('template/default', $data);
 	}
 }

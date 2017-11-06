@@ -91,10 +91,48 @@ class Sotk_m extends MY_Model
 			return FALSE;
 		}
 	}
+    
+    public function get_level($kode=null){
+        $query = $this->db->get_where('view_satker',array('kode'=>$kode));
+		if($query->num_rows() > 0)
+		{
+			return $query->row('level');
+		}else{
+			return FALSE;
+		}
+    }
+    
+    public function get_record_by($id=null)
+	{
+        $level = $this->get_level($id);
+        
+        if($level == 1){
+            $this->db->where('name_level1', $id);
+        }elseif($level == 2){
+            $this->db->where('name_level2', $id);
+        }elseif($level == 3){
+            $this->db->where('name_level3', $id);
+        }elseif($level == 4){
+            $this->db->where('name_level4', $id);
+        }elseif($level == 5){
+            $this->db->where('name_level5', $id);
+        }else{
+            $this->db->where('name_level6', $id);
+        }
+        $this->db->select('id, kode, parent_id as parent, satker, level');
+        $query = $this->db->get('view_satker');
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		}else{
+			return FALSE;
+		}
+	}
 	
+
 	public function get_nested($kode=null)
 	{
-		$this->db->where('kode',$kode);
+        $this->db->where('kode',$kode);
 		$this->db->order_by('parent_id','asc');
 		$this->db->order_by('order_id','asc');
 		$satker = $this->db->get('ref_satker')->result_array();
