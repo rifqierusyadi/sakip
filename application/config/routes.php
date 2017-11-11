@@ -63,19 +63,4 @@ $route['sigin'] = 'auth';
 $route['sigout'] = 'auth/logout';
 
 //route for identitas
-$route['data/identitas/(:num)'] = 'data/identitas';
-$route['data/cpns/(:num)'] = 'data/cpns';
-$route['data/cpns/updated/(:num)'] = 'data/cpns/updated';
-$route['data/cpns/created/(:num)'] = 'data/cpns/created';
-
-$route['data/pns/(:num)'] = 'data/pns';
-$route['data/pns/created/(:num)'] = 'data/pns/created';
-$route['data/pns/updated/(:num)'] = 'data/pns/updated';
-
-$route['data/pangkat/(:num)'] = 'data/pangkat';
-$route['data/pangkat/created/(:num)'] = 'data/pangkat/created';
-$route['data/pangkat/updated/(:num)'] = 'data/pangkat/updated';
-
-$route['data/jabatan/(:num)'] = 'data/jabatan';
-$route['data/jabatan/created/(:num)'] = 'data/jabatan/created';
-$route['data/jabatan/updated/(:num)'] = 'data/jabatan/updated';
+$route['pk/indikator/(:num)'] = 'pk/indikator';

@@ -110,7 +110,7 @@ class User_m extends MY_Model
 	
 	public function get_group()
 	{
-        $query = $this->db->order_by('id', 'ASC')->get('simpeg_groups');
+        $query = $this->db->order_by('id', 'ASC')->get('groups');
         if($query->num_rows() > 0){
         $dropdown[''] = 'Pilih Group/Tingkatan Pengguna';
 		foreach ($query->result() as $row)

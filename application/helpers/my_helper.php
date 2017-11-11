@@ -468,3 +468,20 @@ if ( ! function_exists('rupiah'))
 		}
 	}
 }
+
+//cari pangkat
+if (! function_exists('eselon'))
+{
+	function eselon($kode=null)
+	{
+		$CI =& get_instance();
+		$CI->db->where('kode', $kode);
+		$CI->db->where('deleted_at', null);
+		$query = $CI->db->get('ref_eselon');
+        if($query->num_rows() > 0){
+			return $query->row()->jabatan;
+		}else{
+            return '-';
+        }
+	}
+}

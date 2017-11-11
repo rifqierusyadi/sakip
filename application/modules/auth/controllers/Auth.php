@@ -44,6 +44,7 @@ class Auth extends CI_Controller {
 				
 				$user_ID = $this->_get_userID($email_post);
 				$username = $this->_get_username($email_post);
+				$satker = $this->_get_satker($email_post);
 				$ip_address = $this->input->ip_address();
 				$level = $this->_get_level($email_post);
 				
@@ -51,6 +52,7 @@ class Auth extends CI_Controller {
 					'userID'=> $user_ID,
 					'username' => $username,
 					'ip_address'=> $ip_address,
+					'satker'=> $satker,
 					'signin' => TRUE,
 					'level' => $level
 				);
@@ -86,6 +88,11 @@ class Auth extends CI_Controller {
 	
 	private function _get_level($email_post){
 		$level = $this->data->get_level($email_post);
+		return $level;
+	}
+
+	private function _get_satker($email_post){
+		$level = $this->data->get_satker($email_post);
 		return $level;
 	}
 	

@@ -13,21 +13,19 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
-						<a class="btn btn-sm btn-flat btn-success" onclick="add_data();" href="<?= site_url('setting/user/created'); ?>"><i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
+						<a class="btn btn-sm btn-flat btn-success" onclick="add_data();" href="<?= site_url('rpjmd/indikator/created'); ?>"><i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
 						<button class="btn btn-sm btn-flat btn-danger" onclick="deleted_all();"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
-						<button class="btn btn-sm btn-flat btn-default" data-toggle="tooltip" title="Reload Data" data-placement="right" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i></button>
+						<button class="btn btn-sm btn-flat btn-default" data-toggle="tooltip" title="Reload Data" data-placement="right" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload Data</button>
 						<span id="key" style="display: none;"><?= $this->security->get_csrf_hash(); ?></span>
-						<table id="tableID" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+						<table id="tableIDX" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th width="5px"><input type="checkbox" id="check-all"></th>
-									<th>NIP</th>
-									<th>Nama Lengkap</th>
-									<th>Email</th>
-									<th>Satuan Kerja</th>
-									<th>Level</th>
-									<th>Active</th>
-									<th width="60px"></th>
+									<th>Sasaran/Kinerja Utama</th>
+									<th>Indikator Sasaran</th>
+									<th>Satuan Indikator</th>
+									<th>Periode</th>
+									<th width="90px">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>

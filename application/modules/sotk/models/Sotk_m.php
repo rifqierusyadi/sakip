@@ -119,14 +119,24 @@ class Sotk_m extends MY_Model
         }else{
             $this->db->where('name_level6', $id);
         }
-        $this->db->select('id, kode, parent_id as parent, satker, level');
-        $query = $this->db->get('view_satker');
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}else{
-			return FALSE;
+        $this->db->select('id, kode, parent_id, satker, level');
+        $this->db->order_by('parent_id','asc');
+		$query = $this->db->get('view_satker')->result_array();
+        $array = array();
+		foreach ($query as $row){
+			if(!$row['parent_id']){
+				$array[$row['id']] = $row;
+			}else{
+				$array[$row['parent_id']]['children'][] = $row;
+			}
 		}
+		return $array;
+        // if($query->num_rows() > 0)
+		// {
+		// 	return $query->result();
+		// }else{
+		// 	return FALSE;
+		// }
 	}
 	
 

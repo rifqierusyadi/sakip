@@ -66,12 +66,12 @@ class User extends CI_Controller {
             $no++;
             $col = array();
             $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-            $col[] = $row->fullname;
-			$col[] = $row->username;
+            $col[] = $row->username;
+			$col[] = $row->fullname;
 			$col[] = $row->email;
 			$col[] = $row->satker;
 			$col[] = level($row->level);
-			$col[] = $row->active;
+			$col[] = $row->active ? '<button class="btn btn-xs btn-flat btn-block btn-success"><i class="fa fa-check"></i></button>' : '<button class="btn btn-xs btn-flat btn-block btn-danger"><i class="fa fa-minus"></i></button>';
             
             //add html for action
             $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('setting/password/updated/'.$row->id).'" data-toggle="tooltip" title="Ganti Password"><i class="fa fa-key"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('setting/user/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>

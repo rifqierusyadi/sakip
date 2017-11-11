@@ -20,16 +20,12 @@
 						<dl class="dl-horizontal">
 							<dt>PERIODE</dt>
 							<dd><?= $record->periode; ?></dd>
-							<dt>VISI</dt>
-							<dd><?= $record->visi; ?></dd>
-							<dt>MISI</dt>
-							<dd><?= $record->misi; ?></dd>
-							<dt>TUJUAN</dt>
-							<dd><?= $record->tujuan; ?></dd>
 							<dt>SASARAN</dt>
 							<dd><?= $record->sasaran; ?></dd>
 							<dt>INDIKATOR</dt>
 							<dd><?= $record->indikator; ?></dd>
+							<dt>SATUAN</dt>
+							<dd><?= $record->satuan; ?></dd>
 						</dl>
 						</div>
 					</div>

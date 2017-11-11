@@ -391,3 +391,20 @@ if (! function_exists('makro'))
 		}
 	}
 }
+
+if (! function_exists('pohon_detail'))
+{
+	function pohon_detail($kode=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $kode);
+			$query = $CI->db->get('pohon_detail');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

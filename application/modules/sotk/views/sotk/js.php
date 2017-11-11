@@ -7,7 +7,7 @@ function list_to_tree(list) {
     }
     for (i = 0; i < list.length; i += 1) {
         node = list[i];
-        if (node.parentId !== "0") {
+        if (node.parentId !== null || node.parentId !== '') {
             // if you have dangling branches check that map[node.parentId] exists
             list[map[node.parentId]].children.push(node);
         } else {
@@ -25,6 +25,6 @@ var entries = [
         "level": "1"
     }
 ];
-
+var datas = <?php echo $struktur; ?>;
 console.log(list_to_tree(entries));
 </script>

@@ -18,7 +18,7 @@
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('username') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Username','username');
+							echo form_label('NIP','username');
 							$data = array('class'=>'form-control','name'=>'username','id'=>'username','type'=>'text','value'=>set_value('username', $record->username));
 							echo form_input($data);
 							echo form_error('username') ? form_error('username', '<p class="help-block">','</p>') : '';

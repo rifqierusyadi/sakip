@@ -44,11 +44,7 @@ function level($id=null)
 	}elseif($id == 2){
 		$level = 'Manager';
 	}elseif($id == 3){
-		$level = 'Pengawas';
-	}elseif($id == 4){
-		$level = 'SKPD';
-	}elseif($id == 5){
-		$level = 'Pegawai';
+		$level = 'SOPD';
 	}else{
 		$level = 'Unknown';
 	}

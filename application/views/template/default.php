@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title><?= isset($title) ? $title : 'E-LAKIP KALSEL'; ?></title>
+  <title><?= isset($title) ? $title : 'E-SAKIP KALSEL'; ?></title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="<?= base_url('asset/bootstrap/css/bootstrap.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/select2.min.css'); ?>" />
@@ -55,15 +55,10 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> OPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/jpt'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja JPT</a></li>
-                <li><a href="<?= site_url('pk/admin'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Administrator</a></li>
-                <li><a href="<?= site_url('pk/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja Pengawas</a></li>
+                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
+                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK</a></li>
                 <li class="divider"></li>
-               	 <li><a href="<?= site_url('kinerja/jpt'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja JPT</a></li>
-                <li><a href="<?= site_url('kinerja/admin'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja Administrator</a></li>
-                <li><a href="<?= site_url('kinerja/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Data Kinerja Pengawas</a></li>
-                <li class="divider"></li>
-                <li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja JPT</a></li>
+               	<li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja JPT</a></li>
                 <li><a href="<?= site_url('realisasi/admin'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Administrator</a></li>
                 <li><a href="<?= site_url('realisasi/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Pengawas</a></li>
                 <li class="divider"></li>
@@ -109,7 +104,7 @@
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?= base_url('asset/dist/img/avatar5.png'); ?>" class="user-image" alt="User Image">
-                <span class="hidden-xs"><?= $this->session->userdata('username'); ?></span>
+                <span class="hidden-xs">&nbsp;</span>
               </a>
               <ul class="dropdown-menu">
                 <li class="user-header">
