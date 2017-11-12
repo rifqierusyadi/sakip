@@ -40,9 +40,9 @@ class Target_m extends MY_Model
     private function _get_datatables_query()
     {
         $this->db->select('a.*, b.periode, c.sasaran, d.satuan');
-		$this->db->from('indikator a');
+		$this->db->from('pohon_indikator a');
 		$this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
-		$this->db->join('sasaran c','a.sasaran_id = c.id','LEFT');
+		$this->db->join('pohon c','a.sasaran_id = c.id','LEFT');
 		$this->db->join('ref_satuan d','a.satuan_id = d.id','LEFT');
 		//$this->db->from($this->table);
         $i = 0;
@@ -117,14 +117,11 @@ class Target_m extends MY_Model
 	
 	function get_record_id($id=null)
     {
-		$this->db->select('a.*, b.periode, c.visi, d.misi, e.tujuan, f.sasaran, g.satuan');
-		$this->db->from('indikator a');
+		$this->db->select('a.*, b.periode, c.sasaran, d.satuan');
+		$this->db->from('pohon_indikator a');
 		$this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
-		$this->db->join('visi c','a.visi_id = c.id','LEFT');
-		$this->db->join('misi d','a.misi_id = d.id','LEFT');
-		$this->db->join('tujuan e','a.tujuan_id = e.id','LEFT');
-		$this->db->join('sasaran f','a.sasaran_id = f.id','LEFT');
-		$this->db->join('ref_satuan g','a.satuan_id = g.id','LEFT');
+		$this->db->join('pohon c','a.sasaran_id = c.id','LEFT');
+		$this->db->join('ref_satuan d','a.satuan_id = d.id','LEFT');
 		$this->db->where('a.id', $id);
 		$this->db->where('a.deleted_at', NULL);
         $query = $this->db->get();
@@ -141,7 +138,7 @@ class Target_m extends MY_Model
     {
         $this->db->where('indikator_id', $id);
 		$this->db->where('deleted_at', NULL);
-        $query = $this->db->get('indikator_detail');
+        $query = $this->db->get('pohon_detail');
 		if($query->num_rows() > 0){
 			return $query->result_array();	
 		}else{

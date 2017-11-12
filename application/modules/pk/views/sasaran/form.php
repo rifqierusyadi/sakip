@@ -39,7 +39,7 @@
 						<div class="form-group <?php echo form_error('parent_id') ? 'has-error' : null; ?>">
 							<?php
 							echo form_label('Sasaran Kinerja Induk','parent_id');
-							echo form_dropdown('visi_id', array(''=>'Pilih Sasaran Kinerja Induk'), '', "class='form-control select2' name='parent_id' id='parent_id'");
+							echo form_dropdown('parent_id', array(''=>'Pilih Sasaran Kinerja Induk'), '', "class='form-control select2' name='parent_id' id='parent_id'");
 							echo form_error('parent_id') ? form_error('parent_id', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
@@ -57,7 +57,7 @@
 								  echo form_input($data);
 								  ?>
 								  <div class="input-group-btn">
-									<button class="btn btn-info btn-flat add-button" type="button"><i class="fa fa-plus"></i></button>
+									<button class="btn btn-info btn-flat add-button" type="button"><i class="fa fa-plus"></i> </button>
 								  </div>
 								</div>
 								<?php

@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Peta extends CI_Controller {
+class Pohon extends CI_Controller {
 
 	/**
 	 * code by rifqie rusyadi
 	 * email rifqie.rusyadi@gmail.com
 	 */
-	public $folder = 'report/peta/';
+	public $folder = 'report/pohon/';
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('peta_m', 'data');
+		$this->load->model('pohon_m', 'data');
 		$this->load->helper('identitas_helper');
 		$this->load->helper('my_helper');
 		signin();
@@ -20,7 +20,7 @@ class Peta extends CI_Controller {
 	
 	public function index()
 	{
-		$data['head'] 		= 'Peta Jabatan';
+		$data['head'] 		= 'Pohon Kinerja';
 		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
@@ -40,11 +40,10 @@ class Peta extends CI_Controller {
             $col = array();
             $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
             $col[] = $row->kode;
-			$col[] = $row->unker;
-			$col[] = $row->instan;
+			$col[] = $row->satker;
             
             //add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/peta/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
+            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/pohon/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
                   ';
  
             $data[] = $col;
@@ -62,11 +61,11 @@ class Peta extends CI_Controller {
 	
 	public function detail($id)
 	{
+
+		$satker = $this->data->get_satker($id);
 		
-		$nunker = $this->data->get_nunker($id);
-		
-		$data['head'] 		= $nunker ? 'PETA JABATAN - '.$nunker->unker : 'PETA JABATAN';
-		$data['record'] 	= $this->data->get_peta($nunker->kode);
+		$data['head'] 		= $satker ? 'POHON KINERJA - '.$satker->satker : 'POHON KINERJA';
+		$data['record'] 	= $this->data->get_pohon($satker->kode);
 		$data['content'] 	= $this->folder.'detail';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
@@ -80,7 +79,7 @@ class Peta extends CI_Controller {
 		$nunker = $this->data->get_nunker($id);
 		
 		$data['head'] 		= $nunker ? 'ANALISA JABATAN - '.$nunker->unker : 'ANALISA JABATAN';
-		$data['record'] 	= $this->data->get_peta($nunker->kode);
+		$data['record'] 	= $this->data->get_pohon($nunker->kode);
 		$data['content'] 	= $this->folder.'analisa';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';

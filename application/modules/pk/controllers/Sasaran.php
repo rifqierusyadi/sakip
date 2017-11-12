@@ -164,69 +164,18 @@ class Sasaran extends CI_Controller {
         return $this->form_validation->run();
     }
 	
-	public function get_visi(){
+	public function get_parent(){
 		//echo 'hallo';
         $record = $this->data->get_id($this->uri->segment(4));
-        $periode = $this->input->post('periode_id');
-        $visi = $this->data->get_visi($periode);
-        if(!empty($visi)){
+		$periode = $this->input->post('periode_id');
+		$eselon = $this->input->post('eselon_id');
+        $parent = $this->data->get_parent($periode, $eselon);
+        if(!empty($parent)){
             //$selected = (set_value('unker')) ? set_value('unker') : '';
-			$selected = set_value('visi_id', $record->visi_id);
-            echo form_dropdown('visi_id', $visi, $selected, "class='form-control select2' name='visi_id' id='visi_id'");
+			$selected = set_value('parent_id', $record->parent_id);
+            echo form_dropdown('parent_id', $parent, $selected, "class='form-control select2' name='parent_id' id='parent_id'");
         }else{
-            echo form_dropdown('visi_id', array(''=>'Pilih Visi Kinerja'), '', "class='form-control select2' name='visi_id' id='visi_id'");
-        }
-    }
-	
-	public function get_misi(){
-		//echo 'hallo';
-        $record = $this->data->get_id($this->uri->segment(4));
-        $periode = $this->input->post('periode_id');
-		$visi = $this->input->post('visi_id');
-        $misi = $this->data->get_misi($periode, $visi);
-        if(!empty($misi)){
-            //$selected = (set_value('unker')) ? set_value('unker') : '';
-			$selected = set_value('misi_id', $record->misi_id);
-            echo form_dropdown('misi_id', $misi, $selected, "class='form-control select2' name='misi_id' id='misi_id'");
-        }else{
-            echo form_dropdown('misi_id', array(''=>'Pilih Misi Kinerja'), '', "class='form-control select2' name='misi_id' id='misi_id'");
-        }
-    }
-	
-	public function get_tujuan_edit(){
-		//echo 'hallo';
-        $record = $this->data->get_id($this->uri->segment(4));
-        $periode = $this->input->post('periode_id');
-		$visi = $this->input->post('visi_id');
-		$misi = $this->input->post('misi_id');
-        $tujuan = $this->data->get_tujuan_edit($periode, $visi, $misi);
-        if(!empty($tujuan)){
-            //$selected = (set_value('unker')) ? set_value('unker') : '';
-			$selected = set_value('tujuan_id', $record->tujuan_id);
-            echo form_dropdown('tujuan_id', $tujuan, $selected, "class='form-control select2' name='tujuan_id' id='tujuan_id'");
-        }else{
-            echo form_dropdown('tujuan_id', array(''=>'Pilih Tujuan Misi Kinerja'), '', "class='form-control select2' name='tujuan_id' id='tujuan_id'");
-        }
-    }
-	
-	public function get_tujuan(){
-		//echo 'hallo';
-        //$record = $this->data->get_id($this->uri->segment(4));
-        $periode = $this->input->post('periode_id');
-		$visi = $this->input->post('visi_id');
-		$misi = $this->input->post('misi_id');
-        $tujuan = $this->data->get_tujuan($periode, $visi, $misi);
-        if(!empty($tujuan)){
-			foreach($tujuan as $row){
-				echo '<button class="btn btn-sm btn-flat btn-warning btn-block btn-social"><i class="fa fa-file"></i>'.$row->tujuan.'</button><br>';
-				echo '<div id="wrapper'.$row->id.'"><div id="child"><input type="hidden" value="'.$row->id.'" name="tujuan[]" id="tujuan"><div class="input-group input-group">';
-				echo '<div class="input-group-btn"><button class="btn btn-info btn-flat add-button" data-number="'.$row->id.'" type="button" onclick="tambah(this.getAttribute(\'data-number\'))"><i class="fa fa-plus"></i></button></div>';
-				$data = array('class'=>'form-control','name'=>'sasaran[]','id'=>'sasaran','type'=>'text','value'=>set_value('sasaran[]'),'placeholder'=>'Sasaran Dari Tujuan Kinerja');
-				echo form_input($data);
-				echo '</div></div></div><br>';
-			}  
-        }else{
-			echo '<button class="btn btn-sm btn-flat btn-danger btn-block">Belum Ada Misi Tersedia!</button>';
+            echo form_dropdown('parent_id', array(''=>'Pilih Sasaran Kinerja Induk'), '', "class='form-control select2' name='parent_id' id='parent_id'");
         }
     }
 }

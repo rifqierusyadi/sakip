@@ -29,7 +29,7 @@ data : {tokensys:key}
 paging: true,
 lengthChange: false,
 searching: true,
-ordering: true,
+ordering: false,
 info: true,
 autoWidth: true,
 language: {
@@ -49,7 +49,7 @@ search:"Pencarian:",
 responsive: true,
 columnDefs: [
 {
-targets:[1], visible: false, class:'never'
+targets:[1, 2], visible: false, class:'never'
 }
 ],
 "order": [[ 1, 'asc' ]],
@@ -57,10 +57,19 @@ drawCallback: function ( settings ) {
 	var api = this.api();
 	var rows = api.rows( {page:'current'} ).nodes();
 	var last=null;
-	api.column(1, {page:'current'} ).data().each( function ( sasaran, i ) {
+	api.column(1, {page:'current'} ).data().each( function ( eselon, i ) {
+		if ( last !== eselon ) {
+			$(rows).eq( i ).before(
+			'<tr class="bg-light-blue color-palette disabled" ><td colspan="7"><b>'+eselon+'</b></td></tr>'
+			);
+			last = eselon;
+		}
+	});
+
+	api.column(2, {page:'current'} ).data().each( function ( sasaran, i ) {
 		if ( last !== sasaran ) {
 			$(rows).eq( i ).before(
-			'<tr class="bg-light-blue color-palette disabled" ><td colspan="7"><b>'+sasaran+'</b></td></tr>'
+			'<tr class="bg-green color-palette disabled"><td colspan="7"><b>'+sasaran+'</b></td></tr>'
 			);
 			last = sasaran;
 		}

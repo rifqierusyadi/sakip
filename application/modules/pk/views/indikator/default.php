@@ -13,7 +13,7 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
-						<a class="btn btn-sm btn-flat btn-success" onclick="add_data();" href="<?= site_url('rpjmd/indikator/created'); ?>"><i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
+						<a class="btn btn-sm btn-flat btn-success" onclick="add_data();" href="<?= site_url('pk/sasaran'); ?>"><i class="glyphicon glyphicon-list"></i> Kinerja Utama/ Sasaran</a>
 						<button class="btn btn-sm btn-flat btn-danger" onclick="deleted_all();"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
 						<button class="btn btn-sm btn-flat btn-default" data-toggle="tooltip" title="Reload Data" data-placement="right" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload Data</button>
 						<span id="key" style="display: none;"><?= $this->security->get_csrf_hash(); ?></span>
@@ -21,6 +21,7 @@
 							<thead>
 								<tr>
 									<th width="5px"><input type="checkbox" id="check-all"></th>
+									<th>Tingkat Jabatan</th>
 									<th>Sasaran/Kinerja Utama</th>
 									<th>Indikator Sasaran</th>
 									<th>Satuan Indikator</th>

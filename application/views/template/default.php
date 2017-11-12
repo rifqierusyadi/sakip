@@ -15,12 +15,15 @@
   <link rel="stylesheet" href="<?= base_url('asset/ionicons/css/ionicons.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/dist/css/AdminLTE.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/dist/css/skins/_all-skins.min.css'); ?>">
+  <!-- primitive diagram -->
+	<link rel="stylesheet" href="<?php echo base_url('asset/primitives/js/jquery/ui-lightness/jquery-ui-1.10.2.custom.min.css'); ?>" />
+  <link href="<?php echo base_url('asset/primitives/css/primitives.latest.css'); ?>" media="screen" rel="stylesheet" type="text/css" />
 	<?= isset($style) ? $this->load->view($style) : ''; ?>
 	<!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-	<style>body{font-size: 12px;}.nav-tabs-custom>.nav-tabs>li.active {border-top-color: #00a65a !important;}@media(min-width: 1024px){.main-header{top:0;left: 0;position: fixed;right: 0;z-index: 999;}.content-wrapper{padding-top:50px; padding-bottom:50px;}}.print{font-size: 9px;}.main-footer{bottom:0;left: 0;position: fixed;right: 0;z-index: 999;}</style>
+	<style>body{font-size: 12px;}.nav-tabs-custom>.nav-tabs>li.active {border-top-color: #00a65a !important;}@media(min-width: 1024px){.main-header{top:0;left: 0;position: fixed;right: 0;z-index: 999;}.content-wrapper{padding-top:50px; padding-bottom:50px;}}.print{font-size: 9px;}.main-footer{bottom:0;left: 0;position: fixed;right: 0;z-index: 999;}.besar{text-transform:uppercase;}</style>
 	
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -49,18 +52,15 @@
 								<li><a href="<?= site_url('rpjmd/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Sasaran/Kinerja Utama</a></li>
 								<li><a href="<?= site_url('rpjmd/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Sasaran/Kinerja Utama</a></li>
                 <li><a href="<?= site_url('rpjmd/makro'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Makro</a></li>
-								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> OPD Penanggung Jawab</a></li>
               </ul>
             </li>
 						<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> OPD <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> SOPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
-                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK</a></li>
+                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja SOPD</a></li>
+                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK SOPD</a></li>
                 <li class="divider"></li>
-               	<li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja JPT</a></li>
-                <li><a href="<?= site_url('realisasi/admin'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Administrator</a></li>
-                <li><a href="<?= site_url('realisasi/pengawas'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja Pengawas</a></li>
+               	<li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
                 <li class="divider"></li>
                 <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Anggaran SOPD</a></li>
               </ul>
@@ -68,9 +68,9 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-print"></i> Laporan <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Matrik RPJMD</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
+                <li><a href="<?= site_url('report/rpjmd'); ?>"><i class="fa fa-file-text-o"></i> Matrik RPJMD</a></li>
+								<li><a href="<?= site_url('report/pohon'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
+								<li><a href="<?= site_url('report/iku'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
 								<li class="divider"></li>
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahunan</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Triwulan</a></li>
@@ -180,7 +180,12 @@
 <script src="<?= base_url('asset/plugins/treetable/treeTable.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/number/jquery.number.min.js'); ?>"></script>
 <script src="<?= base_url('asset/app.js'); ?>"></script>
+<!-- PRIMITIVE DIAGRAM -->
+<script src="<?php echo base_url('asset/primitives/js/jquery/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/primitives.min.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/pdfkit/pdfkit.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/pdfkit/blob-stream.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/FileSaver.js/FileSaver.min.js'); ?>"></script>
 <?= isset($js) ? $this->load->view($js) : ''; ?>
-
 </body>
 </html>

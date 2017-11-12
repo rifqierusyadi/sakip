@@ -19,13 +19,13 @@
 						<div class="alert bg-light-blue color-palette alert-dismissible">
 						<dl class="dl-horizontal">
 							<dt>PERIODE</dt>
-							<dd><?= $record->periode; ?></dd>
+							<dd class="besar"><?= $record->periode; ?></dd>
 							<dt>SASARAN</dt>
-							<dd><?= $record->sasaran; ?></dd>
+							<dd class="besar"><?= $record->sasaran; ?></dd>
 							<dt>INDIKATOR</dt>
-							<dd><?= $record->indikator; ?></dd>
+							<dd class="besar"><?= $record->indikator; ?></dd>
 							<dt>SATUAN</dt>
-							<dd><?= $record->satuan; ?></dd>
+							<dd class="besar"><?= $record->satuan; ?></dd>
 						</dl>
 						</div>
 					</div>

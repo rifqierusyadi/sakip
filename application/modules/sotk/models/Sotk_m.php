@@ -156,5 +156,15 @@ class Sotk_m extends MY_Model
 			}
 		}
 		return $array;
-	}
+    }
+    
+    public function get_struktur($id=NULL)
+    {
+        $this->db->from('view_satker');
+        //$this->db->where('deleted_at', NULL);
+		$this->db->like('path', $id);
+        $query = $this->db->get();
+ 
+        return $query->result();
+    }
 }

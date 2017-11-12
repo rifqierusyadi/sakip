@@ -67,9 +67,9 @@ class Sotk extends CI_Controller {
 		$data['content'] 	= $this->folder.'tree';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
-		$data['struktur'] 	= $this->data->get_record_by($id);
-
-		var_dump($data['struktur']);
+		//$data['struktur'] 	= $this->data->get_record_by($id);
+		$data['struktur']	= $this->data->get_struktur($id);
+		//var_dump($data['struktur']);
 		$this->load->view('template/default', $data);
 	}
 }

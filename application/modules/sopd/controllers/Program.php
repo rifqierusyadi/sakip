@@ -16,7 +16,7 @@ class Program extends CI_Controller {
 		$this->load->helper('identitas_helper');
 		$this->load->model('program_m', 'data');
 		signin();
-		admin();
+		//admin();
 	}
 	
 	//halaman index

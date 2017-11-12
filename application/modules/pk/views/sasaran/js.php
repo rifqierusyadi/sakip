@@ -29,7 +29,7 @@ data : {tokensys:key}
 paging: true,
 lengthChange: false,
 searching: true,
-ordering: true,
+ordering: false,
 info: true,
 autoWidth: true,
 language: {
@@ -47,7 +47,7 @@ previous:"Sebelum"
 search:"Pencarian:",
 },
 responsive: true,
-"order": [[ 0, 'asc' ]],
+"order": [[ 1, 'asc' ]],
 columnDefs: [
 	{
 	targets:[ 1], visible: false, className: 'never',
@@ -71,123 +71,42 @@ drawCallback: function ( settings ) {
 });
 
 
-$("#periode_id").change(function(){
+$("#eselon_id").change(function(){
 var periode_id = $("#periode_id").val();
-if(periode_id){
+var eselon_id = $("#eselon_id").val();
+if(eselon_id){
 $.ajax({
 type: "POST",
 async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_visi')?>",
+url : "<?php echo site_url('pk/sasaran/get_parent')?>",
 data: {
 'periode_id': periode_id,
+'eselon_id': eselon_id,
 '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
 },
 success: function(msg){
-$('#visi_id').html(msg);
-}
-});
-}
-});
-
-$("#visi_id").change(function(){
-var periode_id = $("#periode_id").val();
-var visi_id = $("#visi_id").val();
-if(visi_id){
-$.ajax({
-type: "POST",
-async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_misi')?>",
-data: {
-'periode_id': periode_id,
-'visi_id': visi_id,
-'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
-},
-success: function(msg){
-$('#misi_id').html(msg);
-}
-});
-}
-});
-
-$("#misi_id").change(function(){
-var periode_id = $("#periode_id").val();
-var visi_id = $("#visi_id").val();
-var misi_id = $("#misi_id").val();
-if(misi_id){
-$.ajax({
-type: "POST",
-async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_tujuan')?>",
-data: {
-'periode_id': periode_id,
-'visi_id': visi_id,
-'misi_id': misi_id,
-'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
-},
-success: function(msg){
-$('#tujuan').html(msg);
+$('#parent_id').html(msg);
 }
 });
 }
 });
 
 //ready
-$("#periode_idx").ready(function(){
+$("#parent_idx").ready(function(){
 var periode_id = $("#periode_idx").val();
+var eselon_id = $("#eselon_idx").val();
 if(periode_id){
 $.ajax({
 type: "POST",
 async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_visi/'.$this->uri->segment(4)); ?>",
+url : "<?php echo site_url('pk/sasaran/get_parent/'.$this->uri->segment(4)); ?>",
 data: {
 'periode_id': periode_id,
+'eselon_id': eselon_id,
 '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
 },
 success: function(msg){
-$('#visi_id').html(msg);
-}
-});
-}
-});
-
-$("#misi_idx").ready(function(){
-var periode_id = $("#periode_id").val();
-var visi_id = $("#visi_idx").val();
-if(visi_id){
-$.ajax({
-type: "POST",
-async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_misi/'.$this->uri->segment(4))?>",
-data: {
-'periode_id': periode_id,
-'visi_id': visi_id,
-'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
-},
-success: function(msg){
-$('#misi_id').html(msg);
-}
-});
-}
-});
-
-$("#tujuan_idx").ready(function(){
-var periode_id = $("#periode_id").val();
-var visi_id = $("#visi_id").val();
-var misi_id = $("#misi_id").val();
-var tujuan_idx = $("#tujuan_idx").val();
-if(tujuan_idx){
-$.ajax({
-type: "POST",
-async: false,
-url : "<?php echo site_url('rpjmd/sasaran/get_tujuan_edit/'.$this->uri->segment(4))?>",
-data: {
-'periode_id': periode_id,
-'visi_id': visi_id,
-'misi_id': misi_id,
-'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
-},
-success: function(msg){
-$('#tujuan_id').html(msg);
+$('#parent_id').html(msg);
 }
 });
 }
@@ -227,7 +146,7 @@ $(function(){
 		  echo form_input($data);
 		  ?>
 		  <div class="input-group-btn">
-			<button class="btn btn-danger btn-flat remove-button" type="button"><i class="fa fa-minus"></i></button>
+			<button class="btn btn-danger btn-flat remove-button" type="button" style="padding: 9px 12px !important;"><i class="fa fa-minus"></i></button>
 		  </div>
 		</div>
 		<?php

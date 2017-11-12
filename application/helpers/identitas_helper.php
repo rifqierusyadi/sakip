@@ -408,3 +408,20 @@ if (! function_exists('pohon_detail'))
 		}
 	}
 }
+
+if (! function_exists('pohon_deskripsi'))
+{
+	function pohon_deskripsi($kode=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $kode);
+			$query = $CI->db->get('pohon_deskripsi');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

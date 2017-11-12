@@ -32,7 +32,7 @@ class Indikator_m extends MY_Model
 	//urusan lawan datatable
     private function _get_datatables_query()
     {
-        $this->db->select('a.*, b.periode, c.sasaran, d.satuan');
+        $this->db->select('a.*, b.periode, c.sasaran, c.eselon_id, d.satuan');
 		$this->db->from('pohon_indikator a');
 		$this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
 		$this->db->join('pohon c','a.sasaran_id = c.id','LEFT');
@@ -88,6 +88,7 @@ class Indikator_m extends MY_Model
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
+        //$this->db->where('c.deleted_at', NULL);
         $this->db->where('a.deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();

@@ -11,7 +11,7 @@ class Sasaran_m extends MY_Model
 	//ajax datatable
     public $column_order = array('b.periode','a.sasaran','a.eselon_id',null); //set kolom field database pada datatable secara berurutan
     public $column_search = array('b.periode','a.sasaran','a.eselon_id'); //set kolom field database pada datatable untuk pencarian
-    public $order = array('id' => 'ASC'); //order baku 
+    public $order = array('eselon_id' => 'ASC'); //order baku 
 	
 	public function __construct()
 	{
@@ -87,6 +87,7 @@ class Sasaran_m extends MY_Model
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
+        $this->db->where('a.satker_id', $this->session->userdata('satker'));
         $this->db->where('a.deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
@@ -137,63 +138,19 @@ class Sasaran_m extends MY_Model
 		return $dropdown;
 	}
 	
-	public function get_visi($periode=null)
+	public function get_parent($periode=null, $eselon=null)
 	{
-        $query = $this->db->where('periode_id',$periode)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('visi');
+        $query = $this->db->where('periode_id',$periode)->where('eselon_id <',$eselon)->where('deleted_at',NULL)->where('satker_id',$this->session->userdata('satker'))->order_by('id', 'ASC')->get('pohon');
         if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Salah Satu Visi';
+        $dropdown[''] = 'Pilih Sasaran Kinerja Induk';
 		foreach ($query->result() as $row)
 		{
-			$dropdown[$row->id] = $row->visi;
+			$dropdown[$row->id] = $row->sasaran;
 		}
         }else{
-            $dropdown[''] = 'Belum Ada Visi Tersedia'; 
+            $dropdown[''] = 'Belum Ada Sasaran Kinerja Induk Tersedia'; 
         }
 		return $dropdown;
 	}
-	
-	public function get_misi($periode=null, $visi=null)
-	{
-        $query = $this->db->where('periode_id',$periode)->where('visi_id',$visi)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('misi');
-        if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Salah Satu Misi';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->id] = $row->misi;
-		}
-        }else{
-            $dropdown[''] = 'Belum Ada Misi Tersedia'; 
-        }
-		return $dropdown;
-	}
-	
-	public function get_tujuan_edit($periode=null, $visi=null, $misi=null)
-	{
-        $query = $this->db->where('periode_id',$periode)->where('visi_id',$visi)->where('misi_id',$misi)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('tujuan');
-        if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Salah Satu Tujuan Misi';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->id] = $row->tujuan;
-		}
-        }else{
-            $dropdown[''] = 'Belum Ada Tujuan Tersedia'; 
-        }
-		return $dropdown;
-	}
-	
-	public function get_tujuan($periode=null, $visi=null, $misi=null)
-    {
-        $this->db->where('periode_id', $periode);
-		$this->db->where('visi_id', $visi);
-		$this->db->where('misi_id', $misi);
-		$this->db->where('deleted_at', NULL);
-        $query = $this->db->get('tujuan');
-		if($query->num_rows() > 0){
-			return $query->result();	
-		}else{
-			//show_404();
-			return FALSE;
-		}
-    }
+
 }

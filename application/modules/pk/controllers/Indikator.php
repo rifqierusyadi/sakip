@@ -62,6 +62,7 @@ class Indikator extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
 		$data['satuan']		= $this->data->get_satuan();
+		$data['sasaran']	= $this->data->get_sasaran($id);
 		
 		$this->load->view('template/default', $data);
 	}
@@ -76,7 +77,8 @@ class Indikator extends CI_Controller {
             $no++;
             $col = array();
             $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-			$col[] = $row->sasaran;
+			$col[] = eselon($row->eselon_id);
+			$col[] = '<a href="'.site_url('pk/indikator/'.$row->sasaran_id).'" class="btn btn-xs btn-info btn-flat"><i class="fa fa-plus"></i></a> '. $row->sasaran;
 			//$col[] = strip_tags($row->visi).'<br>--- '.strip_tags($row->misi).'<br>------'.$row->tujuan.'<br>---------'.$row->sasaran;
 			$col[] = $row->indikator;
 			$col[] = $row->satuan;
@@ -87,7 +89,13 @@ class Indikator extends CI_Controller {
 				$indikator = '<a class="btn btn-xs btn-flat btn-danger" href="'.site_url('pk/target/created/'.$row->id).'" data-toggle="tooltip" title="Target">';
 			}
 
-			$col[] = $indikator.'<i class="glyphicon glyphicon-ok-circle"></i></a>  <a class="btn btn-xs btn-flat btn-info" href="'.site_url('pk/description/updated/'.$row->id).'" data-toggle="tooltip" title="Keterangan"><i class="fa fa-file"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('pk/indikator/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+			if(pohon_deskripsi($row->id)){
+				$deskripsi = '<a class="btn btn-xs btn-flat btn-info" href="'.site_url('pk/deskripsi/updated/'.$row->id).'" data-toggle="tooltip" title="Deskripsi">';
+			}else{
+				$deskripsi = '<a class="btn btn-xs btn-flat btn-danger" href="'.site_url('pk/deskripsi/created/'.$row->id).'" data-toggle="tooltip" title="Deskripsi">';
+			}
+
+			$col[] = $indikator.'<i class="glyphicon glyphicon-ok-circle"></i></a>  '.$deskripsi.'<i class="fa fa-file"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('pk/indikator/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
 			<a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
 			
             $data[] = $col;

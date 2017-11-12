@@ -11,7 +11,8 @@
 			</div>
 			<form id="formID" role="form" action="" method="post">
 			<input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>" />
-			<input type="hidden" name="periode_idx" id="periode_idx" value="<?= set_value('periode_id', $record->periode_id)  ?>" />
+			<input type="hidden" name="periode_idx" id="periode_idx" value="<?= set_value('periode_id', $record->periode_id);  ?>" />
+			<input type="hidden" name="eselon_idx" id="eselon_idx" value="<?= set_value('eselon_idx', $record->eselon_id);  ?>" />
 			<!-- box-body -->
 			<div class="box-body">
 				<div class="row">
@@ -39,7 +40,7 @@
 						<div class="form-group <?php echo form_error('parent_id') ? 'has-error' : null; ?>">
 							<?php
 							echo form_label('Sasaran Kinerja Induk','parent_id');
-							echo form_dropdown('visi_id', array(''=>'Pilih Sasaran Kinerja Induk'), '', "class='form-control select2' name='parent_id' id='parent_id'");
+							echo form_dropdown('parent_id', array(''=>'Pilih Sasaran Kinerja Induk'), '', "class='form-control select2' name='parent_id' id='parent_id'");
 							echo form_error('parent_id') ? form_error('parent_id', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
