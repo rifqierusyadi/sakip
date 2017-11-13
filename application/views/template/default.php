@@ -59,6 +59,7 @@
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja SOPD</a></li>
                 <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK SOPD</a></li>
+                <li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja SOPD</a></li>
                 <li class="divider"></li>
                	<li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
                 <li class="divider"></li>

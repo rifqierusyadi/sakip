@@ -1,18 +1,18 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pohon extends CI_Controller {
+class Iku extends CI_Controller {
 
 	/**
 	 * code by rifqie rusyadi
 	 * email rifqie.rusyadi@gmail.com
 	 */
-	public $folder = 'report/pohon/';
+	public $folder = 'report/iku/';
 	
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('pohon_m', 'data');
+		$this->load->model('iku_m', 'data');
 		$this->load->helper('identitas_helper');
 		$this->load->helper('my_helper');
 		signin();
@@ -20,7 +20,7 @@ class Pohon extends CI_Controller {
 	
 	public function index()
 	{
-		$data['head'] 		= 'POHON KINERJA';
+		$data['head'] 		= 'INDIKATOR KINERJA UTAMA';
 		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
@@ -43,7 +43,7 @@ class Pohon extends CI_Controller {
 			$col[] = $row->satker;
             
             //add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/pohon/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
+            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/iku/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
                   ';
  
             $data[] = $col;
@@ -64,26 +64,12 @@ class Pohon extends CI_Controller {
 
 		$satker = $this->data->get_satker($id);
 		
-		$data['head'] 		= $satker ? 'POHON KINERJA - '.$satker->satker : 'POHON KINERJA';
-		$data['record'] 	= $this->data->get_pohon($satker->kode);
+		$data['head'] 		= $satker ? 'INDIKATOR KINERJA UTAMA - '.$satker->satker : 'INDIKATOR KINERJA UTAMA';
+		$data['record'] 	= $this->data->get_indikator($satker->kode);
 		$data['content'] 	= $this->folder.'detail';
-		$data['style'] 		= $this->folder.'style';
-		$data['js'] 		= $this->folder.'js';
+		//$data['style'] 		= $this->folder.'style';
+		//$data['js'] 		= $this->folder.'js';
 		
-		$this->load->view('template/default', $data);
-	}
-	
-	public function analisa($id)
-	{
-		
-		$nunker = $this->data->get_nunker($id);
-		
-		$data['head'] 		= $nunker ? 'ANALISA JABATAN - '.$nunker->unker : 'ANALISA JABATAN';
-		$data['record'] 	= $this->data->get_pohon($nunker->kode);
-		$data['content'] 	= $this->folder.'analisa';
-		$data['style'] 		= $this->folder.'style';
-		$data['js'] 		= $this->folder.'js';
-		
-		$this->load->view('template/default', $data);
+		$this->load->view($data['content'], $data);
 	}
 }
