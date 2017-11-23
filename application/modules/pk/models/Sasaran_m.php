@@ -107,6 +107,20 @@ class Sasaran_m extends MY_Model
 		}
         
     }
+
+    public function cek_sasaran($id=null)
+    {
+        $this->db->where('sasaran_id', $id);
+		$this->db->where('deleted_at', NULL);
+        $query = $this->db->get('pohon_indikator');
+		if($query->num_rows() > 0){
+			return $query->row();	
+		}else{
+			//show_404();
+			return FALSE;
+		}
+        
+    }
 	
 	public function get_periode()
 	{

@@ -56,7 +56,7 @@ $(function(){
         if(x < maxField){ //Check maximum number of input fields
             x++; //Increment field counter
             $(wrapper).append(fieldHTML); // Add field html
-
+			$('.select2').select2();
         }
     });
 	
@@ -68,6 +68,24 @@ $(function(){
     });
 });
 
+
+$("#periode_id").change(function(){
+var periode_id = $("#periode_id").val();
+if(periode_id){
+$.ajax({
+type: "POST",
+async: false,
+url : "<?php echo site_url('sopd/program/get_tahun')?>",
+data: {
+'periode_id': periode_id,
+'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+},
+success: function(msg){
+$('#tahun').html(msg);
+}
+});
+}
+});
 
 $("#total").focus(function() {
     var arr = document.getElementsByName('nilai[]');
@@ -98,7 +116,7 @@ $("#total").focus(function() {
 			?>
 		</div>
 	</div>
-	<div class="col-md-6">
+	<div class="col-md-4">
 		<div class="form-group <?php echo form_error('kegiatan') ? 'has-error' : null; ?>">
 			<?php
 			echo form_label('Kegiatan','kegiatan');
@@ -108,7 +126,17 @@ $("#total").focus(function() {
 			?>
 		</div>
 	</div>
-	<div class="col-md-4">
+	<div class="col-md-3">
+		<div class="form-group <?php echo form_error('tahun') ? 'has-error' : null; ?>">
+			<?php
+			echo form_label('Penanggung Jawab Kegiatan','tahun');
+			$selected = set_value('tahun', $record->periode_id);
+			echo form_dropdown('tahun', $jabatan, $selected, "class='form-control select2' name='tahun' id='tahun'");
+			echo form_error('tahun') ? form_error('tahun', '<p class="help-block">','</p>') : '';
+			?>
+		</div>
+	</div>
+	<div class="col-md-3">
 		<div class="form-group <?php echo form_error('nilai') ? 'has-error' : null; ?>">
 			<?php
 				echo form_label('Nilai Kegiatan','nilai');

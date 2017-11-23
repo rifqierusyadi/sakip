@@ -46,24 +46,24 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> RPJMD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('rpjmd/visi'); ?>"><i class="fa fa-file-text-o"></i> Visi RPJMD</a></li>
-								<li><a href="<?= site_url('rpjmd/misi'); ?>"><i class="fa fa-file-text-o"></i> Misi RPJMD</a></li>
-								<li><a href="<?= site_url('rpjmd/tujuan'); ?>"><i class="fa fa-file-text-o"></i> Tujuan RPJMD</a></li>
+                <li><a href="<?= site_url('rpjmd/visi'); ?>"><i class="fa fa-file-text-o"></i> Visi</a></li>
+								<li><a href="<?= site_url('rpjmd/misi'); ?>"><i class="fa fa-file-text-o"></i> Misi</a></li>
+								<li><a href="<?= site_url('rpjmd/tujuan'); ?>"><i class="fa fa-file-text-o"></i> Tujuan</a></li>
 								<li><a href="<?= site_url('rpjmd/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Sasaran/Kinerja Utama</a></li>
-								<li><a href="<?= site_url('rpjmd/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Sasaran/Kinerja Utama</a></li>
+								<li><a href="<?= site_url('rpjmd/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
                 <li><a href="<?= site_url('rpjmd/makro'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Makro</a></li>
               </ul>
             </li>
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> SOPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja SOPD</a></li>
-                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK SOPD</a></li>
-                <li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja SOPD</a></li>
+                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
+                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK</a></li>
+                <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
+                <li><a href="<?= site_url('sopd/pejabat'); ?>"><i class="fa fa-file-text-o"></i> Pejabat Administrasi</a></li>
+                <li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja</a></li>
                 <li class="divider"></li>
-               	<li><a href="<?= site_url('realisasi/jpt'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
-                <li class="divider"></li>
-                <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Anggaran SOPD</a></li>
+               	<li><a href="<?= site_url('realisasi'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
               </ul>
             </li>
 						<li class="dropdown">
@@ -77,7 +77,6 @@
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Triwulan</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efisiensi/Efektifitas</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Matriks Lakip BAB III</a></li>
               </ul>
             </li>
 						<li class="dropdown">

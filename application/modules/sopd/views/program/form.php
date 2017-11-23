@@ -17,12 +17,21 @@
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('periode_id') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Periode RPJMD','periode_id');
+							echo form_label('Periode','periode_id');
 							$selected = set_value('periode_id', $record->periode_id);
 							echo form_dropdown('periode_id', $periode, $selected, "class='form-control select2' name='periode_id' id='periode_id'");
 							echo form_error('periode_id') ? form_error('periode_id', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
+					</div>
+					<div class="col-md-12">
+					<div class="form-group <?php echo form_error('tahun') ? 'has-error' : null; ?>">
+						<?php
+						echo form_label('Tahun','tahun');
+						echo form_dropdown('tahun', array(''=>'Pilih Tahun'), '', "class='form-control select2' name='tahun' id='tahun'");
+						echo form_error('tahun') ? form_error('tahun', '<p class="help-block">','</p>') : '';
+						?>
+					</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('kode') ? 'has-error' : null; ?>">
@@ -45,6 +54,16 @@
 						</div>
 					</div>
 					<div class="col-md-12">
+						<div class="form-group <?php echo form_error('jabatan_program') ? 'has-error' : null; ?>">
+							<?php
+							echo form_label('Penanggung Jawab Program','jabatan_program');
+							$selected = set_value('jabatan_program', $record->jabatan_program);
+							echo form_dropdown('jabatan_program', $jabatan, $selected, "class='form-control select2' name='jabatan_program' id='jabatan_program'");
+							echo form_error('jabatan_program') ? form_error('jabatan_program', '<p class="help-block">','</p>') : '';
+							?>
+						</div>
+					</div>
+					<div class="col-md-12">
 					<div class="field-wrapper">
 						<div class="child">
 						<div class="row">
@@ -58,7 +77,7 @@
 									?>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-4">
 								<div class="form-group <?php echo form_error('kegiatan') ? 'has-error' : null; ?>">
 									<?php
 									echo form_label('Kegiatan','kegiatan');
@@ -68,7 +87,17 @@
 									?>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-3">
+								<div class="form-group <?php echo form_error('jabatan_kegiatan') ? 'has-error' : null; ?>">
+									<?php
+									echo form_label('Penanggung Jawab Kegiatan','jabatan_kegiatan');
+									$selected = set_value('jabatan_kegiatan', $record->periode_id);
+									echo form_dropdown('jabatan_kegiatan', $jabatan, $selected, "class='form-control select2' name='jabatan_kegiatan' id='jabatan_kegiatan'");
+									echo form_error('jabatan_kegiatan') ? form_error('jabatan_kegiatan', '<p class="help-block">','</p>') : '';
+									?>
+								</div>
+							</div>
+							<div class="col-md-3">
 								<div class="form-group <?php echo form_error('nilai') ? 'has-error' : null; ?>">
 									<?php
 										echo form_label('Nilai Kegiatan','nilai');

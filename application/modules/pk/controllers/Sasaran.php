@@ -73,7 +73,8 @@ class Sasaran extends CI_Controller {
 		   	$col[] = $row->sasaran;
 			$col[] = $row->periode;
 			//add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" href="'.site_url('pk/indikator/'.$row->id).'" data-toggle="tooltip" title="Indikator"><i class="glyphicon glyphicon-list"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('pk/sasaran/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
+			$color = $this->data->cek_sasaran($row->id) ? 'btn-info' : 'btn-danger';
+            $col[] = '<a class="btn btn-xs btn-flat '.$color.'" href="'.site_url('pk/indikator/'.$row->id).'" data-toggle="tooltip" title="Indikator"><i class="glyphicon glyphicon-list"></i></a> <a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('pk/sasaran/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
                   <a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
             $data[] = $col;
         }

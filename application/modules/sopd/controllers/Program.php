@@ -33,6 +33,7 @@ class Program extends CI_Controller {
 	
 	public function created()
 	{
+		$satker = $this->session->userdata('satker');
 		$data['head'] 		= 'Tambah Program dan Kegiatan SOPD';
 		$data['record'] 	= $this->data->get_new();
 		$data['content'] 	= $this->folder.'form';
@@ -40,6 +41,7 @@ class Program extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
 		$data['satuan']		= $this->data->get_satuan();
+		$data['jabatan'] 	= $this->data->get_jabatan($satker);
 		
 		$this->load->view('template/default', $data);
 	}
@@ -95,10 +97,12 @@ class Program extends CI_Controller {
     {
        $data = array(
 				'periode_id' => $this->input->post('periode_id'),
+				'tahun' => $this->input->post('tahun'),
+				'jabatan_id' => $this->input->post('jabatan_program'),
 				'kode' => $this->input->post('kode'),
 				'program' => $this->input->post('program'),
 				'total' => $this->input->post('total'),
-				'satker_id' => 'S00030'
+				'satker_id' => $this->session->userdata('satker')
            );      
 		
         if($this->validation()){
@@ -106,14 +110,16 @@ class Program extends CI_Controller {
 			$kegiatan = $this->input->post('kegiatan');
 			$result = array();
 			foreach($kegiatan AS $key => $val){
-				if($_POST['kegiatan'][$key] != ''){
+				if($_POST['kegiatan'][$key] != '' && $_POST['rekening'][$key] != ''){
 					$result[] = array(
-					 "periode_id"  => $this->input->post('periode_id'),
-					 "program_id"  => $insert,
-					 "rekening"  => $_POST['rekening'][$key],
-					 "kegiatan"  => $_POST['kegiatan'][$key],
-					 "nilai"  => $_POST['nilai'][$key],
-					 "satker_id"  => 'S00030'
+						"periode_id"  => $this->input->post('periode_id'),
+						"tahun"  => $this->input->post('tahun'),
+						'jabatan_id' => $this->input->post('jabatan_kegiatan'),
+						"program_id"  => $insert,
+						"rekening"  => $_POST['rekening'][$key],
+						"kegiatan"  => $_POST['kegiatan'][$key],
+						"nilai"  => $_POST['nilai'][$key],
+						"satker_id" => $this->session->userdata('satker')
 					);
 				}
 			}
@@ -149,7 +155,7 @@ class Program extends CI_Controller {
     
     public function ajax_delete($id=null)
     {
-        $this->data->delete($id);
+		$this->data->delete($id);
 		helper_log("trash", "Menghapus Program SOPD");
         echo json_encode(array("status" => TRUE));
     }
@@ -294,4 +300,18 @@ class Program extends CI_Controller {
 		echo form_dropdown('satuan_id[]', $satuan, $selected, "class='form-control select2' name='satuan_id[]' id='satuan_id'");
 		echo '</div></div></div>';
 	}
+
+	public function get_tahun(){
+		//echo 'hallo';
+        $record = $this->data->get_id($this->uri->segment(4));
+        $periode = $this->input->post('periode_id');
+        $tahun = $this->data->get_tahun($periode);
+        if(!empty($tahun)){
+            //$selected = (set_value('unker')) ? set_value('unker') : '';
+			$selected = set_value('tahun', $record->tahun);
+            echo form_dropdown('tahun', $tahun, $selected, "class='form-control select2' name='tahun' id='tahun'");
+        }else{
+            echo form_dropdown('tahun', array(''=>'Pilih Tahun'), '', "class='form-control select2' name='tahun' id='tahun'");
+        }
+    }
 }

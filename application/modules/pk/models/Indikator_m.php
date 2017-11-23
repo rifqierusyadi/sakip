@@ -11,7 +11,7 @@ class Indikator_m extends MY_Model
 	//ajax datatable
     public $column_order = array('b.periode','c.sasaran','a.indikator',null); //set kolom field database pada datatable secara berurutan
     public $column_search = array('b.periode','c.sasaran','a.indikator'); //set kolom field database pada datatable untuk pencarian
-    public $order = array('id' => 'ASC'); //order baku 
+    public $order = array('eselon_id' => 'ASC'); //order baku 
 	
 	public function __construct()
 	{
@@ -89,6 +89,7 @@ class Indikator_m extends MY_Model
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
         //$this->db->where('c.deleted_at', NULL);
+        $this->db->where('a.satker_id', $this->session->userdata('satker'));
         $this->db->where('a.deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();

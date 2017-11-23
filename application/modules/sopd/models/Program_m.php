@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Program_m extends MY_Model
 {
-	public $table = 'kegiatan'; // you MUST mention the table name
+	public $table = 'program'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
@@ -26,6 +26,8 @@ class Program_m extends MY_Model
         $record->id = '';
 		$record->periode_id = '';
 		$record->kode = '';
+		$record->tahun = '';
+		$record->jabatan_program = '';
 		$record->program = '';
 		$record->total = '';
 		return $record;
@@ -90,7 +92,8 @@ class Program_m extends MY_Model
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
-        $this->db->where('a.deleted_at', NULL);
+		$this->db->where('a.satker_id', $this->session->userdata('satker'));
+		$this->db->where('a.deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
@@ -244,6 +247,42 @@ class Program_m extends MY_Model
 			//show_404();
 			return FALSE;
 		}
-    }
+	}
+	
+	public function get_jabatan($satker=null)
+	{
+        $query = $this->db->like('path',$satker)->get('view_jabatan');
+        if($query->num_rows() > 0){
+		$dropdown[''] = 'PILIH SALAH SATU';
+		foreach ($query->result() as $row)
+		{
+			$dropdown[$row->kode] = $row->jabatan;
+		}
+        }else{
+            $dropdown[''] = 'Belum Ada Jabatan Tersedia'; 
+        }
+		return $dropdown;
+	}
+
+	public function get_tahun($periode=null)
+	{
+        $query = $this->db->where('id',$periode)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('ref_periode')->row();
+        if($query){
+        	$dropdown[''] = 'Pilih Tahun';
+			$awal = $query->awal;
+			$akhir = $query->akhir;
+			
+			for ($i=$awal; $i <= $akhir; $i++){
+				$dropdown[$i] = $i;
+			}
+			// foreach ($query->result() as $row)
+			// {
+			// 	$dropdown[] = $row->visi;
+			// }
+        }else{
+            $dropdown[''] = 'Belum Periode Tahun Tersedia'; 
+        }
+		return $dropdown;
+	}
 
 }
