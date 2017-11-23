@@ -14,42 +14,40 @@
     <div class="page">
 	<div class="title">
             <div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
-            <div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
+            <div class="judul"><h3><?= isset($head) ? $head.'-'.$this->uri->segment('5') : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
     </div>
 	<!-- identitas -->
 	<div class="tabel">
 	<table class="print" id="tableID">
 		<thead>
 		<tr>
-			<th>NO</th>
+			<th width="2%">NO</th>
 			<th width="20%">SASARAN<br>STRATEGIS</th>
 			<th width="20%">INDIKATOR<br>KINERJA<br>UTAMA</th>
-			<th>PENJELASAN</th>
-			<th>PENANGGUNG JAWAB</th>
-			<th>SUMBER DATA</th>
+			<th width="8%">TARGET CAPAIAN</th>
+			<th width="10%">JUMLAH</th>
+			<th width="10%">SATUAN</th>
+			<th width="10%">JUMLAH</th>
+			<th width="10%">%</th>
 		</tr>
 		</thead>
 		<tbody>
 		<?php if($record): ?>
-			<?php $i = 1; ?>
+			<?php $i = 1; $x = ''; $sasaran=''; $indikator=''; ?>
 			<?php foreach($record as $row): ?>
-			<tr>
-			<td><?php echo number_format($i); ?></td>
-			<td><?php echo $row->sasaran; ?></td>
-			<td><?php echo $row->indikator; ?></td>
-			<td><?php echo $row->deskripsi; ?></td>
-			<td>
-			<?php 
-				$data = tanggung_jawab($row->indikator_id, $row->id);
-				if($data){
-					foreach($data as $x){
-						echo posisi($x->jabatan);
-					}
-				} 
-			?>
-			</td>
-			<td><?php echo $row->sumber; ?></td>
-			</tr>
+				<tr>
+					<td><?php echo $x != $i ? number_format($i): ''; ?></td>
+					<td><?php echo $sasaran != $row->sasaran ? $row->sasaran : ''; ?></td>
+					<td><?php echo $indikator != $row->indikator ? $row->indikator : ''; ?></td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+				</tr>
+					<?php $sasaran = $row->sasaran; ?>
+					<?php $indikator = $row->indikator; ?>
+					<?php $x = $i; ?>
 			<?php ++$i; ?>
 			<?php endforeach; ?>
 		<?php endif; ?>

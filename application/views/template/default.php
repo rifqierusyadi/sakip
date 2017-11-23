@@ -71,8 +71,9 @@
                 <li><a href="<?= site_url('report/rpjmd'); ?>"><i class="fa fa-file-text-o"></i> Matrik RPJMD</a></li>
 								<li><a href="<?= site_url('report/pohon'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
 								<li><a href="<?= site_url('report/iku'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
+                <li><a href="<?= site_url('report/pk'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja</a></li>
 								<li class="divider"></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahunan</a></li>
+                <li><a href="<?= site_url('report/realisasi'); ?>"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahunan</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Triwulan</a></li>
 								<li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efisiensi/Efektifitas</a></li>
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li>

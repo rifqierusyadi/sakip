@@ -33,44 +33,44 @@
 			<div class="box-footer">
 				<div class="row">
 					<div class="col-md-12">
-						<?php if($record): ?>
+						<!-- <?php //if($record): ?>
 						<?php
-							$list = array();
-							$i = 1;
-							foreach($record as $option){
-								$visis = $option['visi'];
-								$misis = $option['misi'];
-								$tujuans = $option['tujuan'];
-								$sasarans = $option['sasaran'];
-								$list[$visis][$misis][$tujuans][$i] = $sasarans;
-								$i++;
-							}
+							// $list = array();
+							// $i = 1;
+							// foreach($record as $option){
+							// 	$visis = $option['visi'];
+							// 	$misis = $option['misi'];
+							// 	$tujuans = $option['tujuan'];
+							// 	$sasarans = $option['sasaran'];
+							// 	$list[$visis][$misis][$tujuans][$i] = $sasarans;
+							// 	$i++;
+							//}
 						?>
 						<?php
-							$all= array_chunk($list, 1, TRUE);
-							//var_dump($list);
-							foreach($all as $a){
-						?>
-							<ul>
+							// $all= array_chunk($list, 1, TRUE);
+							// //var_dump($list);
+							// foreach($all as $a){
+						?> -->
+							<!-- <ul>
 								<?php
-								foreach($a as $b => $c){
-									echo '<p><b>'.$b.'</b></p>';
-									foreach($c as $d => $e){
-										echo '<dt><u>'.$d.'</u></dt>';
-										foreach($e as $f => $g){
-											echo '<dd><i>'.$f.'</i></dd>';
-											foreach($g as $h => $i){
-												echo '<li>'.$i.'</li>';
-											}
-										}
-									}
-								}
-								?>
+								// foreach($a as $b => $c){
+								// 	echo '<p><b>'.$b.'</b></p>';
+								// 	foreach($c as $d => $e){
+								// 		echo '<dt><u>'.$d.'</u></dt>';
+								// 		foreach($e as $f => $g){
+								// 			echo '<dd><i>'.$f.'</i></dd>';
+								// 			foreach($g as $h => $i){
+								// 				echo '<li>'.$i.'</li>';
+								// 			}
+								// 		}
+								// 	}
+								// }
+								// ?>
 							</ul>
 						<?php
-							}
-						?>
-						<?php endif; ?>
+							//}
+						?> -->
+						<?php //endif; ?>
 					</div>
 				</div>
 			</div>

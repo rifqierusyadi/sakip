@@ -21,12 +21,11 @@
 	<table class="print" id="tableID">
 		<thead>
 		<tr>
-			<th>NO</th>
-			<th width="20%">SASARAN<br>STRATEGIS</th>
-			<th width="20%">INDIKATOR<br>KINERJA<br>UTAMA</th>
-			<th>PENJELASAN</th>
-			<th>PENANGGUNG JAWAB</th>
-			<th>SUMBER DATA</th>
+			<th width="2%">NO</th>
+			<th width="40%">SASARAN<br>STRATEGIS</th>
+			<th width="40%">INDIKATOR<br>KINERJA<br>UTAMA</th>
+			<th width="10%">TARGET CAPAIAN</th>
+			<th>%</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -48,10 +47,24 @@
 				} 
 			?>
 			</td>
-			<td><?php echo $row->sumber; ?></td>
 			</tr>
 			<?php ++$i; ?>
 			<?php endforeach; ?>
+		<?php else: ?>
+			<tr>
+			<td>1.</td>
+			<td>Sasaran Kinerja Utama</td>
+			<td>Indikator Sasaran Kinerja Utama</td>
+			<td>100</td>
+			<td>%</td>
+			</tr>
+			<tr>
+			<td>2.</td>
+			<td>Sasaran Kinerja Utama</td>
+			<td>Indikator Sasaran Kinerja Utama</td>
+			<td>100</td>
+			<td>%</td>
+			</tr>
 		<?php endif; ?>
 		</tbody>
 	</table>

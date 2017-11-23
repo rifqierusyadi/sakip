@@ -461,3 +461,57 @@ if (! function_exists('pohon_realisasi'))
 		}
 	}
 }
+
+if (! function_exists('realisasi'))
+{
+	function realisasi($kode=null, $tahun=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('id', $kode);
+			$CI->db->where('tahun', $tahun);
+			$query = $CI->db->get('pohon_realisasi');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}
+
+if (! function_exists('tanggung_jawab'))
+{
+	function tanggung_jawab($indikator=null, $deskripsi=null)
+	{
+		if($indikator && $deskripsi){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $indikator);
+			$CI->db->where('deskripsi_id', $deskripsi);
+			$query = $CI->db->get('pohon_jabatan');
+			if($query->num_rows() > 0){
+				return $query->result();
+			}else{
+				return FALSE;
+			}
+		}else{
+			return FALSE;
+		}
+	}
+}
+
+if (! function_exists('posisi'))
+{
+	function posisi($kode=null)
+	{
+		$CI =& get_instance();
+		$CI->db->where('kode', $kode);
+		$CI->db->where('deleted_at', null);
+		$query = $CI->db->get('ref_jabatan');
+		if($query->num_rows() > 0){
+			return $query->row()->jabatan;
+		}else{
+			return FALSE;
+		}
+	}
+}
