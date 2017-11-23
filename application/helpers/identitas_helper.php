@@ -443,3 +443,21 @@ if (! function_exists('target'))
 		}
 	}
 }
+
+if (! function_exists('pohon_realisasi'))
+{
+	function pohon_realisasi($kode=null, $tahun=null)
+	{
+		if($kode){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $kode);
+			$CI->db->where('tahun', $tahun);
+			$query = $CI->db->get('pohon_realisasi');
+			if($query->num_rows() > 0){
+				return $query->row();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

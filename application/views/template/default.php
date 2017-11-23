@@ -61,7 +61,8 @@
                 <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
                 <li><a href="<?= site_url('sopd/pejabat'); ?>"><i class="fa fa-file-text-o"></i> Pejabat Administrasi</a></li>
                 <li class="divider"></li>
-               	<li><a href="<?= site_url('realisasi'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
+               	<li><a href="<?= site_url('realisasi/indikator'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
+                 <li><a href="<?= site_url('realisasi/indikator'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Keuangan</a></li>
               </ul>
             </li>
 						<li class="dropdown">
