@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/select2.min.css'); ?>" />
   <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/dataTables.bootstrap.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css'); ?>">
-	<link rel="stylesheet" href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css">
-  <link rel="stylesheet" href="<?= base_url('asset/plugins/datepicker/datepicker3.css'); ?>" />
+	<link rel="stylesheet" href="<?= base_url('asset/plugins/datepicker/datepicker3.css'); ?>" />
 	<link rel="stylesheet" href="<?= base_url('asset/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/ionicons/css/ionicons.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/dist/css/AdminLTE.min.css'); ?>">
@@ -57,11 +56,10 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> SOPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
-                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator PK</a></li>
+                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Sasaran Kinerja</a></li>
+                <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja</a></li>
                 <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
                 <li><a href="<?= site_url('sopd/pejabat'); ?>"><i class="fa fa-file-text-o"></i> Pejabat Administrasi</a></li>
-                <li><a href="<?= site_url('#'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja</a></li>
                 <li class="divider"></li>
                	<li><a href="<?= site_url('realisasi'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
               </ul>

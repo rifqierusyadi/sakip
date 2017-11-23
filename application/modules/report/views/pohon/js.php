@@ -73,16 +73,16 @@ $(window).load(function () {
 	options.templates = [getTemplate()];
 	options.onItemRender = onTemplateRender;
 	options.hasSelectorCheckbox = primitives.common.Enabled.False;
-	// options.pageFitMode = primitives.common.PageFitMode.None;
-	// options.childrenPlacementType = primitives.common.ChildrenPlacementType.Horizontal;
-	// options.leavesPlacementType = primitives.common.ChildrenPlacementType.Vertical;
+	options.pageFitMode = primitives.common.PageFitMode.None;
+	options.childrenPlacementType = primitives.common.ChildrenPlacementType.Horizontal;
+	options.leavesPlacementType = primitives.common.ChildrenPlacementType.Vertical;
 	// options.normalItemsInterval= 10;
 	// options.normalLevelShift=10;
 	// options.dotLevelShift=10;
 	// options.lineLevelShift=10;
-	// options.graphicsType= primitives.common.GraphicsType.Canvas;
-	// options.scale= 1.0;
-	// options.navigationMode= primitives.common.NavigationMode.Inactive,
+	options.graphicsType= primitives.common.GraphicsType.Canvas;
+	options.scale= 1.0;
+	options.navigationMode= primitives.common.NavigationMode.Inactive,
 	jQuery("#basicdiagram").orgDiagram(options);
 
 	function onTemplateRender(event, data) {
@@ -116,7 +116,7 @@ $(window).load(function () {
 	function getTemplate() {
 		var result = new primitives.orgdiagram.TemplateConfig();
 		result.name = "Template1";
-		result.itemSize = new primitives.common.Size(280, 120);
+		result.itemSize = new primitives.common.Size(300, 150);
 		result.minimizedItemSize = new primitives.common.Size(3, 3);
 		result.highlightPadding = new primitives.common.Thickness(3, 3, 3, 3);
 

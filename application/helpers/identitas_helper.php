@@ -425,3 +425,21 @@ if (! function_exists('pohon_deskripsi'))
 		}
 	}
 }
+
+if (! function_exists('target'))
+{
+	function target($tahun=null, $id=null)
+	{
+		if($tahun && $id){
+			$CI =& get_instance();
+			$CI->db->where('indikator_id', $id);
+			$CI->db->where('tahun', $tahun);
+			$query = $CI->db->get('indikator_detail');
+			if($query->num_rows() > 0){
+				return $query->row()->target;
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}

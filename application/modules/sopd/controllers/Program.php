@@ -48,7 +48,7 @@ class Program extends CI_Controller {
 	
 	public function updated($id=null)
 	{
-		
+		$satker = $this->session->userdata('satker');
 		$data['head'] 		= 'Edit Program dan Kegiatan SOPD';
 		$data['record'] 	= $this->data->get_id($id);
 		$data['content'] 	= $this->folder.'form_edit';
@@ -56,6 +56,7 @@ class Program extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
 		$data['satuan']		= $this->data->get_satuan();
+		$data['jabatan'] 	= $this->data->get_jabatan($satker);
 		
 		$this->load->view('template/default', $data);
 	}
@@ -103,10 +104,10 @@ class Program extends CI_Controller {
 				'program' => $this->input->post('program'),
 				'total' => $this->input->post('total'),
 				'satker_id' => $this->session->userdata('satker')
-           );      
+        );      
 		
         if($this->validation()){
-			$insert = $this->data->insert($data);
+			$insert = $this->db->insert('program', $data);
 			$kegiatan = $this->input->post('kegiatan');
 			$result = array();
 			foreach($kegiatan AS $key => $val){

@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Program_m extends MY_Model
+class Pejabat_m extends MY_Model
 {
-	public $table = 'kegiatan'; // you MUST mention the table name
+	public $table = 'pejabat'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
@@ -25,25 +25,33 @@ class Program_m extends MY_Model
         $record = new stdClass();
         $record->id = '';
 		$record->periode_id = '';
-		$record->kode = '';
-		$record->tahun = '';
-		$record->jabatan_program = '';
-		$record->jabatan_kegiatan = '';
-		$record->program = '';
-		$record->total = '';
+		$record->visi_id = '';
+		$record->misi_id = '';
+		$record->tujuan = '';
 		return $record;
     }
+	
+	public function get_record()
+	{
+		$query = $this->db->query('Select a.visi, b.misi, c. id, c.tujuan, d.periode from sakip_tujuan c LEFT JOIN sakip_visi a ON a.id = c.visi_id LEFT JOIN sakip_misi b ON b.id = c.misi_id LEFT JOIN sakip_ref_periode d on c.periode_id = d.id  WHERE c.deleted_at is NULL');
+		if($query->num_rows() > 0 )
+		{
+			return $query->result_array();
+		}else{
+			return FALSE;
+		}
+	}
 	
 	//urusan lawan datatable
     private function _get_datatables_query()
     {
-        $this->db->select('a.*, b.kode, b.program, b.total, b.satker_id, c.periode');
-		$this->db->from('kegiatan a');
-		$this->db->join('program b','a.program_id = b.id','LEFT');
-		$this->db->join('ref_periode c','b.periode_id = c.id','LEFT');
+         $this->db->select('a.*, b.periode');
+		 $this->db->from('pejabat a');
+		 $this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
+		// $this->db->join('visi c','a.visi_id = c.id','LEFT');
+		// $this->db->join('misi d','a.misi_id = d.id','LEFT');
 		//$this->db->from($this->table);
-		
-		$i = 0;
+        $i = 0;
         foreach ($this->column_search as $item) // loop column 
         {
             if($_POST['search']['value']) // if datatable send POST for search
@@ -93,8 +101,7 @@ class Program_m extends MY_Model
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
-		$this->db->where('a.satker_id', $this->session->userdata('satker'));
-		$this->db->where('a.deleted_at', NULL);
+        $this->db->where('a.deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
@@ -107,20 +114,6 @@ class Program_m extends MY_Model
         $query = $this->db->get($this->table);
 		if($query->num_rows() > 0){
 			return $query->row();	
-		}else{
-			//show_404();
-			return FALSE;
-		}
-        
-    }
-	
-	function get_detail($id=null)
-    {
-        $this->db->where('indikator_id', $id);
-		$this->db->where('deleted_at', NULL);
-        $query = $this->db->get('indikator_detail');
-		if($query->num_rows() > 0){
-			return $query->result();	
 		}else{
 			//show_404();
 			return FALSE;
@@ -158,7 +151,7 @@ class Program_m extends MY_Model
 		return $dropdown;
 	}
 	
-	public function get_misi($periode=null, $visi=null)
+	public function get_misi_edit($periode=null, $visi=null)
 	{
         $query = $this->db->where('periode_id',$periode)->where('visi_id',$visi)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('misi');
         if($query->num_rows() > 0){
@@ -172,100 +165,33 @@ class Program_m extends MY_Model
         }
 		return $dropdown;
 	}
-	
-	public function get_tujuan_edit($periode=null, $visi=null, $misi=null)
-	{
-        $query = $this->db->where('periode_id',$periode)->where('visi_id',$visi)->where('misi_id',$misi)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('tujuan');
-        if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Salah Satu Tujuan Misi';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->id] = $row->tujuan;
-		}
-        }else{
-            $dropdown[''] = 'Belum Ada Tujuan Tersedia'; 
-        }
-		return $dropdown;
-	}
-	
-	public function get_satuan()
-	{
-		$this->db->where('deleted_at',null);
-		$query = $this->db->get('ref_satuan');
-        if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Satuan';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->id] = $row->satuan;
-		}
-        }else{
-            $dropdown[''] = 'Belum Ada Satuan'; 
-        }
-		return $dropdown;
-	}
 
-	public function get_sasaran_edit($periode=null, $visi=null, $misi=null, $tujuan=null)
-	{
-        $query = $this->db->where('periode_id',$periode)->where('visi_id',$visi)->where('misi_id',$misi)->where('tujuan_id',$tujuan)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('sasaran');
-        if($query->num_rows() > 0){
-        $dropdown[''] = 'Pilih Salah Satu Sasaran Tujuan';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->id] = $row->sasaran;
-		}
-        }else{
-            $dropdown[''] = 'Belum Ada Sasaran Tujuan Tersedia'; 
-        }
-		return $dropdown;
-	}
-	
-	public function get_tujuan($periode=null, $visi=null, $misi=null)
+	public function get_misi($periode=null, $visi=null)
     {
         $this->db->where('periode_id', $periode);
 		$this->db->where('visi_id', $visi);
-		$this->db->where('misi_id', $misi);
 		$this->db->where('deleted_at', NULL);
-        $query = $this->db->get('tujuan');
+        $query = $this->db->get('misi');
 		if($query->num_rows() > 0){
 			return $query->result();	
 		}else{
 			//show_404();
 			return FALSE;
 		}
+        
     }
-	
-	public function get_sasaran($periode=null, $visi=null, $misi=null, $tujuan=null)
-    {
-        $this->db->where('periode_id', $periode);
-		$this->db->where('visi_id', $visi);
-		$this->db->where('misi_id', $misi);
-		$this->db->where('tujuan_id', $tujuan);
-		$this->db->where('deleted_at', NULL);
-        $query = $this->db->get('sasaran');
-		if($query->num_rows() > 0){
-			return $query->result();	
-		}else{
-			//show_404();
-			return FALSE;
-		}
-	}
-	
-	public function get_jabatan($satker=null)
+
+    public function get_jabatan($satker=null)
 	{
         $query = $this->db->like('path',$satker)->get('view_jabatan');
         if($query->num_rows() > 0){
-		$dropdown[''] = 'PILIH SALAH SATU';
-		foreach ($query->result() as $row)
-		{
-			$dropdown[$row->kode] = $row->jabatan;
-		}
+		    return $query->result();
         }else{
-            $dropdown[''] = 'Belum Ada Jabatan Tersedia'; 
+            return FALSE;
         }
-		return $dropdown;
-	}
-
-	public function get_tahun($periode=null)
+    }
+    
+    public function get_tahun($periode=null)
 	{
         $query = $this->db->where('id',$periode)->where('deleted_at',NULL)->order_by('id', 'ASC')->get('ref_periode')->row();
         if($query){

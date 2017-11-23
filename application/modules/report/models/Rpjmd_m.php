@@ -108,10 +108,10 @@ class Rpjmd_m extends MY_Model
 
     public function get_data($id=null)
 	{
-    $query = $this->db->query("SELECT a.periode_id, a.visi, b.misi, c.tujuan, d.sasaran, e.indikator FROM sakip_visi a LEFT JOIN sakip_misi b ON a.id = b.visi_id LEFT JOIN sakip_tujuan c on a.id = c.visi_id AND b.id = c.misi_id LEFT JOIN sakip_sasaran d on c.id = d.tujuan_id LEFT JOIN sakip_indikator e ON d.id = e.sasaran_id");
+    $query = $this->db->query("SELECT a.periode_id, a.visi, b.misi, c.tujuan, d.sasaran, e.indikator, e.id as indikator_id FROM sakip_visi a LEFT JOIN sakip_misi b ON a.id = b.visi_id AND b.deleted_at is NULL LEFT JOIN sakip_tujuan c on a.id = c.visi_id AND b.id = c.misi_id AND c.deleted_at is NULL LEFT JOIN sakip_sasaran d on c.id = d.tujuan_id AND d.deleted_at is NULL LEFT JOIN sakip_indikator e ON d.id = e.sasaran_id and e.deleted_at IS NULL WHERE a.deleted_at IS NULL");
 		if($query->num_rows() > 0)
 		{
-			return $query->result_array();
+			return $query->result();
 		}else{
 			return FALSE;
 		}

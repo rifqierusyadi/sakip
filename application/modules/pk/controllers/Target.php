@@ -99,6 +99,11 @@ class Target extends CI_Controller {
 					"indikator_id"  => $this->input->post('indikator_id'),
 					"tahun"  => $_POST['tahun'][$key],
 					"target"  => $_POST['target'][$key],
+					"tw1"  => $_POST['tw1'][$key],
+					"tw2"  => $_POST['tw2'][$key],
+					"tw3"  => $_POST['tw3'][$key],
+					"tw4"  => $_POST['tw4'][$key],
+					"notasi"  => $_POST['notasi'][$key],
 					);
 				}
 				$this->db->insert_batch('pohon_detail', $result);
@@ -118,6 +123,11 @@ class Target extends CI_Controller {
 				 "indikator_id"  => $this->input->post('indikator_id'),
 				 "tahun"  => $_POST['tahun'][$key],
 				 "target"  => $_POST['target'][$key],
+				 "tw1"  => $_POST['tw1'][$key],
+				 "tw2"  => $_POST['tw2'][$key],
+				 "tw3"  => $_POST['tw3'][$key],
+				 "tw4"  => $_POST['tw4'][$key],
+				 "notasi"  => $_POST['notasi'][$key],
 				);
 			}
 			//$insert = $this->data->insert($data);

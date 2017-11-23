@@ -54,7 +54,7 @@ class Indikator extends CI_Controller {
 	
 	public function updated($id=null)
 	{
-		
+		$idx = $this->db->get_where('pohon_indikator', array('id'=>$id))->row()->sasaran_id;
 		$data['head'] 		= 'Edit Indikator Kinerja Utama';
 		$data['record'] 	= $this->data->get_id($id);
 		$data['content'] 	= $this->folder.'form_edit';
@@ -62,7 +62,7 @@ class Indikator extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
 		$data['satuan']		= $this->data->get_satuan();
-		$data['sasaran']	= $this->data->get_sasaran($id);
+		$data['sasaran']	= $this->data->get_sasaran($idx);
 		
 		$this->load->view('template/default', $data);
 	}

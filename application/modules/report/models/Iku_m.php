@@ -97,7 +97,7 @@ class Iku_m extends MY_Model
 	
 	public function get_indikator($id=null)
 	{
-    $query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id WHERE b.satker_id LIKE '{$id}' ORDER BY c.eselon_id ASC");
+    $query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL WHERE b.satker_id LIKE '{$id}' ORDER BY c.eselon_id ASC");
 		if($query->num_rows() > 0)
 		{
 			return $query->result();

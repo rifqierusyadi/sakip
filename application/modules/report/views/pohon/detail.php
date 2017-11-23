@@ -13,6 +13,10 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
+					<div class="title">
+						<div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
+						<div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
+					</div>
 					<div id="basicdiagram" style="width: 100%; height: 750px; border-style: dotted; border-width: 1px;" />
 					</div>
 				</div>

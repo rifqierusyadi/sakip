@@ -91,7 +91,7 @@
 								<div class="form-group <?php echo form_error('jabatan_kegiatan') ? 'has-error' : null; ?>">
 									<?php
 									echo form_label('Penanggung Jawab Kegiatan','jabatan_kegiatan');
-									$selected = set_value('jabatan_kegiatan', $record->periode_id);
+									$selected = set_value('jabatan_kegiatan', $record->jabatan_kegiatan);
 									echo form_dropdown('jabatan_kegiatan', $jabatan, $selected, "class='form-control select2' name='jabatan_kegiatan' id='jabatan_kegiatan'");
 									echo form_error('jabatan_kegiatan') ? form_error('jabatan_kegiatan', '<p class="help-block">','</p>') : '';
 									?>
