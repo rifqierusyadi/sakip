@@ -108,9 +108,11 @@ class Pohon_m extends MY_Model
     
     public function get_pohon($id=NULL)
     {
-        $this->db->from('pohon');
-        $this->db->where('deleted_at', NULL);
-		$this->db->where('satker_id', $id);
+        $this->db->select('a.*, b.indikator');
+        $this->db->from('pohon a');
+        $this->db->join('pohon_indikator b', 'a.id = b.sasaran_id','LEFT');
+        $this->db->where('a.deleted_at', NULL);
+		$this->db->where('a.satker_id', $id);
         $query = $this->db->get();
         return $query->result();
     }

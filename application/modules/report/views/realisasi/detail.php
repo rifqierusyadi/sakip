@@ -10,8 +10,6 @@
 		<style>p{margin:0px;}</style>
 	</head>
 <body>
-<div class="book">
-    <div class="page">
 	<div class="title">
             <div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
             <div class="judul"><h3><?= isset($head) ? $head.'-'.$this->uri->segment('5') : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
@@ -54,9 +52,6 @@
 		</tbody>
 	</table>
 </div>
-	<p><?php //echo '<img src="'.site_url('report/pangkat/barcode/0123456789').'">'; ?></p>
-</div>
-</div>
 <script src="<?= base_url('asset/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/tableexport/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/tableexport/js-xlsx/xlsx.core.min.js'); ?>"></script>
@@ -68,7 +63,7 @@
 $(function () {
 e = $("#tableID").tableExport({
         bootstrap: true,
-        formats: ["xlsx","txt"],
+        formats: ["xlsx"],
         position: "top",
         fileName: "IKU-<?php echo date('dmy'); ?>",
     });

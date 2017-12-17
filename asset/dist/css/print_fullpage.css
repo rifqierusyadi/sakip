@@ -1,28 +1,9 @@
 body {
-    margin: 0;
-    padding: 0;
+    margin: 5px;
+    padding: 5px;
     background-color: #fff;
-    font-size: 10px;
-    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-}
-
-*{
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
-}
-
-.page {
-    width: 100%;
-    /* min-height: 21cm; */
-    padding: 0.2cm;
-    margin: 0.2cm auto;
-    border: 1px #cfcfcf solid;
-    background: white;
-    box-shadow: 0 0 1px rgba(0, 0, 0, 0.1);
-}
-
-.logo{
-    /* float: left; */
+    font-size: 11px;
+    font-family: "arial";
 }
 
 .title{
@@ -46,27 +27,10 @@ body {
 }
 
 @media print {
-    .page {
-        margin: 0;
-        border: initial;
-        border-radius: initial;
-        width: initial;
-        min-height: initial;
-        box-shadow: initial;
-        background: initial;
-        padding: 0.2cm;
-        margin: 0.2cm auto;
-        page-break-after: always;
-    }
-    
     caption{
         display: none;
     }
-
-    table { page-break-inside:avoid }
-    tr    { page-break-inside:avoid; page-break-after:auto }
     thead { display:table-header-group;  -webkit-print-color-adjust: exact;  }
-    tfoot { display:table-footer-group }
 }
 
 h2{
@@ -116,9 +80,6 @@ caption{
 
 .center{
     text-align: center !important;
-}
-.break{
-    page-break-after: always;
 }
 
 p{

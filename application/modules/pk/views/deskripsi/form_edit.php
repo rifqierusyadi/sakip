@@ -43,7 +43,7 @@
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('bidang_id[]') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Bidang','bidang_id');
+							echo form_label('Penganggung Jawab','bidang_id');
 							if($bidang){
 								foreach($bidang as $x){
 									$data[] = $x->jabatan; 

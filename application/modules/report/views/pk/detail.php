@@ -10,8 +10,6 @@
 		<style>p{margin:0px;}</style>
 	</head>
 <body>
-<div class="book">
-    <div class="page">
 	<div class="title">
             <div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
             <div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
@@ -24,8 +22,7 @@
 			<th width="2%">NO</th>
 			<th width="40%">SASARAN<br>STRATEGIS</th>
 			<th width="40%">INDIKATOR<br>KINERJA<br>UTAMA</th>
-			<th width="10%">TARGET CAPAIAN</th>
-			<th>%</th>
+			<th>TARGET CAPAIAN</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -56,21 +53,16 @@
 			<td>Sasaran Kinerja Utama</td>
 			<td>Indikator Sasaran Kinerja Utama</td>
 			<td>100</td>
-			<td>%</td>
 			</tr>
 			<tr>
 			<td>2.</td>
 			<td>Sasaran Kinerja Utama</td>
 			<td>Indikator Sasaran Kinerja Utama</td>
 			<td>100</td>
-			<td>%</td>
 			</tr>
 		<?php endif; ?>
 		</tbody>
 	</table>
-</div>
-	<p><?php //echo '<img src="'.site_url('report/pangkat/barcode/0123456789').'">'; ?></p>
-</div>
 </div>
 <script src="<?= base_url('asset/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/tableexport/jquery.min.js'); ?>"></script>
@@ -83,7 +75,7 @@
 $(function () {
 e = $("#tableID").tableExport({
         bootstrap: true,
-        formats: ["xlsx","txt"],
+        formats: ["xlsx"],
         position: "top",
         fileName: "IKU-<?php echo date('dmy'); ?>",
     });

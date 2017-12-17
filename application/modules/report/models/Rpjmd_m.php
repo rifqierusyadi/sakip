@@ -3,15 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Rpjmd_m extends MY_Model
 {
-	public $table = 'ref_satker'; // you MUST mention the table name
+	public $table = 'ref_periode'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
 	
 	//ajax datatable
-    public $column_order = array('id','kode','satker',null); //set kolom field database pada datatable secara berurutan
-    public $column_search = array('kode','satker'); //set kolom field database pada datatable untuk pencarian
-    public $order = array('kode' => 'asc'); //order baku 
+    public $column_order = array('id','periode',null); //set kolom field database pada datatable secara berurutan
+    public $column_search = array('periode'); //set kolom field database pada datatable untuk pencarian
+    public $order = array('id' => 'asc'); //order baku 
 	
 	public function __construct()
 	{
@@ -84,9 +84,9 @@ class Rpjmd_m extends MY_Model
         return $query->result();
     }
 	
-	public function get_satker($id=null)
+	public function get_periode($id=null)
 	{
-		$query = $this->db->get_where('ref_satker',array('id'=>$id));
+		$query = $this->db->get_where('ref_periode',array('id'=>$id));
 		if($query->num_rows() > 0)
 		{
 			return $query->row();
@@ -95,34 +95,25 @@ class Rpjmd_m extends MY_Model
 		}
     }
 	
-	public function get_indikator($id=null)
-	{
-    $query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id WHERE b.satker_id LIKE '{$id}' ORDER BY c.eselon_id ASC");
-		if($query->num_rows() > 0)
-		{
-			return $query->result();
-		}else{
-			return FALSE;
-		}
-    }
+	// public function get_indikator($id=null)
+	// {
+    // $query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id WHERE b.satker_id LIKE '{$id}' ORDER BY c.eselon_id ASC");
+	// 	if($query->num_rows() > 0)
+	// 	{
+	// 		return $query->result();
+	// 	}else{
+	// 		return FALSE;
+	// 	}
+    // }
 
     public function get_data($id=null)
 	{
-    $query = $this->db->query("SELECT a.periode_id, a.visi, b.misi, c.tujuan, d.sasaran, e.indikator, e.id as indikator_id FROM sakip_visi a LEFT JOIN sakip_misi b ON a.id = b.visi_id AND b.deleted_at is NULL LEFT JOIN sakip_tujuan c on a.id = c.visi_id AND b.id = c.misi_id AND c.deleted_at is NULL LEFT JOIN sakip_sasaran d on c.id = d.tujuan_id AND d.deleted_at is NULL LEFT JOIN sakip_indikator e ON d.id = e.sasaran_id and e.deleted_at IS NULL WHERE a.deleted_at IS NULL");
+    $query = $this->db->query("SELECT a.periode_id, a.visi, b.misi, c.tujuan, d.sasaran, e.indikator, e.id as indikator_id FROM sakip_visi a LEFT JOIN sakip_misi b ON a.id = b.visi_id AND b.deleted_at is NULL LEFT JOIN sakip_tujuan c on a.id = c.visi_id AND b.id = c.misi_id AND c.deleted_at is NULL LEFT JOIN sakip_sasaran d on c.id = d.tujuan_id AND d.deleted_at is NULL LEFT JOIN sakip_indikator e ON d.id = e.sasaran_id and e.deleted_at IS NULL WHERE a.deleted_at IS NULL AND a.periode_id = {$id}");
 		if($query->num_rows() > 0)
 		{
 			return $query->result();
 		}else{
 			return FALSE;
 		}
-    }
-    
-    public function get_pohon($id=NULL)
-    {
-        $this->db->from('pohon');
-        //$this->db->where('deleted_at', NULL);
-		$this->db->where('satker_id', $id);
-        $query = $this->db->get();
-        return $query->result();
     }
 }

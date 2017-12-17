@@ -43,7 +43,7 @@
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('bidang_id[]') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Bidang','bidang_id');
+							echo form_label('Penanggung Jawab','bidang_id');
 							$selected = set_value('bidang_id[]');
 							echo form_dropdown('bidang_id[]', $jabatan, $selected, "class='form-control select2' id='bidang' multiple");
 							echo form_error('bidang_id[]') ? form_error('bidang_id[]', '<p class="help-block">','</p>') : '';

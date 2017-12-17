@@ -23,7 +23,7 @@
 									<th width="5px"><input type="checkbox" id="check-all"></th>
 									<th>Tingkat Jabatan</th>
 									<th>Sasaran/Kinerja Utama</th>
-									<th>Indikator Sasaran</th>
+									<th>Indikator</th>
 									<th>Satuan Indikator</th>
 									<th>Periode</th>
 									<th width="90px">Aksi</th>

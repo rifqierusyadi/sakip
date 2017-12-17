@@ -22,7 +22,7 @@ class Sasaran extends CI_Controller {
 	//halaman index
 	public function index()
 	{
-		$data['head'] 		= 'Pohon Kinerja';
+		$data['head'] 		= 'Kinerja Utama / Sasaran';
 		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
@@ -33,7 +33,7 @@ class Sasaran extends CI_Controller {
 	
 	public function created()
 	{
-		$data['head'] 		= 'Tambah Pohon Kinerja';
+		$data['head'] 		= 'Tambah Kinerja Utama';
 		$data['record'] 	= $this->data->get_new();
 		$data['content'] 	= $this->folder.'form';
 		$data['style'] 		= $this->folder.'style';
@@ -47,7 +47,7 @@ class Sasaran extends CI_Controller {
 	public function updated($id=null)
 	{
 		
-		$data['head'] 		= 'Edit Pohon Kinerja';
+		$data['head'] 		= 'Edit Kinerja Utama';
 		$data['record'] 	= $this->data->get_id($id);
 		$data['content'] 	= $this->folder.'form_edit';
 		$data['style'] 		= $this->folder.'style';
@@ -108,7 +108,7 @@ class Sasaran extends CI_Controller {
 				}
 			}
 			$this->db->insert_batch('pohon', $result);
-			helper_log("add", "Menambah Pohon Kinerja");
+			helper_log("add", "Menambah Kinerja Utama");
         }
     }
     
@@ -123,14 +123,14 @@ class Sasaran extends CI_Controller {
 		
         if($this->validation($id)){
             $this->data->update($data, $id);
-			helper_log("edit", "Merubah Pohon Kinerja");
+			helper_log("edit", "Merubah Kinerja Utama");
         }
     }
     
     public function ajax_delete($id=null)
     {
         $this->data->delete($id);
-		helper_log("trash", "Menghapus Pohon Kinerja");
+		helper_log("trash", "Menghapus Kinerja Utama");
         echo json_encode(array("status" => TRUE));
     }
     
@@ -139,7 +139,7 @@ class Sasaran extends CI_Controller {
         $list_id = $this->input->post('id');
         foreach ($list_id as $id) {
             $this->data->delete($id);
-			helper_log("trash", "Menghapus Pohon Kinerja");
+			helper_log("trash", "Menghapus Kinerja Utama");
         }
         echo json_encode(array("status" => TRUE));
     }

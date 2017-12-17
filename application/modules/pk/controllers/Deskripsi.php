@@ -128,9 +128,10 @@ class Deskripsi extends CI_Controller {
 			'deskripsi' => $this->input->post('deskripsi'),
 			'sumber' => $this->input->post('sumber'),
 		);
-	
-		if($this->validation($id)){
-			$this->data->update($data, $id);
+		
+		$get_id = $this->db->get_where('pohon_deskripsi', array('indikator_id'=>$id))->row()->id;
+		if($this->validation($get_id)){
+			$this->data->update($data, $get_id);
 			helper_log("edit", "Merubah Penjelasan Indikator Kinerja");
 		}
     }

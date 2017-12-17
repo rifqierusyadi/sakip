@@ -57,8 +57,9 @@ $(window).load(function () {
 	        new primitives.orgdiagram.ItemConfig({
 			id: '<?php echo $row->id; ?>',
 			parent: '<?php echo $row->parent_id; ?>',
-			title: "Kinerja Utama",
-			description: "<?php echo $row->sasaran; ?>",
+			title: "SASARAN KINERJA",
+			sasaran: "<?php echo $row->sasaran; ?>",
+			indikator: "<?php echo $row->indikator; ?>",
 			image: null,
 	        templateName: "Template1"
 		}),
@@ -101,7 +102,7 @@ $(window).load(function () {
 			data.element.find("[name=photo]").attr({ "src": itemConfig.image, "alt": itemConfig.title });
 			data.element.find("[name=titleBackground]").css({ "background": itemConfig.itemTitleColor });
 
-			var fields = ["title", "description","image"];
+			var fields = ["title", "sasaran","indikator", "image"];
 			for (var index = 0; index < fields.length; index++) {
 				var field = fields[index];
 
@@ -116,14 +117,14 @@ $(window).load(function () {
 	function getTemplate() {
 		var result = new primitives.orgdiagram.TemplateConfig();
 		result.name = "Template1";
-		result.itemSize = new primitives.common.Size(300, 150);
+		result.itemSize = new primitives.common.Size(300, 180);
 		result.minimizedItemSize = new primitives.common.Size(3, 3);
 		result.highlightPadding = new primitives.common.Thickness(3, 3, 3, 3);
 
 
 		var itemTemplate = jQuery(
 		  '<div class="bp-item bp-corner-all bt-item-frame">' + '<div name="title" class="bp-item" style="text-align:center; top: 10px; left: 10px; right: 10px; font-size: 13px;"></div>'
-			+ '<div name="description" class="bp-item" style="text-align:left; top: 30px; left: 10px; right: 10px; font-size: 11px;"></div>'
+			+ '<div name="sasaran" class="bp-item" style="text-align:left; top: 40px; left: 10px; right: 10px; font-size: 11px;"></div>' + '<div name="indikator" class="bp-item" style="text-align:left; top: 110px; left: 10px; right: 10px; font-size: 11px;"></div>'
 		+ '</div>'
 		).css({
 			width: result.itemSize.width + "px",

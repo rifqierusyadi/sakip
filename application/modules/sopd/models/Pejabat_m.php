@@ -10,7 +10,7 @@ class Pejabat_m extends MY_Model
 	
 	//ajax datatable
     public $column_order = array(null); //set kolom field database pada datatable secara berurutan
-    public $column_search = array(); //set kolom field database pada datatable untuk pencarian
+    public $column_search = array('jabatan','periode','tahun','nip','nama'); //set kolom field database pada datatable untuk pencarian
     public $order = array('id' => 'ASC'); //order baku 
 	
 	public function __construct()

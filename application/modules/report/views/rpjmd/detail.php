@@ -11,31 +11,12 @@
 		<style>p{margin:0px;}</style>
 	</head>
 <body>
-<div class="book">
-    <div class="page">
-	<div class="title">
-            <div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
-            <div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
+    <div class="title">
+		<div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
+		<div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>
     </div>
-	<!-- identitas -->
 	<div class="tabel">
-	<?php
-		// $list = array();
-		// $i = 1;
-		// foreach($record as $option){
-		// 	$visis = $option['visi'];
-		// 	$misis = $option['misi'];
-		// 	$tujuans = $option['tujuan'];
-		// 	$sasarans = $option['sasaran'];
-		// 	//$indikators = $option['indikator'];
-		// 	//$list[$visis][$misis][$tujuans][$sasarans][$i] = $indikators;
-		// 	$list[$visis][$misis][$tujuans][$i] = $sasarans;
-		// 	$i++;
-
-		// }
-		// $all= array_chunk($list, 1, TRUE);
-	?>
-	<table class="print" id="tableID">
+	<table class="print" id="tableID" style="width:100%">
 		<thead>
 		<tr>
 			<th>VISI</th>
@@ -53,12 +34,27 @@
 		</tr>
 		</thead>
 		<tbody>
+		<?php if($record): ?>
+		<?php $tujuan = null; ?>
+		<?php $sasaran = null; ?>
 		<?php foreach($record as $row): ?>
 			<tr>
 				<td><?= $row->visi; ?></td>
 				<td><?= $row->misi; ?></td>
-				<td><?= $row->tujuan; ?></td>
-				<td><?= $row->sasaran; ?></td>
+				<?php if($tujuan != $row->tujuan): ?>
+				<?php $tujuan = $row->tujuan; ?>
+				<td><?= '<b>'.$row->tujuan.'</b>'; ?></td>
+				<?php else: ?>
+				<td></td>
+				<?php endif; ?>
+				
+				<?php if($sasaran != $row->sasaran): ?>
+				<?php $sasaran = $row->sasaran; ?>
+				<td><?= '<b>'.$row->sasaran.'</b>'; ?></td>
+				<?php else: ?>
+				<td></td>
+				<?php endif; ?>
+				
 				<td><?= $row->indikator; ?></td>
 				<td><?= target('2015',$row->indikator_id); ?></td>
 				<td><?= target('2016',$row->indikator_id); ?></td>
@@ -69,12 +65,11 @@
 				<td><?= target('2021',$row->indikator_id); ?></td>
 			</tr>
 		<?php endforeach; ?>
+		<?php endif; ?>
 		</tbody>
 	</table>
-</div>
-	<p><?php //echo '<img src="'.site_url('report/pangkat/barcode/0123456789').'">'; ?></p>
-</div>
-</div>
+	</div>
+
 <script src="<?= base_url('asset/plugins/tableexport/jquery.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
@@ -88,7 +83,7 @@
 $(function () {
 e = $("#tableID").tableExport({
         bootstrap: true,
-        formats: ["xlsx","txt"],
+        formats: ["xlsx"],
         position: "top",
         fileName: "RPJMD-<?php echo date('dmy'); ?>",
     });
