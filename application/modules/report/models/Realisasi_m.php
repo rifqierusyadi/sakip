@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Realisasi_m extends MY_Model
 {
-	public $table = 'ref_periode'; // you MUST mention the table name
+	public $table = 'ref_satker'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
@@ -133,11 +133,11 @@ class Realisasi_m extends MY_Model
         }
     }
     
-    public function get_pohon($id=NULL)
+    public function get_periode($id=NULL)
     {
-        $this->db->from('pohon');
-        //$this->db->where('deleted_at', NULL);
-		$this->db->where('satker_id', $id);
+        $this->db->from('ref_periode');
+        $this->db->where('deleted_at', NULL);
+		//$this->db->where('satker_id', $id);
         $query = $this->db->get();
         return $query->result();
     }

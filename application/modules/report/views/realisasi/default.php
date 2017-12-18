@@ -14,13 +14,13 @@
 				<div class="row">
 					<div class="col-md-12">
 						<span id="key" style="display: none;"><?= $this->security->get_csrf_hash(); ?></span>
-						<table id="tableID" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%">
+						<table id="tableID" class="table table-striped table-bordered" cellspacing="0" width="100%">
 							<thead>
 								<tr>
 									<th width="5px"><input type="checkbox" id="check-all"></th>
-									<th>Periode</th>
-									<th>Tahun</th>
-									<!-- <th width="10px">Aksi</th> -->
+									<th>Kode</th>
+									<th>Satuan Kerja</th>
+									<th width="10px">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>

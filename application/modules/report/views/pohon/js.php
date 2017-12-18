@@ -3,57 +3,13 @@
 <script src="<?php echo base_url(); ?>asset/plugins/tableexport/FileSaver.min.js"></script>
 <script src="<?php echo base_url(); ?>asset/plugins/tableexport/dist/js/tableexport.js"></script>
 <script src="<?php echo base_url(); ?>asset/plugins/tableexport/dist/js/tableexport.js"></script>
-<script type="text/javascript">
-com_github_culmat_jsTreeTable.register(this)
-treeTable($('#tableIDX'))
-</script>
-<script>
-$(function () {
-
-e = $("#tableIDX").tableExport({
-        bootstrap: true,
-        formats: ["xlsx","txt"],
-        position: "top",
-        fileName: "PETA-<?php echo date('dmyyyy'); ?>",
-    });
-
-table = $('#tableIDX').DataTable({
-    "paging": false,
-    "searching": false,
-    "ordering": false,
-    "info": false,
-    "autoWidth": true,
-    "responsive" :true,
-    "columnDefs":[{
-        "searchable" : false,
-        "orderable" : false,
-        "targets" : 0
-    },
-    { "visible": 'false', "targets": 1 }],
-    "drawCallback": function ( settings ) {
-            var api = this.api();
-            var rows = api.rows( {page:'current'} ).nodes();
-            var last=null;
- 
-            api.column(1, {page:'current'} ).data().each( function ( group, i ) {
-                if ( last !== group ) {
-                    $(rows).eq( i ).before(
-                        '<tr class="group" ><td colspan="11"><strong>'+group+'</strong></td></tr>'
-                    );
-                    last = group;
-                }
-            } );
-        }
-	});
-});
-</script>
-
-<script type='text/javascript'>//<![CDATA[
+<script type='text/javascript'>
+//<![CDATA[
 $(window).load(function () {
 	var options = new primitives.orgdiagram.Config();	
-	<?php if($record): ?>
+	<?php if($pohon): ?>
 	var items = [
-		<?php foreach($record as $row): ?>
+		<?php foreach($pohon as $row): ?>
 	        new primitives.orgdiagram.ItemConfig({
 			id: '<?php echo $row->id; ?>',
 			parent: '<?php echo $row->parent_id; ?>',
@@ -124,7 +80,7 @@ $(window).load(function () {
 
 		var itemTemplate = jQuery(
 		  '<div class="bp-item bp-corner-all bt-item-frame">' + '<div name="title" class="bp-item" style="text-align:center; top: 10px; left: 10px; right: 10px; font-size: 13px;"></div>'
-			+ '<div name="sasaran" class="bp-item" style="text-align:left; top: 40px; left: 10px; right: 10px; font-size: 11px;"></div>' + '<div name="indikator" class="bp-item" style="text-align:left; top: 110px; left: 10px; right: 10px; font-size: 11px;"></div>'
+			+ '<div name="sasaran" class="bp-item" style="text-align:left; top: 40px; left: 10px; right: 10px; font-size: 11px;"></div>' + '<div name="indikator" class="bp-item" style="text-align:left; top: 115px; left: 10px; right: 10px; font-size: 11px;"></div>'
 		+ '</div>'
 		).css({
 			width: result.itemSize.width + "px",

@@ -28,8 +28,38 @@ class Realisasi extends CI_Controller {
 		
 		$this->load->view('template/default', $data);
 	}
-	
+
 	public function ajax_list()
+    {
+        $record	= $this->data->get_datatables();
+        $data 	= array();
+        $no 	= $_POST['start'];
+		
+        foreach ($record as $row) {
+            $no++;
+            $col = array();
+            $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
+            $col[] = $row->kode;
+			$col[] = $row->satker;
+            
+            //add html for action
+            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/realisasi/periode/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
+                  ';
+ 
+            $data[] = $col;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->data->count_all(),
+                        "recordsFiltered" => $this->data->count_filtered(),
+                        "data" => $data,
+                );
+        
+		echo json_encode($output);
+    }
+	
+	public function ajax_periode()
     {
         $record	= $this->data->get_datatables();
         $data 	= array();
@@ -48,14 +78,8 @@ class Realisasi extends CI_Controller {
 	
 				}
 			}
-
-			$col[] = $indikator ? implode(" ", $indikator) : '-';
 			
-			//$col[] = $row->id;
-            
-            //add html for action
-            //$col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/realisasi/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>';
- 
+			$col[] = $indikator ? implode(" ", $indikator) : '-';
             $data[] = $col;
         }
  
@@ -67,7 +91,21 @@ class Realisasi extends CI_Controller {
                 );
         
 		echo json_encode($output);
-    }
+	}
+	
+	public function periode($id)
+	{
+		//$satker = $this->data->get_satker($this->session->userdata('satker'));
+		$satker = $this->db->get_where('ref_satker', array('id'=>$id))->row();
+
+		$data['head'] 		= $satker ? 'RENCANA AKSI - '.$satker->satker : 'RENCANA AKSI TAHUNAN';
+		$data['record'] 	= $this->data->get_periode();
+		$data['content'] 	= $this->folder.'periode';
+		$data['style'] 		= $this->folder.'style';
+		$data['js'] 		= $this->folder.'js';
+		
+		$this->load->view('template/default', $data);
+	}
 	
 	public function detail($id)
 	{

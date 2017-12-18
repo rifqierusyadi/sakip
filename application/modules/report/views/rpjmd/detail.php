@@ -11,6 +11,7 @@
 		<style>p{margin:0px;}</style>
 	</head>
 <body>
+	
     <div class="title">
 		<div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
 		<div class="judul"><h3><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h3></div>

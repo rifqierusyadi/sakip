@@ -51,9 +51,9 @@ table = $('#tableIDX').DataTable({
 <script type='text/javascript'>//<![CDATA[
 $(window).load(function () {
 	var options = new primitives.orgdiagram.Config();	
-	<?php if($record): ?>
+	<?php if($pohon): ?>
 	var items = [
-		<?php foreach($record as $row): ?>
+		<?php foreach($pohon as $row): ?>
 	        new primitives.orgdiagram.ItemConfig({
 			id: '<?php echo $row->id; ?>',
 			parent: '<?php echo $row->parent_id; ?>',
@@ -133,5 +133,4 @@ $(window).load(function () {
 		return result;
 	}
 });//]]>
-	  
 </script>

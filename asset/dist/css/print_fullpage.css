@@ -30,6 +30,17 @@ body {
     caption{
         display: none;
     }
+
+    .panel{
+        display: none !important;
+    }
+
+    table.print {
+        width: 100% !important;
+        margin: 0px;
+        padding: 0px;
+    }
+
     thead { display:table-header-group;  -webkit-print-color-adjust: exact;  }
 }
 
@@ -61,6 +72,7 @@ table.print tr td{
 
 caption{
     margin-bottom : 20px;
+    text-align: center;
 }
 
 .num {

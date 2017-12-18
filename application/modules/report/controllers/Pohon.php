@@ -22,6 +22,7 @@ class Pohon extends CI_Controller {
 	{
 		$data['head'] 		= 'POHON KINERJA';
 		$data['record'] 	= $this->data->get_all();
+		$data['pohon'] 		= FALSE;
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
@@ -61,29 +62,13 @@ class Pohon extends CI_Controller {
 	
 	public function detail($id)
 	{
-
-		$satker = $this->data->get_satker($id);
-		
+		$satker = $this->data->get_satker($id);	
 		$data['head'] 		= $satker ? 'POHON KINERJA - '.$satker->satker : 'POHON KINERJA';
-		$data['record'] 	= $this->data->get_pohon($satker->kode);
+		$data['record'] 	= FALSE;
+		$data['pohon'] 		= $this->data->get_pohon($satker->kode);
 		$data['content'] 	= $this->folder.'detail';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
-		
-		$this->load->view('template/default', $data);
-	}
-	
-	public function analisa($id)
-	{
-		
-		$nunker = $this->data->get_nunker($id);
-		
-		$data['head'] 		= $nunker ? 'ANALISA JABATAN - '.$nunker->unker : 'ANALISA JABATAN';
-		$data['record'] 	= $this->data->get_pohon($nunker->kode);
-		$data['content'] 	= $this->folder.'analisa';
-		$data['style'] 		= $this->folder.'style';
-		$data['js'] 		= $this->folder.'js';
-		
 		$this->load->view('template/default', $data);
 	}
 }
