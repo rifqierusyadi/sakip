@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard_m extends MY_Model
+class Informasi_m extends MY_Model
 {
 	public $table = 'informasi'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
@@ -9,16 +9,26 @@ class Dashboard_m extends MY_Model
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
 	
 	//ajax datatable
-    public $column_order = array('id',null); //set kolom field database pada datatable secara berurutan
-    public $column_search = array('id'); //set kolom field database pada datatable untuk pencarian
+    public $column_order = array('id','judul','tanggal',null); //set kolom field database pada datatable secara berurutan
+    public $column_search = array('judul','tanggal'); //set kolom field database pada datatable untuk pencarian
     public $order = array('id' => 'asc'); //order baku 
 	
 	public function __construct()
 	{
 		$this->timestamps = TRUE;
-		$this->soft_deletes = FALSE;
+		$this->soft_deletes = TRUE;
 		parent::__construct();
 	}
+	
+	public function get_new()
+    {
+        $record = new stdClass();
+        $record->id = '';
+		$record->judul = '';
+		$record->informasi = '';
+		$record->tanggal = date('yyyy-mm-dd');
+		return $record;
+    }
 	
 	//urusan lawan datatable
     private function _get_datatables_query()
@@ -80,13 +90,12 @@ class Dashboard_m extends MY_Model
         return $query->result();
     }
 	
-	public function get_record()
-	{
-		$query = $this->db->query("Select a.visi, b.misi, c.tujuan, d.sasaran from sakip_sasaran d LEFT JOIN sakip_visi a ON a.id = d.visi_id LEFT JOIN sakip_misi b ON b.id = d.misi_id LEFT JOIN sakip_tujuan c ON c.id = d.tujuan_id WHERE d.deleted_at is NULL");
-		if($query->num_rows() > 0){
-			return $query->result_array();
-		}else{
-			return FALSE;
-		}
-	}
+	function get_id($id=null)
+    {
+        $this->db->where('id', $id);
+		$this->db->where('deleted_at', NULL);
+        $query = $this->db->get($this->table);
+        return $query->row();
+    }
+
 }

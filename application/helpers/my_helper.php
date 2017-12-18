@@ -485,3 +485,59 @@ if (! function_exists('eselon'))
         }
 	}
 }
+
+if (! function_exists('satuan'))
+{
+	function satuan($kode=null)
+	{
+		$CI =& get_instance();
+		$CI->db->where('id', $kode);
+		$CI->db->where('deleted_at', null);
+		$query = $CI->db->get('ref_satuan');
+        if($query->num_rows() > 0){
+			return $query->row()->satuan;
+		}else{
+            return '-';
+        }
+	}
+}
+
+if (! function_exists('capaian'))
+{
+	function capaian($indikator=null, $tahun=null, $triwulan=null)
+	{
+		$CI =& get_instance();
+		$CI->db->where('indikator_id', $indikator);
+		$CI->db->where('tahun', $tahun);
+		$CI->db->where('deleted_at', null);
+		$query = $CI->db->get('pohon_realisasi');
+        if($query->num_rows() > 0){
+			if($triwulan == 1){
+				return $query->row()->tw1;
+			}elseif($triwulan == 2){
+				return $query->row()->tw2;
+			}elseif($triwulan == 3){
+				return $query->row()->tw3;
+			}elseif($triwulan == 4){
+				return $query->row()->tw4;
+			}else{
+				return '-';
+			}
+		}else{
+            return '-';
+        }
+	}
+}
+
+if (! function_exists('rumus'))
+{
+	function rumus($realisasi=null, $target=null)
+	{
+		if($realisasi && $target){
+			$hasil = ($realisasi/$target)* 100;
+		}else{
+			$hasil = 0;
+		}
+		return $hasil;
+	}
+}

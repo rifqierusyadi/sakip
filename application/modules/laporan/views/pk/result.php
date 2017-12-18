@@ -8,9 +8,8 @@
 <tr>
 	<th>SASARAN<br>STRATEGIS</th>
 	<th>INDIKATOR<br>KINERJA<br>UTAMA</th>
-	<th>PENJELASAN</th>
-	<th>PENANGGUNG JAWAB</th>
-	<th>SUMBER DATA</th>
+	<th>TARGET</th>
+	<th>SATUAN</th>
 </tr>
 </thead>
 <tbody>
@@ -27,19 +26,8 @@
 	<?php endif; ?>
 
 	<td><?php echo $row->indikator; ?></td>
-	<td><?php echo strip_tags($row->deskripsi); ?></td>
-	<td>
-	<?php 
-		$data = tanggung_jawab($row->indikator_id, $row->id);
-		if($data){
-			foreach($data as $x){
-				echo ucwords(strtolower(posisi($x->jabatan)));
-				echo '; ';
-			}
-		} 
-	?>
-	</td>
-	<td><?php echo strip_tags($row->sumber); ?></td>
+	<td><?php echo $row->target; ?></td>
+	<td><?php echo satuan($row->satuan_id); ?></td>
 	</tr>
 	<?php ++$i; ?>
 	<?php endforeach; ?>

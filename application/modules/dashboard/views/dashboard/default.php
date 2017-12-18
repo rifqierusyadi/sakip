@@ -22,15 +22,52 @@
 			</div>
 			<!-- box-body -->
 			<div class="box-body">
-				<div class="row">
-					<div class="col-md-12">
-						<p>Selamat datang pada e-sakip versi Beta 1.0</p>
+			
+			<div class="row">
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="info-box bg-red	">
+					<span class="info-box-icon"><i class="fa fa-building"></i></span>
+		
+					<div class="info-box-content">
+					<span class="info-box-text">SOPD</span>
+					<span class="info-box-number">140</span>
 					</div>
+					<!-- /.info-box-content -->
 				</div>
+				<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+				<div class="col-md-6 col-sm-6 col-xs-12">
+				<div class="info-box bg-aqua">
+					<span class="info-box-icon"><i class="fa fa-users"></i></span>
+		
+					<div class="info-box-content">
+					<span class="info-box-text">USERS</span>
+					<span class="info-box-number">140</span>
+					</div>
+					<!-- /.info-box-content -->
+				</div>
+				<!-- /.info-box -->
+				</div>
+				<!-- /.col -->
+			</div>
+
+			<?php if($record): ?>
+			<?php foreach($record as $row): ?>
+			<div class="row">
+				<div class="col-md-12">
+				<div class="alert alert-warning alert-dismissible">
+                <h4><i class="icon fa fa-file-text-o"></i> <?= $row->judul; ?></h4>
+                <?= $row->informasi; ?>
+              	</div>	
+				</div>
+			</div>
+			<?php endforeach; ?>
+			<?php endif; ?>
 			</div>
 			<!-- ./box-body -->
 			
-			<div class="box-footer">
+			<!-- <div class="box-footer">
 				<div class="row">
 					<div class="col-md-12">
 						<!-- <?php //if($record): ?>
@@ -71,9 +108,9 @@
 							//}
 						?> -->
 						<?php //endif; ?>
-					</div>
+					<!-- </div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 </div>

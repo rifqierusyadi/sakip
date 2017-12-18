@@ -9,8 +9,8 @@
   <link rel="stylesheet" href="<?= base_url('asset/plugins/select2/select2.min.css'); ?>" />
   <link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/dataTables.bootstrap.css'); ?>">
 	<link rel="stylesheet" href="<?= base_url('asset/plugins/datatables/extensions/Responsive/css/responsive.bootstrap.min.css'); ?>">
-	<link rel="stylesheet" href="<?= base_url('asset/plugins/datepicker/datepicker3.css'); ?>" />
-	<link rel="stylesheet" href="<?= base_url('asset/font-awesome/css/font-awesome.min.css'); ?>">
+  <link rel="stylesheet" href="<?= base_url('asset/plugins/datepicker/datepicker3.css'); ?>" />
+  <link rel="stylesheet" href="<?= base_url('asset/font-awesome/css/font-awesome.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/ionicons/css/ionicons.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/dist/css/AdminLTE.min.css'); ?>">
   <link rel="stylesheet" href="<?= base_url('asset/dist/css/skins/_all-skins.min.css'); ?>">
@@ -22,7 +22,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-	<style>body{font-size: 12px;}.nav-tabs-custom>.nav-tabs>li.active {border-top-color: #00a65a !important;}@media(min-width: 1024px){.main-header{top:0;left: 0;position: fixed;right: 0;z-index: 999;}.content-wrapper{padding-top:50px; padding-bottom:50px;}}.print{font-size: 9px;}.main-footer{bottom:0;left: 0;position: fixed;right: 0;z-index: 999;}.besar{text-transform:uppercase;}</style>
+	<style>body{font-size: 12px;}.nav-tabs-custom>.nav-tabs>li.active {border-top-color: #00a65a !important;}@media(min-width: 1024px){.main-header{top:0;left: 0;position: fixed;right: 0;z-index: 999;}.content-wrapper{padding-top:50px; padding-bottom:50px;}}.print{font-size: 9px;}.main-footer{bottom:0;left: 0;position: fixed;right: 0;z-index: 999;}.besar{text-transform:uppercase;}.content-wrapper{background-color: #eaeaea;}</style>
 	
 </head>
 <!-- ADD THE CLASS layout-top-nav TO REMOVE THE SIDEBAR. -->
@@ -48,7 +48,7 @@
                 <li><a href="<?= site_url('rpjmd/visi'); ?>"><i class="fa fa-file-text-o"></i> Visi</a></li>
 								<li><a href="<?= site_url('rpjmd/misi'); ?>"><i class="fa fa-file-text-o"></i> Misi</a></li>
 								<li><a href="<?= site_url('rpjmd/tujuan'); ?>"><i class="fa fa-file-text-o"></i> Tujuan</a></li>
-								<li><a href="<?= site_url('rpjmd/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Sasaran/Kinerja Utama</a></li>
+								<li><a href="<?= site_url('rpjmd/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Kinerja Utama / Sasaran</a></li>
 								<li><a href="<?= site_url('rpjmd/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
                 <li><a href="<?= site_url('rpjmd/makro'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Makro</a></li>
               </ul>
@@ -56,9 +56,9 @@
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> SOPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Kinerja Utama/Sasaran</a></li>
+                <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Kinerja Utama / Sasaran</a></li>
                 <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja</a></li>
-                <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
+                <li><a href=""><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
                 <li><a href="<?= site_url('sopd/pejabat'); ?>"><i class="fa fa-file-text-o"></i> Pejabat Administrasi</a></li>
                 <li class="divider"></li>
                	<li><a href="<?= site_url('realisasi/indikator'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
@@ -66,33 +66,36 @@
               </ul>
             </li>
 						<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-print"></i> Laporan <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-clipboard"></i> Laporan <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('laporan/rpjmd'); ?>" target="_blank"><i class="fa fa-file-text-o"></i> Matrik RPJMD</a></li>
-								<li><a href="<?= site_url('report/pohon'); ?>"><i class="fa fa-file-text-o"></i> Pohon Kinerja</a></li>
-								<li><a href="<?= site_url('laporan/iku'); ?>" target="_blank"><i class="fa fa-file-text-o"></i> Indikator Kinerja Utama</a></li>
-                <li><a href="<?= site_url('report/pk'); ?>"><i class="fa fa-file-text-o"></i> Perjanjian Kinerja</a></li>
+                <li><a href="<?= site_url('laporan/rpjmd'); ?>" target="_blank"><i class="fa fa-print"></i> Matrik RPJMD</a></li>
+								<li><a href="<?= site_url('laporan/pohon'); ?>" target="_blank"><i class="fa fa-print"></i> Pohon Kinerja</a></li>
+								<li><a href="<?= site_url('laporan/iku'); ?>" target="_blank"><i class="fa fa-print"></i> Indikator Kinerja Utama</a></li>
+                <li><a href="<?= site_url('laporan/pk'); ?>" target="_blank"><i class="fa fa-print"></i> Perjanjian Kinerja</a></li>
 								<li class="divider"></li>
-                <li><a href="<?= site_url('report/realisasi'); ?>"><i class="fa fa-file-text-o"></i> Rencana Aksi Tahunan</a></li>
-								<li><a href="<?= site_url('report/triwulan'); ?>"><i class="fa fa-file-text-o"></i> Pengukuran Kinerja Triwulan</a></li>
-								<li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efisiensi/Efektifitas</a></li>
-                <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li>
+                <li><a href="<?= site_url('laporan/rencana'); ?>"  target="_blank"><i class="fa fa-print"></i> Rencana Aksi Tahunan</a></li>
+                <li><a href="<?= site_url('laporan/triwulan'); ?>"  target="_blank"><i class="fa fa-print"></i> Pengukuran Kinerja Triwulan</a></li>
+                <li><a href="<?= site_url('laporan/tahunan'); ?>"  target="_blank"><i class="fa fa-print"></i> Pengukuran Kinerja Tahunan</a></li>
+								<!-- <li><a href="#"><i class="fa fa-file-text-o"></i> Analisa Efisiensi/Efektifitas</a></li>
+                <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li> -->
               </ul>
             </li>
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder"></i> Data Master <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="<?= site_url('referensi/periode'); ?>"><i class="fa fa-database"></i> Master Periode</a></li>
-								<li><a href="<?= site_url('referensi/satker'); ?>"><i class="fa fa-database"></i> Master Satuan Kerja</a></li>
-								<li><a href="<?= site_url('referensi/eselon'); ?>"><i class="fa fa-database"></i> Master Tingkat Jabatan</a></li>
-								<li><a href="<?= site_url('referensi/jabatan'); ?>"><i class="fa fa-database"></i> Master Jabatan</a></li>
-								<li><a href="<?= site_url('referensi/satuan'); ?>"><i class="fa fa-database"></i> Master Jenis Satuan</a></li>
+                <li><a href="<?= site_url('referensi/periode'); ?>"><i class="fa fa-calendar"></i> Master Periode</a></li>
+								<li><a href="<?= site_url('referensi/satker'); ?>"><i class="fa fa-building"></i> Master Satuan Kerja</a></li>
+								<li><a href="<?= site_url('referensi/eselon'); ?>"><i class="fa fa-tag"></i> Master Tingkat Jabatan</a></li>
+								<li><a href="<?= site_url('referensi/jabatan'); ?>"><i class="fa fa-bookmark"></i> Master Jabatan</a></li>
+								<li><a href="<?= site_url('referensi/satuan'); ?>"><i class="fa fa-puzzle-piece"></i> Master Jenis Satuan</a></li>
 								<li class="divider"></li>
-								<li><a href="<?= site_url('setting/user'); ?>"><i class="fa fa-database"></i> Master Pengguna</a></li>
+								<li><a href="<?= site_url('setting/user'); ?>"><i class="fa fa-users"></i> Master Pengguna</a></li>
 								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-database"></i> Backup Database</a></li>
 							</ul>
             </li>
-						<li><a href="<?= site_url('sotk'); ?>"><i class="fa fa-sitemap"></i> SOTK</a></li>
+            <li><a href="<?= site_url('setting/informasi'); ?>"><i class="fa fa-newspaper-o"></i> Informasi</a></li>
+            <li><a href="<?= site_url('file'); ?>"><i class="fa fa-download"></i> Dokumen</a></li>
+            <li><a href="<?= site_url('sotk'); ?>"><i class="fa fa-sitemap"></i> SOTK</a></li>
 						<li><a href="<?= site_url('logout'); ?>"><i class="fa fa-sign-out"></i> Keluar</a></li>
           </ul>
         </div>
@@ -163,7 +166,6 @@
 <!-- ./wrapper -->
 
 <script src="<?= base_url('asset/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
-<script src="<?= base_url('asset/plugins/treetable/treeTable.js'); ?>"></script>
 <script src="<?= base_url('asset/bootstrap/js/bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/slimScroll/jquery.slimscroll.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/fastclick/fastclick.js'); ?>"></script>
@@ -173,19 +175,17 @@
 <script src="<?= base_url('asset/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/datatables/extensions/Responsive/js/responsive.bootstrap.min.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/select2/select2.full.min.js'); ?>"></script>
-<script src="<?= base_url('asset/plugins/datepicker/bootstrap-datepicker.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/datepicker/locales/bootstrap-datepicker.id.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.date.extensions.js'); ?>"></script>
-<script src="<?= base_url('asset/plugins/tinymce/tinymce.min.js'); ?>"></script>
-<script src="<?= base_url('asset/plugins/treetable/treeTable.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/number/jquery.number.min.js'); ?>"></script>
-<script src="<?= base_url('asset/app.js'); ?>"></script>
 <!-- PRIMITIVE DIAGRAM -->
 <script src="<?php echo base_url('asset/primitives/js/jquery/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/primitives.min.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/pdfkit/pdfkit.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/pdfkit/blob-stream.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/FileSaver.js/FileSaver.min.js'); ?>"></script>
+<script src="<?= base_url('asset/app.js'); ?>"></script>
 <?= isset($js) ? $this->load->view($js) : ''; ?>
 </body>
 </html>

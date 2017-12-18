@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>LAPORAN IKU SKPD</title>
+		<title>LAPORAN PERJANJIAN KINERJA SKPD</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -13,16 +13,28 @@
 	</head>
 <body>
 	<div class="row text-muted well well-sm no-shadow panel">
-		<div class="col-md-5">
+		<div class="col-md-2">
 			<?php
 			echo form_label('Periode');
 			echo form_dropdown('periode', $periode, '', "class='form-control select2' name='periode' id='periode'");
 			?>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-2">
+			<?php
+			echo form_label('Tahun');
+			echo form_dropdown('tahun', $periode, '', "class='form-control select2' name='tahun' id='tahun'");
+			?>
+		</div>
+		<div class="col-md-3">
 			<?php
 			echo form_label('Satuan Kerja');
 			echo form_dropdown('satker', $satker, '', "class='form-control select2' name='satker' id='satker'");
+			?>
+		</div>
+		<div class="col-md-3">
+			<?php
+			echo form_label('Jabatan');
+			echo form_dropdown('jabatan', $satker, '', "class='form-control select2' name='jabatan' id='jabatan'");
 			?>
 		</div>
 		<div class="col-md-2">
@@ -51,9 +63,8 @@
 			<tr>
 				<th>SASARAN<br>STRATEGIS</th>
 				<th>INDIKATOR<br>KINERJA<br>UTAMA</th>
-				<th>PENJELASAN</th>
-				<th>PENANGGUNG JAWAB</th>
-				<th>SUMBER DATA</th>
+				<th>TARGET</th>
+				<th>SATUAN</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -70,19 +81,8 @@
 				<?php endif; ?>
 	
 				<td><?php echo $row->indikator; ?></td>
-				<td><?php echo strip_tags($row->deskripsi); ?></td>
-				<td>
-				<?php 
-					$data = tanggung_jawab($row->indikator_id, $row->id);
-					if($data){
-						foreach($data as $x){
-							echo ucwords(strtolower(posisi($x->jabatan)));
-							echo '; ';
-						}
-					} 
-				?>
-				</td>
-				<td><?php echo strip_tags($row->sumber); ?></td>
+				<td><?php echo $row->target; ?></td>
+				<td><?php echo satuan($row->satuan_id); ?></td>
 				</tr>
 				<?php ++$i; ?>
 				<?php endforeach; ?>

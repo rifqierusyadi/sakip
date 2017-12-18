@@ -8,9 +8,10 @@
 <tr>
 	<th>SASARAN<br>STRATEGIS</th>
 	<th>INDIKATOR<br>KINERJA<br>UTAMA</th>
-	<th>PENJELASAN</th>
-	<th>PENANGGUNG JAWAB</th>
-	<th>SUMBER DATA</th>
+	<th>TARGET</th>
+	<th>SATUAN</th>
+	<th>REALISASI</th>
+	<th>CAPAIAN %</th>
 </tr>
 </thead>
 <tbody>
@@ -25,21 +26,29 @@
 	<?php else: ?>
 	<td></td>
 	<?php endif; ?>
-
-	<td><?php echo $row->indikator; ?></td>
-	<td><?php echo strip_tags($row->deskripsi); ?></td>
+	<td><?php echo $row->indikator.' '.$row->indikator_id; ?></td>
 	<td>
-	<?php 
-		$data = tanggung_jawab($row->indikator_id, $row->id);
-		if($data){
-			foreach($data as $x){
-				echo ucwords(strtolower(posisi($x->jabatan)));
-				echo '; ';
-			}
-		} 
-	?>
+		<?php 
+		if($triwulan == 1){
+			$target = $row->tw1;
+			echo $target; 
+		}elseif($triwulan == 2){
+			$target = $row->tw2;
+			echo $target;
+		}elseif($triwulan == 3){
+			$target = $row->tw3;
+			echo $target;
+		}elseif($triwulan == 4){
+			$target = $row->tw4;
+			echo $target;
+		}else{
+			echo $target = null;
+		}
+		?>
 	</td>
-	<td><?php echo strip_tags($row->sumber); ?></td>
+	<td><?php echo satuan($row->satuan_id); ?></td>
+	<td><?php echo capaian($row->indikator_id, $tahun, $triwulan); ?></td>
+	<td><?php echo number_format(rumus(capaian($row->indikator_id, $tahun, $triwulan), $target), 2); ?></td>
 	</tr>
 	<?php ++$i; ?>
 	<?php endforeach; ?>

@@ -19,7 +19,7 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 		$data['head'] 		= 'Dashboard';
-		$data['record'] 	= $this->data->get_record();
+		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
