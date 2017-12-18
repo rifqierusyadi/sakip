@@ -94,7 +94,7 @@
 							</ul>
             </li>
             <li><a href="<?= site_url('setting/informasi'); ?>"><i class="fa fa-newspaper-o"></i> Informasi</a></li>
-            <li><a href="<?= site_url('file'); ?>"><i class="fa fa-download"></i> Dokumen</a></li>
+            <li><a href="<?= site_url('setting/folder'); ?>"><i class="fa fa-download"></i> Dokumen</a></li>
             <li><a href="<?= site_url('sotk'); ?>"><i class="fa fa-sitemap"></i> SOTK</a></li>
 						<li><a href="<?= site_url('logout'); ?>"><i class="fa fa-sign-out"></i> Keluar</a></li>
           </ul>
@@ -179,13 +179,15 @@
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/input-mask/jquery.inputmask.date.extensions.js'); ?>"></script>
 <script src="<?= base_url('asset/plugins/number/jquery.number.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/tinymce/tinymce.min.js'); ?>"></script>
+<script src="<?= base_url('asset/app.js'); ?>"></script>
 <!-- PRIMITIVE DIAGRAM -->
 <script src="<?php echo base_url('asset/primitives/js/jquery/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/primitives.min.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/pdfkit/pdfkit.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/js/pdfkit/blob-stream.js'); ?>"></script>
 <script src="<?php echo base_url('asset/primitives/FileSaver.js/FileSaver.min.js'); ?>"></script>
-<script src="<?= base_url('asset/app.js'); ?>"></script>
+
 <?= isset($js) ? $this->load->view($js) : ''; ?>
 </body>
 </html>

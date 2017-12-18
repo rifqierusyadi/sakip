@@ -15,70 +15,65 @@ class Triwulan extends CI_Controller {
 		$this->load->model('triwulan_m', 'data');
 		$this->load->helper('identitas_helper');
 		$this->load->helper('my_helper');
-		signin();
 	}
 	
 	public function index()
 	{
-		$data['head'] 		= 'PENGUKURAN KINERJA TRIWULAN';
-		$data['record'] 	= $this->data->get_all();
+		$periode = null;
+		$triwulan = null;
+
+		$data['head'] 		= $periode ? 'LAPORAN PENGUKURAN KINERJA TRIWULAN<br>PERIODE '.$periode->periode : 'LAPORAN PENGUKURAN KINERJA TRIWULAN';
+		$data['record'] 	= FALSE;
+		$data['periode'] 	= $this->data->get_periode();
+		$data['satker'] 	= $this->data->get_satker();
+		$data['triwulan'] 	= $triwulan;
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		
-		$this->load->view('template/default', $data);
+		$this->load->view($data['content'], $data);
 	}
-	
-	public function ajax_list()
-    {
-        $record	= $this->data->get_datatables();
-        $data 	= array();
-        $no 	= $_POST['start'];
-		
-        foreach ($record as $row) {
-            $no++;
-            $col = array();
-            $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-            $col[] = $row->periode;
-			for($i = $row->awal; $i <= $row->akhir; $i++){
-				if(realisasi($row->id, $i)){
-					$indikator[] = '<a class="btn btn-xs btn-flat btn-success" href="'.site_url('report/triwulan/detail/'.$row->id.'/'.$i).'" data-toggle="tooltip" title="Target">'.$i.'</a>';
-				}else{
-					$indikator[] = '<a class="btn btn-xs btn-flat btn-danger" href="" data-toggle="tooltip" title="Target">'.$i.'</a>';
-	
-				}
-			}
 
-			$col[] = $indikator ? implode(" ", $indikator) : '-';
-			
-			//$col[] = $row->id;
-            
-            //add html for action
-            //$col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/triwulan/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>';
- 
-            $data[] = $col;
-        }
- 
-        $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->data->count_all(),
-                        "recordsFiltered" => $this->data->count_filtered(),
-                        "data" => $data,
-                );
-        
-		echo json_encode($output);
-    }
-	
-	public function detail($id)
+	public function result()
 	{
-		$satker = $this->data->get_satker($this->session->userdata('satker'));
+		$id = $this->input->post('periode');
+		$tahun = $this->input->post('tahun');
+		$satker = $this->input->post('satker');
+		$jabatan = $this->input->post('jabatan');
+		$triwulan = $this->input->post('triwulan');
+
+		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
 		
-		$data['head'] 		= $satker ? 'PENGUKURAN KINERJA TRIWULAN - '.$satker->satker : 'PENGUKURAN KINERJA TRIWULAN';
-		$data['record'] 	= $this->data->get_indikator();
-		$data['content'] 	= $this->folder.'detail';
-		//$data['style'] 		= $this->folder.'style';
-		//$data['js'] 		= $this->folder.'js';
+		$data['head'] 		= $periode ? 'LAPORAN PENGUKURAN KINERJA TRIWULAN <br>PERIODE '.$periode->periode : 'LAPORAN PENGUKURAN KINERJA TRIWULAN';
+		$data['record'] 	= $this->data->get_data($id, $tahun, $satker, $jabatan, $triwulan);
+		$data['periode'] 	= $this->data->get_periode();
+		$data['satker'] 	= $this->data->get_satker();
+		$data['triwulan'] 	= $triwulan;
+		$data['tahun'] 		= $tahun;
+		$data['content'] 	= $this->folder.'result';
+		$data['style'] 		= $this->folder.'style';
+		$data['js'] 		= $this->folder.'js';
 		
 		$this->load->view($data['content'], $data);
 	}
+
+	public function get_tahun(){
+		$periode = $this->input->post('periode');
+        $tahun = $this->data->get_tahun($periode);
+        if(!empty($tahun)){
+            echo form_dropdown('tahun', $tahun, '', "class='form-control select2' name='tahun' id='tahun'");
+        }else{
+            echo form_dropdown('tahun', array(''=>'Pilih Tahun'), '', "class='form-control select2' name='tahun' id='tahun'");
+        }
+	}
+	
+	public function get_jabatan(){
+		$satker = $this->input->post('satker');
+        $jabatan = $this->data->get_jabatan($satker);
+        if(!empty($jabatan)){
+            echo form_dropdown('jabatan', $jabatan, '', "class='form-control select2' name='jabatan' id='jabatan'");
+        }else{
+            echo form_dropdown('jabatan', array(''=>'Pilih Jabatan'), '', "class='form-control select2' name='jabatan' id='jabatan'");
+        }
+    }
 }

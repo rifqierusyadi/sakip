@@ -107,6 +107,6 @@ class Auth extends CI_Controller {
 		$this->session->unset_userdata('password');
 		$this->session->sess_destroy();
 		helper_log("logout", "Logout Pada Sistem");
-		redirect('login');
+		redirect('home/dashboard');
 	}
 }

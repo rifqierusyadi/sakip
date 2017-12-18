@@ -15,60 +15,34 @@ class Rpjmd extends CI_Controller {
 		$this->load->model('rpjmd_m', 'data');
 		$this->load->helper('identitas_helper');
 		$this->load->helper('my_helper');
-		signin();
 	}
 	
 	public function index()
 	{
-		$data['head'] 		= 'MATRIKS RPJMD';
-		$data['record'] 	= $this->data->get_all();
+		$periode = null;
+
+		$data['head'] 		= $periode ? 'MATRIKS RPJMD <br>PERIODE '.$periode->periode : 'MATRIKS RPJMD';
+		$data['record'] 	= FALSE;
+		$data['periode'] 	= $this->data->get_periode();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		
-		$this->load->view('template/default', $data);
-	}
-
-	public function detail($id)
-	{
-
-		$periode = $this->data->get_periode($id);
-		
-		$data['head'] 		= $periode ? 'MATRIKS RPJMD <br>PERIODE '.$periode->periode : 'MATRIKS RPJMD';
-		$data['record'] 	= $this->data->get_data($id);
-		$data['content'] 	= $this->folder.'detail';
-		//$data['style'] 		= $this->folder.'style';
-		//$data['js'] 		= $this->folder.'js';
-		
 		$this->load->view($data['content'], $data);
 	}
 
-	public function ajax_list()
-    {
-        $record	= $this->data->get_datatables();
-        $data 	= array();
-        $no 	= $_POST['start'];
+	public function result()
+	{
+		$id = $this->input->post('periode');
+		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
 		
-        foreach ($record as $row) {
-            $no++;
-            $col = array();
-            $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-            $col[] = $row->periode;
-			
-            //add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/rpjmd/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
-                  ';
- 
-            $data[] = $col;
-        }
- 
-        $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->data->count_all(),
-                        "recordsFiltered" => $this->data->count_filtered(),
-                        "data" => $data,
-                );
-        
-		echo json_encode($output);
-    }
+		$data['head'] 		= $periode ? 'MATRIKS RPJMD <br>PERIODE '.$periode->periode : 'MATRIKS RPJMD';
+		$data['record'] 	= $this->data->get_data($id);
+		$data['periode'] 	= $this->data->get_periode(1);
+		$data['content'] 	= $this->folder.'result';
+		$data['style'] 		= $this->folder.'style';
+		$data['js'] 		= $this->folder.'js';
+		
+		$this->load->view($data['content'], $data);
+	}
 }

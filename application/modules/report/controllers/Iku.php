@@ -15,60 +15,36 @@ class Iku extends CI_Controller {
 		$this->load->model('iku_m', 'data');
 		$this->load->helper('identitas_helper');
 		$this->load->helper('my_helper');
-		signin();
 	}
 	
 	public function index()
 	{
-		$data['head'] 		= 'INDIKATOR KINERJA UTAMA';
-		$data['record'] 	= $this->data->get_all();
+		$periode = null;
+
+		$data['head'] 		= $periode ? 'INDIKATOR KINERJA UTAMA <br>PERIODE '.$periode->periode : 'INDIKATOR KINERJA UTAMA';
+		$data['record'] 	= FALSE;
+		$data['periode'] 	= $this->data->get_periode();
+		$data['satker'] 	= $this->data->get_satker();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		
-		$this->load->view('template/default', $data);
+		$this->load->view($data['content'], $data);
 	}
-	
-	public function ajax_list()
-    {
-        $record	= $this->data->get_datatables();
-        $data 	= array();
-        $no 	= $_POST['start'];
-		
-        foreach ($record as $row) {
-            $no++;
-            $col = array();
-            $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-            $col[] = $row->kode;
-			$col[] = $row->satker;
-            
-            //add html for action
-            $col[] = '<a class="btn btn-xs btn-flat btn-info" onclick="edit_data();" href="'.site_url('report/iku/detail/'.$row->id).'" data-toggle="tooltip" title="Lihat"><i class="fa fa-file-text"></i></a>
-                  ';
- 
-            $data[] = $col;
-        }
- 
-        $output = array(
-                        "draw" => $_POST['draw'],
-                        "recordsTotal" => $this->data->count_all(),
-                        "recordsFiltered" => $this->data->count_filtered(),
-                        "data" => $data,
-                );
-        
-		echo json_encode($output);
-    }
-	
-	public function detail($id)
-	{
 
-		$satker = $this->data->get_satker($id);
+	public function result()
+	{
+		$id = $this->input->post('periode');
+		$satker = $this->input->post('satker');
+		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
 		
-		$data['head'] 		= $satker ? 'INDIKATOR KINERJA UTAMA - '.$satker->satker : 'INDIKATOR KINERJA UTAMA';
-		$data['record'] 	= $this->data->get_indikator($satker->kode);
-		$data['content'] 	= $this->folder.'detail';
-		//$data['style'] 		= $this->folder.'style';
-		//$data['js'] 		= $this->folder.'js';
+		$data['head'] 		= $periode ? 'INDIKATOR KINERJA UTAMA <br>PERIODE '.$periode->periode : 'INDIKATOR KINERJA UTAMA';
+		$data['record'] 	= $this->data->get_data($id, $satker);
+		$data['periode'] 	= $this->data->get_periode();
+		$data['satker'] 	= $this->data->get_satker();
+		$data['content'] 	= $this->folder.'result';
+		$data['style'] 		= $this->folder.'style';
+		$data['js'] 		= $this->folder.'js';
 		
 		$this->load->view($data['content'], $data);
 	}

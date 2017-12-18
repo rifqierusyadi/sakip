@@ -7,7 +7,7 @@ mb_http_input('UTF-8');
 mb_language('uni');
 mb_regex_encoding('UTF-8');
 ob_start('mb_output_handler');
-date_default_timezone_set('Europe/Rome');
+date_default_timezone_set('Asia/Makassar');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +27,7 @@ date_default_timezone_set('Europe/Rome');
 |
 */
 
-define('USE_ACCESS_KEYS', false); // TRUE or FALSE
+define('USE_ACCESS_KEYS', true); // TRUE or FALSE
 
 /*
 |--------------------------------------------------------------------------
@@ -141,7 +141,7 @@ $config = array(
 	|
 	*/
 
-	'access_keys' => array(),
+	'access_keys' => array('b4nj4rm4s1nbung4s'),
 
 	//--------------------------------------------------------------------------------------------------------
 	// YOU CAN COPY AND CHANGE THESE VARIABLES INTO FOLDERS config.php FILES TO CUSTOMIZE EACH FOLDER OPTIONS
@@ -173,7 +173,7 @@ $config = array(
 	|--------------------------------------------------------------------------
 	|
 	*/
-	'fileFolderPermission' => 0755,
+	'fileFolderPermission' => 0775,
 
 
 	/*
@@ -363,9 +363,9 @@ $config = array(
 	// Hidden files and folders
 	//**********************
 	// set the names of any folders you want hidden (eg "hidden_folder1", "hidden_folder2" ) Remember all folders with these names will be hidden (you can set any exceptions in config.php files on folders)
-	'hidden_folders'                          => array(),
+	'hidden_folders'                          => array('resources'),
 	// set the names of any files you want hidden. Remember these names will be hidden in all folders (eg "this_document.pdf", "that_image.jpg" )
-	'hidden_files'                            => array( 'config.php' ),
+	'hidden_files'                            => array( 'config.php','index.html','index.php'),
 
 	/*******************
 	* URL upload
@@ -375,7 +375,7 @@ $config = array(
 	/*******************
 	* JAVA upload
 	*******************/
-	'java_upload'                             => true,
+	'java_upload'                             => false,
 	'JAVAMaxSizeUpload'                       => 200, //Gb
 
 

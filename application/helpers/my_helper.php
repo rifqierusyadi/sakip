@@ -533,7 +533,7 @@ if (! function_exists('rumus'))
 {
 	function rumus($realisasi=null, $target=null)
 	{
-		if($realisasi && $target){
+		if(is_numeric($realisasi) && is_numeric($target)){
 			$hasil = ($realisasi/$target)* 100;
 		}else{
 			$hasil = 0;

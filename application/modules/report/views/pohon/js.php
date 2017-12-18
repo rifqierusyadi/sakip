@@ -1,15 +1,58 @@
-<script src="<?php echo base_url(); ?>asset/plugins/tableexport/js-xlsx/xlsx.core.min.js"></script>
-<script src="<?php echo base_url(); ?>asset/plugins/tableexport/Blob.js"></script>
-<script src="<?php echo base_url(); ?>asset/plugins/tableexport/FileSaver.min.js"></script>
-<script src="<?php echo base_url(); ?>asset/plugins/tableexport/dist/js/tableexport.js"></script>
-<script src="<?php echo base_url(); ?>asset/plugins/tableexport/dist/js/tableexport.js"></script>
-<script type='text/javascript'>
+<script src="<?= base_url('asset/plugins/tableexport/jquery.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/jQuery/jquery-2.2.3.min.js'); ?>"></script>
+<script src="<?= base_url('asset/bootstrap/js/bootstrap.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/datatables/jquery.dataTables.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/datatables/dataTables.bootstrap.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/tableexport/js-xlsx/xlsx.core.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/tableexport/Blob.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/tableexport/FileSaver.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/tableexport/dist/js/tableexport.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/pace/pace.min.js'); ?>"></script>
+<script src="<?= base_url('asset/plugins/select2/select2.full.min.js'); ?>"></script>
+<!-- PRIMITIVE DIAGRAM -->
+<script src="<?php echo base_url('asset/primitives/js/jquery/jquery-ui-1.10.2.custom.min.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/primitives.min.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/pdfkit/pdfkit.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/js/pdfkit/blob-stream.js'); ?>"></script>
+<script src="<?php echo base_url('asset/primitives/FileSaver.js/FileSaver.min.js'); ?>"></script>
+<script type="text/javascript">
+$(function () {
+$('.select2').select2();
+
+e = $("#tableID").tableExport({
+        bootstrap: true,
+        formats: ["xlsx"],
+        position: "bottom",
+        fileName: "POHON-<?php echo date('dmy'); ?>",
+    });
+
+$('#tableID').DataTable({
+    "paging": false,
+    "searching": false,
+    "ordering": false,
+    "info": false,
+    "autoWidth": true,
+    "responsive" :true
+});
+});
+
+$("#filter").on('click', function(){
+	var periode = $("#periode").val();
+	var satker = $("#satker").val();
+	var options = new primitives.orgdiagram.Config();	
+	if(periode){
+		window.location.href = "<?= site_url('report/pohon/result/'); ?>"+periode+'/'+satker;
+	}else{
+		alert('Silahkan Periode Terlebih Dahulu');
+	}
+});
+
 //<![CDATA[
 $(window).load(function () {
 	var options = new primitives.orgdiagram.Config();	
-	<?php if($pohon): ?>
+	<?php if($record): ?>
 	var items = [
-		<?php foreach($pohon as $row): ?>
+		<?php foreach($record as $row): ?>
 	        new primitives.orgdiagram.ItemConfig({
 			id: '<?php echo $row->id; ?>',
 			parent: '<?php echo $row->parent_id; ?>',
@@ -90,5 +133,4 @@ $(window).load(function () {
 		return result;
 	}
 });//]]>
-	  
 </script>
