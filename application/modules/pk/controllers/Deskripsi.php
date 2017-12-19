@@ -131,7 +131,21 @@ class Deskripsi extends CI_Controller {
 		
 		$get_id = $this->db->get_where('pohon_deskripsi', array('indikator_id'=>$id))->row()->id;
 		if($this->validation($get_id)){
-			$this->data->update($data, $get_id);
+			$update = $this->data->update($data, $get_id);
+			$bidang = $this->input->post('bidang_id');
+			$delete = $this->db->delete('pohon_jabatan', array('indikator_id'=>$this->input->post('indikator_id'), 'deskripsi_id'=>$get_id));
+			if($delete){
+				foreach($bidang AS $key => $val){
+					if($_POST['bidang_id'][$key] != ''){
+						$result[] = array(
+						 "indikator_id" => $this->input->post('indikator_id'),
+						 "deskripsi_id"  => $get_id,
+						 "jabatan"  => $_POST['bidang_id'][$key]
+						);
+					}
+				}
+				$this->db->insert_batch('pohon_jabatan', $result);
+			}
 			helper_log("edit", "Merubah Penjelasan Indikator Kinerja");
 		}
     }

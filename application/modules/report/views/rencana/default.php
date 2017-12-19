@@ -61,7 +61,7 @@
 			<table class="print table table-striped" id="tableID" style="width:100%">
 			<thead>
 			<tr>
-				<th rowSpan="2">SASARAN<br>STRATEGIS</th>
+				<th rowSpan="2">KINERJA<br>UTAMA</th>
 				<th rowSpan="2">INDIKATOR<br>KINERJA<br>UTAMA</th>
 				<th colspan='4'>TARGET</th>
 				<th rowSpan="2">SATUAN</th>

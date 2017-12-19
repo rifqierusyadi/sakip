@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>LAPORAN RENCANA TAHUNAN</title>
+		<title>LAPORAN PENGUKURAN KINERJA TRIWULAN</title>
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
   		<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
@@ -25,16 +25,22 @@
 	echo form_dropdown('tahun', $periode, '', "class='form-control select2' name='tahun' id='tahun'");
 	?>
 </div>
-<div class="col-md-3">
+<div class="col-md-2">
 	<?php
 	echo form_label('Satuan Kerja');
 	echo form_dropdown('satker', $satker, '', "class='form-control select2' name='satker' id='satker'");
 	?>
 </div>
-<div class="col-md-3">
+<div class="col-md-2">
 	<?php
 	echo form_label('Jabatan');
 	echo form_dropdown('jabatan', $satker, '', "class='form-control select2' name='jabatan' id='jabatan'");
+	?>
+</div>
+<div class="col-md-2">
+	<?php
+	echo form_label('Triwulan');
+	echo form_dropdown('triwulan', array(''=>'Pilih Triwulan','1'=>"TW.1",'2'=>"TW.2",'3'=>"TW.3",'4'=>"TW.4"), '', "class='form-control select2' name='triwulan' id='triwulan'");
 	?>
 </div>
 <div class="col-md-2">
@@ -60,46 +66,49 @@
 		<div class="tabel">
 			<table class="print table table-striped" id="tableID" style="width:100%">
 			<thead>
-			<tr>
-				<th rowSpan="2">KINERJA<br>UTAMA</th>
-				<th rowSpan="2">INDIKATOR<br>KINERJA<br>UTAMA</th>
-				<th colspan='4'>TARGET</th>
-				<th rowSpan="2">SATUAN</th>
-			</tr>
-			<tr>
-				<th>TW.I</th>
-				<th>TW.II</th>
-				<th>TW.III</th>
-				<th>TW.IV</th>
-			</tr>
-			</thead>
-			<tbody>
-			<?php if($record): ?>
-				<?php $i = 1; ?>
-				<?php $sasaran = null; ?>
-				<?php foreach($record as $row): ?>
-				<tr>
-				<?php if($sasaran != $row->sasaran): ?>
-				<?php $sasaran = $row->sasaran; ?>
-				<td><?= $row->sasaran; ?></td>
-				<?php else: ?>
-				<td></td>
-				<?php endif; ?>
-				<td><?php echo $row->indikator; ?></td>
-				<td><?php echo $row->tw1; ?></td>
-				<td><?php echo $row->tw2; ?></td>
-				<td><?php echo $row->tw3; ?></td>
-				<td><?php echo $row->tw4; ?></td>
-				<td><?php echo satuan($row->satuan_id); ?></td>
-				<td></td>
-				</tr>
-				<?php ++$i; ?>
-				<?php endforeach; ?>
-			<?php endif; ?>
-			</tbody>
-			</table>
-		</div>
-	</div>
+<tr>
+	<th rowSpan="2">KINERJA<br>UTAMA</th>
+	<th rowSpan="2">INDIKATOR<br>KINERJA<br>UTAMA</th>
+	<th rowSpan="2">CAPAIAN<br>TAHUN LALU</th>
+	<th rowSpan="2">SATUAN</th>
+	<th colSpan="3">TARGET DAN CAPAIAN</th>
+	<th rowSpan="2">TARGET AKHIR</th>
+	<th rowSpan="2">CAPAIAN TERHADAP<br>TARGET AKHIR</th>
+</tr>
+<tr>
+	<th>TARGET</th>
+	<th>REALISASI</th>
+	<th>CAPAIAN</th>
+</tr>
+</thead>
+<tbody>
+<?php if($record): ?>
+	<?php $i = 1; ?>
+	<?php $sasaran = null; ?>
+	<?php foreach($record as $row): ?>
+	<tr>
+	<?php if($sasaran != $row->sasaran): ?>
+	<?php $sasaran = $row->sasaran; ?>
+	<td><?= $row->sasaran; ?></td>
+	<?php else: ?>
+	<td></td>
+	<?php endif; ?>
+	<td><?php echo $row->indikator; ?></td>
+	<td><?php echo $row->target; ?></td>
+	<td><?php echo satuan($row->satuan_id); ?></td>
+	<td><?php echo $row->target; ?></td>
+	<td><?php echo capaian($row->indikator_id, $tahun, 4); ?></td>
+	<td><?php echo number_format(rumus(capaian($row->indikator_id, $tahun, 4), $row->target), 2); ?></td>
+	<td></td>
+	<td></td>
+	</tr>
+	<?php ++$i; ?>
+	<?php endforeach; ?>
+<?php endif; ?>
+</tbody>	
+</table>
+</div>
+</div>
 <?= isset($js) ? $this->load->view($js) : ''; ?>
 </body>
 </html>

@@ -56,7 +56,7 @@ $(window).load(function () {
 	        new primitives.orgdiagram.ItemConfig({
 			id: '<?php echo $row->id; ?>',
 			parent: '<?php echo $row->parent_id; ?>',
-			title: "SASARAN KINERJA",
+			title: "KINERJA UTAMA",
 			sasaran: "<?php echo $row->sasaran; ?>",
 			indikator: "<?php echo $row->indikator; ?>",
 			image: null,

@@ -90,7 +90,7 @@
 								<li><a href="<?= site_url('referensi/satuan'); ?>"><i class="fa fa-puzzle-piece"></i> Master Jenis Satuan</a></li>
 								<li class="divider"></li>
 								<li><a href="<?= site_url('setting/user'); ?>"><i class="fa fa-users"></i> Master Pengguna</a></li>
-								<li><a href="<?= site_url('#'); ?>"><i class="fa fa-database"></i> Backup Database</a></li>
+								<li><a href="<?= site_url('setting/backup'); ?>"><i class="fa fa-database"></i> Backup Database</a></li>
 							</ul>
             </li>
             <li><a href="<?= site_url('setting/informasi'); ?>"><i class="fa fa-newspaper-o"></i> Informasi</a></li>

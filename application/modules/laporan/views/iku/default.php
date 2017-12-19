@@ -49,7 +49,7 @@
 			<table class="print table table-striped" id="tableID" style="width:100%">
 			<thead>
 			<tr>
-				<th>SASARAN<br>STRATEGIS</th>
+				<th>KINERJA<br>UTAMA</th>
 				<th>INDIKATOR<br>KINERJA<br>UTAMA</th>
 				<th>PENJELASAN</th>
 				<th>PENANGGUNG JAWAB</th>
