@@ -38,8 +38,9 @@ class Pohon extends CI_Controller {
 		$id = $this->uri->segment(4);
 		$satker = $this->uri->segment(5);
 		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
-		
-		$data['head'] 		= $periode ? 'POHON KINERJA <br>PERIODE '.$periode->periode : 'POHON KINERJA';
+		$nama_satker = $this->db->get_where('ref_satker', array('kode'=>$satker))->row();
+
+		$data['head'] 		= $periode ? 'POHON KINERJA <br>'.$nama_satker->satker.'<br>PERIODE '.$periode->periode : 'POHON KINERJA';
 		$data['record'] 	= $this->data->get_data($id, $satker);
 		$data['periode'] 	= $this->data->get_periode();
 		$data['satker'] 	= $this->data->get_satker();

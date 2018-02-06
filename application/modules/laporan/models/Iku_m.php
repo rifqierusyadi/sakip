@@ -50,9 +50,28 @@ class Iku_m extends MY_Model
 		return $dropdown;
 	}
 
-	public function get_data($periode=null,$satker=null)
+	public function get_jabatan($satker=null)
 	{
-    	$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' ORDER BY c.eselon_id ASC");
+        $query = $this->db->like('path',$satker)->get('view_jabatan');
+        if($query->num_rows() > 0){
+        $dropdown[''] = 'Pilih Penanggung Jawab';
+		foreach ($query->result() as $row)
+		{
+			$dropdown[$row->kode] = $row->jabatan;
+		}
+        }else{
+            $dropdown[] = 'Belum Ada Penanggung Jawab Tersedia'; 
+        }
+		return $dropdown;
+	}
+
+	public function get_data($periode=null,$satker=null, $jabatan=null)
+	{
+		if($jabatan != null){
+			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL LEFT JOIN sakip_pohon_jabatan d ON a.id = d.deskripsi_id WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' AND d.jabatan = '{$jabatan}' ORDER BY c.eselon_id ASC");
+		}else{
+			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' ORDER BY c.eselon_id ASC");
+		}
 		if($query->num_rows() > 0)
 		{
 			return $query->result();

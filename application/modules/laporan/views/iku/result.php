@@ -3,6 +3,24 @@
 	<div class="judul"><h4><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h4></div>
 </div>
 <div class="tabel">
+<table class="print table" style="width:100%">
+<tr>
+	<td width="19%">INSTANSI</td>
+	<td width="1%">:</td>
+	<td><?= $data['satker']; ?></td>
+</tr>
+<tr>
+	<td>TUGAS</td>
+	<td>:</td>
+	<td><?= $data['tugas']; ?></td>
+</tr>
+<tr>
+	<td>FUNGSI</td>
+	<td>:</td>
+	<td><?= $data['fungsi']; ?></td>
+</tr>
+</table>
+<p>&nbsp</p>
 <table class="print table table-striped" id="tableID" style="width:100%">
 <thead>
 <tr>

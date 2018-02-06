@@ -19,7 +19,7 @@
 			echo form_dropdown('periode', $periode, '', "class='form-control select2' name='periode' id='periode'");
 			?>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<?php
 			echo form_label('&nbsp;');
 			$data = array(
@@ -28,6 +28,20 @@
 				'type'          => 'button',
 				'content'       => '<i class="fa fa-search"></i> Filter',
 				'class'			=> 'form-control'
+			);
+			echo form_button($data);
+			?>
+		</div>
+		<div class="col-md-1">
+			<?php
+			echo form_label('&nbsp;');
+			$data = array(
+				'name'          => 'print',
+				'id'            => 'print',
+				'type'          => 'button',
+				'content'       => '<i class="fa fa-print"></i> Print',
+				'class'			=> 'form-control',
+				'onclick'		=> 'window.print()'
 			);
 			echo form_button($data);
 			?>

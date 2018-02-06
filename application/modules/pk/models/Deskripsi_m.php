@@ -124,7 +124,6 @@ class Deskripsi_m extends MY_Model
 			//show_404();
 			return FALSE;
 		}
-        
 	}
 	
 	function get_record_id($id=null)

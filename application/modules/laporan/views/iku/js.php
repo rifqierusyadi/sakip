@@ -30,9 +30,28 @@ $('#tableID').DataTable({
 });
 });
 
+$("#satker").change(function(){
+ var satker = $("#satker").val();
+	if(satker){
+		$.ajax({
+				type: "POST",
+				async: false,
+				url : "<?php echo site_url('laporan/iku/get_jabatan')?>",
+				data: {
+				   'satker': satker,
+				   '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+				},
+				success: function(msg){
+						$('#jabatan').html(msg);
+				}
+		});
+	}
+});
+
 $("#filter").on('click', function(){
 	var periode = $("#periode").val();
 	var satker = $("#satker").val();
+	var jabatan = $("#jabatan").val();
 
 	if(periode){
 		$.ajax({
@@ -42,6 +61,7 @@ $("#filter").on('click', function(){
 				data: {
 				   'periode': periode,
 				   'satker': satker,
+				   'jabatan': jabatan,
 				   '<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
 				},
 				success: function(msg){

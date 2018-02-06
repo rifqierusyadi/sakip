@@ -41,8 +41,14 @@ class Pk extends CI_Controller {
 		$jabatan = $this->input->post('jabatan');
 
 		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
+
+		$nama_satker = $this->db->get_where('ref_satker', array('kode'=>$satker))->row();
+		$nama_satker = $nama_satker ? $nama_satker->satker.'<br>' : '';
+
+		$nama_jabatan = $this->db->get_where('ref_jabatan', array('kode'=>$jabatan))->row();
+		$nama_jabatan = $nama_jabatan ? $nama_jabatan->jabatan.'<br>' : '';
 		
-		$data['head'] 		= $periode ? 'LAMPIRAN PERJANJIAN KINERJA <br>PERIODE '.$periode->periode : 'LAMPIRAN PERJANJIAN KINERJA';
+		$data['head'] 		= $periode ? 'LAMPIRAN PERJANJIAN KINERJA TAHUN '.$tahun.' <br>'.$nama_jabatan.$nama_satker : 'LAMPIRAN PERJANJIAN KINERJA';
 		$data['record'] 	= $this->data->get_data($id, $tahun, $satker, $jabatan);
 		$data['periode'] 	= $this->data->get_periode();
 		$data['satker'] 	= $this->data->get_satker();

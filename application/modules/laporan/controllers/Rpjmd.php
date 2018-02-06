@@ -22,7 +22,7 @@ class Rpjmd extends CI_Controller {
 	{
 		$periode = null;
 
-		$data['head'] 		= $periode ? 'MATRIKS RPJMD <br>PERIODE '.$periode->periode : 'MATRIKS RPJMD';
+		$data['head'] 		= $periode ? 'SASARAN PEMBANGUNAN <br>PERIODE '.$periode->periode : 'SASARAN PEMBANGUNAN';
 		$data['record'] 	= FALSE;
 		$data['periode'] 	= $this->data->get_periode();
 		$data['content'] 	= $this->folder.'default';
@@ -37,7 +37,7 @@ class Rpjmd extends CI_Controller {
 		$id = $this->input->post('periode');
 		$periode = $this->db->get_where('ref_periode', array('id'=>$id))->row();
 		
-		$data['head'] 		= $periode ? 'MATRIKS RPJMD <br>PERIODE '.$periode->periode : 'MATRIKS RPJMD';
+		$data['head'] 		= $periode ? 'SASARAN PEMBANGUNAN <br>PERIODE '.$periode->periode : 'SASARAN PEMBANGUNAN';
 		$data['record'] 	= $this->data->get_data($id);
 		$data['periode'] 	= $this->data->get_periode(1);
 		$data['content'] 	= $this->folder.'result';

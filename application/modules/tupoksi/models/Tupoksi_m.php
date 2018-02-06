@@ -1,29 +1,42 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard_m extends MY_Model
+class Tupoksi_m extends MY_Model
 {
-	public $table = 'informasi'; // you MUST mention the table name
+	public $table = 'tupoksi'; // you MUST mention the table name
 	public $primary_key = 'id'; // you MUST mention the primary key
 	public $fillable = array(); // If you want, you can set an array with the fields that can be filled by insert/update
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
 	
 	//ajax datatable
-    public $column_order = array('id',null); //set kolom field database pada datatable secara berurutan
-    public $column_search = array('id'); //set kolom field database pada datatable untuk pencarian
-    public $order = array('id' => 'desc'); //order baku 
+    public $column_order = array('id','tujuan','fungsi',null); //set kolom field database pada datatable secara berurutan
+    public $column_search = array('tujuan','fungsi'); //set kolom field database pada datatable untuk pencarian
+    public $order = array('id' => 'ASC'); //order baku 
 	
 	public function __construct()
 	{
 		$this->timestamps = TRUE;
-		$this->soft_deletes = FALSE;
+		$this->soft_deletes = TRUE;
 		parent::__construct();
 	}
+	
+	public function get_new()
+    {
+        $record = new stdClass();
+        $record->id = '';
+		$record->satker_id = '';
+		$record->tugas = '';
+		$record->fungsi = '';
+		return $record;
+    }
 	
 	//urusan lawan datatable
     private function _get_datatables_query()
     {
-        $this->db->from($this->table);
+        //$this->db->select('a.*, b.periode');
+		//$this->db->from('visi a');
+		//$this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
+		$this->db->from($this->table);
         $i = 0;
         foreach ($this->column_search as $item) // loop column 
         {
@@ -75,18 +88,21 @@ class Dashboard_m extends MY_Model
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->where('deleted_at', NULL);
-        $this->db->limit($_POST['length'], $_POST['start']);
+		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();
     }
 	
-	public function get_record()
-	{
-		$query = $this->db->query("Select a.visi, b.misi, c.tujuan, d.sasaran from sakip_sasaran d LEFT JOIN sakip_visi a ON a.id = d.visi_id LEFT JOIN sakip_misi b ON b.id = d.misi_id LEFT JOIN sakip_tujuan c ON c.id = d.tujuan_id WHERE d.deleted_at is NULL");
+	function get_id($id=null)
+    {
+        $this->db->where('id', $id);
+		$this->db->where('deleted_at', NULL);
+        $query = $this->db->get($this->table);
 		if($query->num_rows() > 0){
-			return $query->result_array();
+			return $query->row();	
 		}else{
+			//show_404();
 			return FALSE;
 		}
-	}
+    }
 }

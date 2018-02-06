@@ -34,10 +34,10 @@
 		<div class="col-md-3">
 			<?php
 			echo form_label('Jabatan');
-			echo form_dropdown('jabatan', $satker, '', "class='form-control select2' name='jabatan' id='jabatan'");
+			echo form_dropdown('jabatan', null, '', "class='form-control select2' name='jabatan' id='jabatan'");
 			?>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-1">
 			<?php
 			echo form_label('&nbsp;');
 			$data = array(
@@ -50,12 +50,26 @@
 			echo form_button($data);
 			?>
 		</div>
+		<div class="col-md-1">
+			<?php
+			echo form_label('&nbsp;');
+			$data = array(
+				'name'          => 'print',
+				'id'            => 'print',
+				'type'          => 'button',
+				'content'       => '<i class="fa fa-print"></i> Print',
+				'class'			=> 'form-control',
+				'onclick'		=> 'window.print()'
+			);
+			echo form_button($data);
+			?>
+		</div>
 	</div>
 	
 	<div id="hasil">
 		<div class="title">
 			<div class="logo"><img src="<?php echo base_url('asset/dist/img/kalsel-114.png'); ?>" width="36px"></div>
-			<div class="judul"><h4><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h4></div>
+			<div class="judul"><h4><?= isset($head) ? $head : ''; ?> PEMERINTAH PROVINSI KALIMANTAN SELATAN</h4></div>
 		</div>
 		<div class="tabel">
 			<table class="print table table-striped" id="tableID" style="width:100%">

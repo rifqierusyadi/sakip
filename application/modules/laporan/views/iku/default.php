@@ -13,19 +13,25 @@
 	</head>
 <body>
 	<div class="row text-muted well well-sm no-shadow panel">
-		<div class="col-md-5">
+		<div class="col-md-2">
 			<?php
 			echo form_label('Periode');
 			echo form_dropdown('periode', $periode, '', "class='form-control select2' name='periode' id='periode'");
 			?>
 		</div>
-		<div class="col-md-5">
+		<div class="col-md-4">
 			<?php
 			echo form_label('Satuan Kerja');
 			echo form_dropdown('satker', $satker, '', "class='form-control select2' name='satker' id='satker'");
 			?>
 		</div>
-		<div class="col-md-2">
+		<div class="col-md-4">
+			<?php
+			echo form_label('Jabatan');
+			echo form_dropdown('jabatan', null, '', "class='form-control select2' name='jabatan' id='jabatan'");
+			?>
+		</div>
+		<div class="col-md-1">
 			<?php
 			echo form_label('&nbsp;');
 			$data = array(
@@ -38,6 +44,20 @@
 			echo form_button($data);
 			?>
 		</div>
+		<div class="col-md-1">
+			<?php
+			echo form_label('&nbsp;');
+			$data = array(
+				'name'          => 'print',
+				'id'            => 'print',
+				'type'          => 'button',
+				'content'       => '<i class="fa fa-print"></i> Print',
+				'class'			=> 'form-control',
+				'onclick'		=> 'window.print()'
+			);
+			echo form_button($data);
+			?>
+		</div>
 	</div>
 	
 	<div id="hasil">
@@ -46,6 +66,24 @@
 			<div class="judul"><h4><?= isset($head) ? $head : ''; ?><br>PEMERINTAH PROVINSI KALIMANTAN SELATAN</h4></div>
 		</div>
 		<div class="tabel">
+			<table class="print table" style="width:100%">
+			<tr>
+				<td width="19%">INSTANSI</td>
+				<td width="1%">:</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>TUGAS</td>
+				<td>:</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>FUNGSI</td>
+				<td>:</td>
+				<td></td>
+			</tr>
+			</table>	
+			
 			<table class="print table table-striped" id="tableID" style="width:100%">
 			<thead>
 			<tr>
