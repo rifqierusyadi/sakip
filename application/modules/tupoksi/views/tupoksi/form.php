@@ -15,6 +15,16 @@
 			<div class="box-body">
 				<div class="row">
 				<div class="col-md-12">
+					<div class="form-group <?php echo form_error('jabatan') ? 'has-error' : null; ?>">
+						<?php
+						echo form_label('Jabatan','jabatan');
+						$selected = set_value('jabatan');
+						echo form_dropdown('jabatan', $jabatan, $selected, "class='form-control select2' id='jabatan'");
+						echo form_error('jabatan') ? form_error('jabatan', '<p class="help-block">','</p>') : '';
+						?>
+					</div>
+				</div>
+				<div class="col-md-12">
 					<div class="form-group <?php echo form_error('tugas') ? 'has-error' : null; ?>">
 						<?php
 						echo form_label('Tugas Pokok','tugas');

@@ -134,9 +134,10 @@ class Target_m extends MY_Model
         
     }
 	
-	function get_detail($id=null)
+	function get_detail($id=null,$tahun=null)
     {
-        $this->db->where('indikator_id', $id);
+		$this->db->where('indikator_id', $id);
+		$this->db->where('tahun', $tahun);
 		$this->db->where('deleted_at', NULL);
         $query = $this->db->get('pohon_realisasi');
 		if($query->num_rows() > 0){
@@ -281,6 +282,6 @@ class Target_m extends MY_Model
 			//show_404();
 			return FALSE;
 		}
-    }
+	}
 
 }

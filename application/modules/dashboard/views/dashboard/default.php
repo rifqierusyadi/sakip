@@ -30,7 +30,7 @@
 		
 					<div class="info-box-content">
 					<span class="info-box-text">SOPD</span>
-					<span class="info-box-number">140</span>
+					<span class="info-box-number">-</span>
 					</div>
 					<!-- /.info-box-content -->
 				</div>
@@ -38,12 +38,12 @@
 				</div>
 				<!-- /.col -->
 				<div class="col-md-6 col-sm-6 col-xs-12">
-				<div class="info-box bg-aqua">
+				<div class="info-box bg-yellow">
 					<span class="info-box-icon"><i class="fa fa-users"></i></span>
 		
 					<div class="info-box-content">
 					<span class="info-box-text">USERS</span>
-					<span class="info-box-number">140</span>
+					<span class="info-box-number">-</span>
 					</div>
 					<!-- /.info-box-content -->
 				</div>
@@ -56,7 +56,7 @@
 			<?php foreach($record as $row): ?>
 			<div class="row">
 				<div class="col-md-12">
-				<div class="alert alert-warning alert-dismissible">
+				<div class="alert alert-info alert-dismissible">
                 <h4><i class="icon fa fa-file-text-o"></i> <?= $row->judul; ?></h4>
                 <?= $row->informasi; ?>
               	</div>	

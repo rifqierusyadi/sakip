@@ -79,9 +79,12 @@ function group($group)
 {
 	$CI =& get_instance();
 	if(!in_array($CI->session->userdata('level'), $group)){
-		$CI->session->set_flashdata('flasherror','Anda Tidak Memiliki Hak Akses Untuk Modul Tersebut.');
-		redirect('dashboard');
-	}
+        return FALSE;
+        $CI->session->set_flashdata('flasherror','Anda Tidak Memiliki Hak Akses Untuk Modul Tersebut.');
+        redirect('dashboard');
+	}else{
+        return TRUE;
+    }
 }
 
 //function manager()

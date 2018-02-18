@@ -11,7 +11,7 @@ class Dashboard_m extends MY_Model
 	//ajax datatable
     public $column_order = array(null); //set kolom field database pada datatable secara berurutan
     public $column_search = array(); //set kolom field database pada datatable untuk pencarian
-    public $order = array('id' => 'asc'); //order baku 
+    public $order = array('id' => 'DESC'); //order baku 
 	
 	public function __construct()
 	{

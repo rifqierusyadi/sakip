@@ -13,9 +13,9 @@ class Tupoksi extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('identitas_helper');
 		$this->load->model('tupoksi_m', 'data');
 		signin();
-		admin();
 	}
 	
 	//halaman index
@@ -39,6 +39,9 @@ class Tupoksi extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
 		
+		$satker = $this->session->userdata('satker');
+		$data['jabatan'] 	= $this->data->get_jabatan($satker);
+
 		$this->load->view('template/default', $data);
 	}
 	
@@ -51,6 +54,9 @@ class Tupoksi extends CI_Controller {
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
+
+		$satker = $this->session->userdata('satker');
+		$data['jabatan'] 	= $this->data->get_jabatan($satker);
 		
 		$this->load->view('template/default', $data);
 	}
@@ -65,7 +71,8 @@ class Tupoksi extends CI_Controller {
             $no++;
             $col = array();
             $col[] = '<input type="checkbox" class="data-check" value="'.$row->id.'">';
-            $col[] = $row->tugas;
+			$col[] = posisi($row->jabatan_id);
+			$col[] = $row->tugas;
 			$col[] = $row->fungsi;
 			
 			//add html for action
@@ -89,6 +96,7 @@ class Tupoksi extends CI_Controller {
         //$kode = $this->data->get_kode();
 		$data = array(
 				'satker_id' => $this->session->userdata('satker'),
+				'jabatan_id' => $this->input->post('jabatan'),
 				'tugas' => $this->input->post('tugas'),
 				'fungsi' => $this->input->post('fungsi'),
             );
@@ -103,6 +111,7 @@ class Tupoksi extends CI_Controller {
     {
         $data = array(
 			'satker_id' => $this->session->userdata('satker'),
+			'jabatan_id' => $this->input->post('jabatan'),
 			'tugas' => $this->input->post('tugas'),
 			'fungsi' => $this->input->post('fungsi'),
 		);
@@ -135,6 +144,7 @@ class Tupoksi extends CI_Controller {
         //$id = $this->input->post('id');
 		$data = array('success' => false, 'messages' => array());
         
+		$this->form_validation->set_rules("jabatan", "Jabatan", "trim|required");
 		$this->form_validation->set_rules("tugas", "Tugas Pokok Dan Fungsi", "trim|required");
 		$this->form_validation->set_rules("fungsi", "Tugas Pokok Dan Fungsi", "trim|required");
 		

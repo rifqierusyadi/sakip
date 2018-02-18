@@ -48,7 +48,7 @@ class Target extends CI_Controller {
 		$data['head'] 		= 'Ubah Target Indikator Kinerja';
 		$data['record'] 	= $this->data->get_record_id($id);
 		$data['target'] 	= $this->data->get_target($id, $tahun);
-		$data['detail'] 	= $this->data->get_detail($id);
+		$data['detail'] 	= $this->data->get_detail($id,$tahun);
 		$data['content'] 	= $this->folder.'form_edit';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';

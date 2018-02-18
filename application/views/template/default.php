@@ -42,7 +42,8 @@
         <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
           <ul class="nav navbar-nav">
             <li><a href="<?= site_url('dashboard'); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-						<li class="dropdown">
+						<?php if(group(array('1','2'))): ?>
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> RPJMD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="<?= site_url('rpjmd/visi'); ?>"><i class="fa fa-file-text-o"></i> Visi</a></li>
@@ -53,6 +54,7 @@
                 <li><a href="<?= site_url('rpjmd/makro'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja Makro</a></li>
               </ul>
             </li>
+            <?php endif; ?>
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bank"></i> SOPD <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -81,6 +83,7 @@
                 <li><a href="#"><i class="fa fa-file-text-o"></i> Realisasi Kinerja dan Anggaran</a></li> -->
               </ul>
             </li>
+            <?php if(group(array('1','2'))): ?>
 						<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder"></i> Data Master <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -96,6 +99,7 @@
             </li>
             <li><a href="<?= site_url('setting/informasi'); ?>"><i class="fa fa-newspaper-o"></i> Informasi</a></li>
             <li><a href="<?= site_url('setting/folder'); ?>"><i class="fa fa-download"></i> Dokumen</a></li>
+            <?php endif; ?>
             <li><a href="<?= site_url('sotk'); ?>"><i class="fa fa-sitemap"></i> SOTK</a></li>
 						<li><a href="<?= site_url('logout'); ?>"><i class="fa fa-sign-out"></i> Keluar</a></li>
           </ul>

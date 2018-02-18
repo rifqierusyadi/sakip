@@ -105,4 +105,18 @@ class Tupoksi_m extends MY_Model
 			return FALSE;
 		}
     }
+
+    public function get_jabatan($satker=null)
+	{
+        $query = $this->db->like('path',$satker)->get('view_jabatan');
+        if($query->num_rows() > 0){
+        foreach ($query->result() as $row)
+		{
+			$dropdown[$row->kode] = $row->jabatan;
+		}
+        }else{
+            $dropdown[''] = 'Belum Ada Jabatan Tersedia'; 
+        }
+		return $dropdown;
+	}
 }
