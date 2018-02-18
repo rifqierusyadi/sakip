@@ -13,8 +13,6 @@
 			<div class="box-body">
 				<div class="row">
 					<div class="col-md-12">
-						<a class="btn btn-sm btn-flat btn-success" onclick="add_data();" href="<?= site_url('sopd/program/created'); ?>"><i class="glyphicon glyphicon-plus"></i> Tambah Data</a>
-						<button class="btn btn-sm btn-flat btn-danger" onclick="deleted_all();"><i class="glyphicon glyphicon-trash"></i> Hapus</button>
 						<button class="btn btn-sm btn-flat btn-default" data-toggle="tooltip" title="Reload Data" data-placement="right" onclick="reload_table()"><i class="glyphicon glyphicon-refresh"></i> Reload Data</button>
 						<span id="key" style="display: none;"><?= $this->security->get_csrf_hash(); ?></span>
 						<table id="tableIDX" class="table table-striped table-bordered responsive nowrap" cellspacing="0" width="100%">
@@ -26,8 +24,9 @@
 									<th>Kode</th>
 									<th>Program / Kegiatan</th>
 									<th>Nilai</th>
+									<th>Realisasi</th>
 									<th>Penanggung Jawab</th>
-									<th width="60px">Aksi</th>
+									<th width="30px">Aksi</th>
 								</tr>
 							</thead>
 							<tbody>

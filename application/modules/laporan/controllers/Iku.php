@@ -46,11 +46,14 @@ class Iku extends CI_Controller {
 		$nama_jabatan = $this->db->get_where('ref_jabatan', array('kode'=>$jabatan))->row();
 		$nama_jabatan = $nama_jabatan ? $nama_jabatan->jabatan.'<br>' : '';
 
-		$tugas = $this->db->get_where('tupoksi', array('satker_id'=>$this->input->post('satker'), 'deleted_at'=>null),1)->row();
+		$tugas = $this->db->get_where('tupoksi', array('satker_id'=>$this->input->post('satker'), 'jabatan_id'=>$this->input->post('jabatan'), 'deleted_at'=>null),1)->row();
 		$tugas = $tugas ? $tugas->tugas : '-';
 
-		$fungsi = $this->db->get_where('tupoksi', array('satker_id'=>$this->input->post('satker'), 'deleted_at'=>null),1)->row();
+		$fungsi = $this->db->get_where('tupoksi', array('satker_id'=>$this->input->post('satker'), 'jabatan_id'=>$this->input->post('jabatan'), 'deleted_at'=>null),1)->row();
 		$fungsi = $fungsi ? $fungsi->fungsi : '-';
+
+		$data_jabatan = $this->db->get_where('pejabat', array('periode_id'=>$this->input->post('periode'),'satker_id'=>$this->input->post('satker'), 'jabatan_id'=>$this->input->post('jabatan'), 'deleted_at'=>null),1)->row();
+		$data_jabatan = $data_jabatan ? $data_jabatan : '-';
 
 		$data['head'] 		= $periode ? 'INDIKATOR KINERJA UTAMA <br>'.$nama_jabatan.$nama_satker.'PERIODE '.$periode->periode : 'INDIKATOR KINERJA UTAMA';
 		$data['record'] 	= $this->data->get_data($id, $satker, $jabatan);
@@ -61,6 +64,7 @@ class Iku extends CI_Controller {
 		$data['js'] 		= $this->folder.'js';
 
 		$data['data']		= array('satker'=>$nama_satker,'tugas'=>$tugas,'fungsi'=>$fungsi);
+		$data['jabatan']	= array('jabatan'=>$data_jabatan->jabatan,'nip'=>$data_jabatan->nip,'nama'=>$data_jabatan->nama);
 		
 		$this->load->view($data['content'], $data);
 	}

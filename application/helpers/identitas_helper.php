@@ -500,6 +500,25 @@ if (! function_exists('tanggung_jawab'))
 	}
 }
 
+if (! function_exists('proker_jabatan'))
+{
+	function proker_jabatan($proker=null)
+	{
+		if($proker){
+			$CI =& get_instance();
+			$CI->db->where('proker_id', $proker);
+			$query = $CI->db->get('proker_jabatan');
+			if($query->num_rows() > 0){
+				return $query->result();
+			}else{
+				return FALSE;
+			}
+		}else{
+			return FALSE;
+		}
+	}
+}
+
 if (! function_exists('posisi'))
 {
 	function posisi($kode=null)
@@ -510,6 +529,22 @@ if (! function_exists('posisi'))
 		$query = $CI->db->get('ref_jabatan');
 		if($query->num_rows() > 0){
 			return $query->row()->jabatan;
+		}else{
+			return FALSE;
+		}
+	}
+}
+
+if (! function_exists('periode'))
+{
+	function periode($kode=null)
+	{
+		$CI =& get_instance();
+		$CI->db->where('id', $kode);
+		$CI->db->where('deleted_at', null);
+		$query = $CI->db->get('ref_periode');
+		if($query->num_rows() > 0){
+			return $query->row()->periode;
 		}else{
 			return FALSE;
 		}

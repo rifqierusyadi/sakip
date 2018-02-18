@@ -36,96 +36,46 @@
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('kode') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Kode Program','kode');
-							$data = array('class'=>'form-control','name'=>'kode','id'=>'kode','type'=>'text','value'=>set_value('kode'));
+							echo form_label('Kode Program / Kegiatan','kode');
+							$data = array('class'=>'form-control','name'=>'kode','id'=>'kode','type'=>'text','value'=>set_value('kode', $record->kode));
 							echo form_input($data);
 							echo form_error('kode') ? form_error('kode', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="form-group <?php echo form_error('program') ? 'has-error' : null; ?>">
+						<div class="form-group <?php echo form_error('proker') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Program','program');
-							$data = array('class'=>'form-control','name'=>'program','id'=>'program','type'=>'text','value'=>set_value('program'));
+							echo form_label('Program / Kegiatan','proker');
+							$data = array('class'=>'form-control','name'=>'proker','id'=>'proker','type'=>'text','value'=>set_value('proker', $record->proker));
 							echo form_input($data);
-							echo form_error('program') ? form_error('program', '<p class="help-block">','</p>') : '';
+							echo form_error('proker') ? form_error('proker', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
 					</div>
 					<div class="col-md-12">
-						<div class="form-group <?php echo form_error('jabatan_program') ? 'has-error' : null; ?>">
+						<div class="form-group <?php echo form_error('jabatan[]') ? 'has-error' : null; ?>">
 							<?php
-							echo form_label('Penanggung Jawab Program','jabatan_program');
-							$selected = set_value('jabatan_program');
-							echo form_dropdown('jabatan_program', $jabatan, $selected, "class='form-control select2' name='jabatan_program' id='jabatan_program'");
-							echo form_error('jabatan_program') ? form_error('jabatan_program', '<p class="help-block">','</p>') : '';
+							if($bidang){
+								foreach($bidang as $x){
+									$data[] = $x->jabatan; 
+								}
+							}else{
+								$data[] = FALSE;
+							}
+							
+							echo form_label('Penanggung Jawab','jabatan');
+							$selected = set_value('jabatan[]', $data);
+							echo form_dropdown('jabatan[]', $jabatan, $selected, "class='form-control select2' name='jabatan' id='jabatan' multiple");
+							echo form_error('jabatan[]') ? form_error('jabatan[]', '<p class="help-block">','</p>') : '';
 							?>
 						</div>
-					</div>
-					<div class="col-md-12">
-					<div class="field-wrapper">
-						<div class="child">
-						<div class="row">
-							<div class="col-md-2">
-								<div class="form-group <?php echo form_error('rekening') ? 'has-error' : null; ?>">
-									<?php
-									echo form_label('Kode Rekening','rekening');
-									$data = array('class'=>'form-control','name'=>'rekening','id'=>'rekening','type'=>'text','value'=>set_value('rekening', $record->rekening));
-									echo form_input($data);
-									echo form_error('rekening') ? form_error('rekening', '<p class="help-block">','</p>') : '';
-									?>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="form-group <?php echo form_error('kegiatan') ? 'has-error' : null; ?>">
-									<?php
-									echo form_label('Kegiatan','kegiatan');
-									$data = array('class'=>'form-control','name'=>'kegiatan','id'=>'kegiatan','type'=>'text','value'=>set_value('kegiatan', $record->kegiatan));
-									echo form_input($data);
-									echo form_error('kegiatan') ? form_error('kegiatan', '<p class="help-block">','</p>') : '';
-									?>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group <?php echo form_error('jabatan_kegiatan') ? 'has-error' : null; ?>">
-									<?php
-									echo form_label('Penanggung Jawab Kegiatan','jabatan_kegiatan');
-									$selected = set_value('jabatan_kegiatan', $record->jabatan_id);
-									echo form_dropdown('jabatan_kegiatan', $jabatan, $selected, "class='form-control select2' name='jabatan_kegiatan' id='jabatan_kegiatan'");
-									echo form_error('jabatan_kegiatan') ? form_error('jabatan_kegiatan', '<p class="help-block">','</p>') : '';
-									?>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<div class="form-group <?php echo form_error('nilai') ? 'has-error' : null; ?>">
-									<?php
-										echo form_label('Nilai Kegiatan','nilai');
-									?>
-									
-									<div class="input-group input-group">  
-									<?php
-									$data = array('class'=>'form-control','name'=>'nilai','id'=>'nilai','type'=>'text','value'=>set_value('nilai', $record->nilai));
-									echo form_input($data);
-									?>
-									<div class="input-group-btn">
-										<button class="btn btn-info btn-flat add-button" type="button"><i class="fa fa-plus"></i></button>
-									</div>
-									</div>
-									<?php
-									echo form_error('nilai') ? form_error('nilai', '<p class="help-block">','</p>') : '';
-									?>
-								</div>
-							</div>
-						</div>
-						</div>
-					</div>
 					</div>
 					<div class="col-md-12">
 						<div class="form-group <?php echo form_error('total') ? 'has-error' : null; ?>">
 							<?php
 							echo form_label('Total Nilai Program','total');
-							$data = array('class'=>'form-control','name'=>'total','id'=>'total','type'=>'text','value'=>set_value('total'));
+							$data = array('class'=>'form-control','name'=>'total','id'=>'total','type'=>'text','value'=>set_value('total', $record->total));
 							echo form_input($data);
 							echo form_error('total') ? form_error('total', '<p class="help-block">','</p>') : '';
 							?>

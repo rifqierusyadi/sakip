@@ -61,11 +61,11 @@
                 <li><a href="<?= site_url('tupoksi/tupoksi'); ?>"><i class="fa fa-file-text-o"></i> Tugas dan Fungsi</a></li> 
                 <li><a href="<?= site_url('pk/sasaran'); ?>"><i class="fa fa-file-text-o"></i> Kinerja Utama / Sasaran</a></li>
                 <li><a href="<?= site_url('pk/indikator'); ?>"><i class="fa fa-file-text-o"></i> Indikator Kinerja</a></li>
-                <li><a href=""><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
+                <li><a href="<?= site_url('sopd/program'); ?>"><i class="fa fa-file-text-o"></i> Program Kegiatan</a></li>
                 <li><a href="<?= site_url('sopd/pejabat'); ?>"><i class="fa fa-file-text-o"></i> Pejabat Administrasi</a></li>
                 <li class="divider"></li>
                	<li><a href="<?= site_url('realisasi/indikator'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Kinerja</a></li>
-                 <li><a href="<?= site_url('realisasi/indikator'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Keuangan</a></li>
+                 <li><a href="<?= site_url('realisasi/program'); ?>"><i class="fa fa-file-text-o"></i> Realisasi Keuangan</a></li>
               </ul>
             </li>
 						<li class="dropdown">

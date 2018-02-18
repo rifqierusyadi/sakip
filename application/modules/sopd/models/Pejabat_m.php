@@ -45,9 +45,9 @@ class Pejabat_m extends MY_Model
 	//urusan lawan datatable
     private function _get_datatables_query()
     {
-         $this->db->select('a.*, b.periode');
-		 $this->db->from('pejabat a');
-		 $this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
+        $this->db->select('a.*, b.periode');
+        $this->db->from('pejabat a');
+        $this->db->join('ref_periode b','a.periode_id = b.id','LEFT');
 		// $this->db->join('visi c','a.visi_id = c.id','LEFT');
 		// $this->db->join('misi d','a.misi_id = d.id','LEFT');
 		//$this->db->from($this->table);
@@ -102,6 +102,7 @@ class Pejabat_m extends MY_Model
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->where('a.deleted_at', NULL);
+        $this->db->where('a.satker_id', $this->session->userdata('satker'));
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();
         return $query->result();

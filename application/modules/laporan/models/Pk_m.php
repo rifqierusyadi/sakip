@@ -94,5 +94,18 @@ class Pk_m extends MY_Model
 		}else{
 			return FALSE;
 		}
+	}
+	
+	public function get_proker($periode=null, $tahun=null,$satker=null,$jabatan=null)
+	{
+		//$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' ORDER BY c.eselon_id ASC");
+		
+		$query = $this->db->query("SELECT a.id, a.periode_id, a.tahun, a.kode, a.proker, a.total, a.realisasi, a.satker_id, b.proker_id, b.jabatan FROM sakip_proker a LEFT JOIN sakip_proker_jabatan b ON b.proker_id = a.id AND b.deleted_at is NULL WHERE a.periode_id = '{$periode}' AND a.satker_id = '{$satker}' AND b.jabatan = '{$jabatan}' AND a.tahun = '{$tahun}' AND a.deleted_at is NULL ORDER BY `a`.`id` ASC");
+		if($query->num_rows() > 0)
+		{
+			return $query->result();
+		}else{
+			return FALSE;
+		}
     }
 }

@@ -47,6 +47,10 @@ class Pk extends CI_Controller {
 
 		$nama_jabatan = $this->db->get_where('ref_jabatan', array('kode'=>$jabatan))->row();
 		$nama_jabatan = $nama_jabatan ? $nama_jabatan->jabatan.'<br>' : '';
+
+		$data_jabatan = $this->db->get_where('pejabat', array('periode_id'=>$this->input->post('periode'),'satker_id'=>$this->input->post('satker'), 'jabatan_id'=>$this->input->post('jabatan'), 'deleted_at'=>null),1)->row();
+		$data_jabatan = $data_jabatan ? $data_jabatan : '-';
+
 		
 		$data['head'] 		= $periode ? 'LAMPIRAN PERJANJIAN KINERJA TAHUN '.$tahun.' <br>'.$nama_jabatan.$nama_satker : 'LAMPIRAN PERJANJIAN KINERJA';
 		$data['record'] 	= $this->data->get_data($id, $tahun, $satker, $jabatan);
@@ -55,6 +59,9 @@ class Pk extends CI_Controller {
 		$data['content'] 	= $this->folder.'result';
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
+		$data['proker'] 	= $this->data->get_proker($id, $tahun, $satker, $jabatan);
+
+		$data['jabatan']	= array('jabatan'=>$data_jabatan->jabatan,'nip'=>$data_jabatan->nip,'nama'=>$data_jabatan->nama);
 		
 		$this->load->view($data['content'], $data);
 	}

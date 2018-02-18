@@ -34,4 +34,46 @@
 <?php endif; ?>
 </tbody>
 </table>
+<table class="table table-striped table-bordered" id="tableID" style="width:50%">
+	<thead>
+		<tr>
+			<th>No</th>
+			<th>Program / Kegiatan</th>
+			<th>Anggaran</th>
+		</tr>
+	</thead>
+<tbody>
+<?php if($proker): ?>
+<?php $no = 1; $total = 0; ?>
+<?php foreach($proker as $z): ?>
+	<tr>
+	<td width="1%"><?= $no; ?></td>
+	<td width="59%"><?= $z->proker; ?></td>
+	<td width="40%" style="text-align:right;"><?= rupiah($z->total); ?></td>
+	</tr>
+<?php ++$no; $total += $z->total; ?>
+<?php endforeach; ?>
+<?php endif; ?>
+</tbody>
+<tfoot>
+	<tr>
+		<th></th>
+		<th></th>
+		<th style="text-align:right;"><?= rupiah($total); ?></th>
+	</tr>
+</tfoot>
+	</table>
+<p>&nbsp;</p>
+	<table class="table" id="tableID" style="width:100%">
+	<tr>
+	<td width="33.33%"></td>
+	<td width="33.33%"></td>
+	<td width="33.33%" style="text-align:center;">
+	<?php echo $jabatan['jabatan']; ?>
+	<br><br><br><br><br>
+	<?php echo $jabatan['nama']; ?><br>
+	<?php echo $jabatan['nip']; ?>
+	</td>
+	</tr>
+	</table>
 </div>

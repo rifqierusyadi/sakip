@@ -44,6 +44,7 @@ responsive: true,
 <script type="text/javascript">
 //$('input#nilai').number(true);
 $('input#total').number(true);
+$('input#realisasi').number(true);
 //function add button
 // $(function(){
 // 	var maxField = 20; //Input fields increment limitation

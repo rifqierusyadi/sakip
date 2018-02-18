@@ -40,7 +40,7 @@
 <div class="col-md-2">
 	<?php
 	echo form_label('Triwulan');
-	echo form_dropdown('triwulan', array(''=>'Pilih Triwulan','1'=>"TW.1",'2'=>"TW.2",'3'=>"TW.3",'4'=>"TW.4"), '', "class='form-control select2' name='triwulan' id='triwulan'");
+	echo form_dropdown('triwulan', array(''=>'Pilih Triwulan','1'=>"TW.1",'2'=>"TW.2",'3'=>"TW.3"), '', "class='form-control select2' name='triwulan' id='triwulan'");
 	?>
 </div>
 <div class="col-md-2">

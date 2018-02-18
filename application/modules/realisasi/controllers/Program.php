@@ -8,7 +8,7 @@ class Program extends CI_Controller {
 	 * email rifqie.rusyadi@gmail.com
 	 */
 	
-	public $folder = 'sopd/program/';
+	public $folder = 'realisasi/program/';
 	
 	public function __construct()
 	{
@@ -22,7 +22,7 @@ class Program extends CI_Controller {
 	//halaman index
 	public function index()
 	{
-		$data['head'] 		= 'Program dan Kegiatan SOPD';
+		$data['head'] 		= 'Realisasi Program dan Kegiatan SOPD';
 		$data['record'] 	= $this->data->get_all();
 		$data['content'] 	= $this->folder.'default';
 		$data['style'] 		= $this->folder.'style';
@@ -31,25 +31,25 @@ class Program extends CI_Controller {
 		$this->load->view('template/default', $data);
 	}
 	
-	public function created()
-	{
-		$satker = $this->session->userdata('satker');
-		$data['head'] 		= 'Tambah Program dan Kegiatan SOPD';
-		$data['record'] 	= $this->data->get_new();
-		$data['content'] 	= $this->folder.'form';
-		$data['style'] 		= $this->folder.'style';
-		$data['js'] 		= $this->folder.'js';
-		$data['periode']	= $this->data->get_periode();
-		$data['satuan']		= $this->data->get_satuan();
-		$data['jabatan'] 	= $this->data->get_jabatan($satker);
+	// public function created()
+	// {
+	// 	$satker = $this->session->userdata('satker');
+	// 	$data['head'] 		= 'Tambah Realisasi Program dan Kegiatan SOPD';
+	// 	$data['record'] 	= $this->data->get_new();
+	// 	$data['content'] 	= $this->folder.'form';
+	// 	$data['style'] 		= $this->folder.'style';
+	// 	$data['js'] 		= $this->folder.'js';
+	// 	$data['periode']	= $this->data->get_periode();
+	// 	$data['satuan']		= $this->data->get_satuan();
+	// 	$data['jabatan'] 	= $this->data->get_jabatan($satker);
 		
-		$this->load->view('template/default', $data);
-	}
+	// 	$this->load->view('template/default', $data);
+	// }
 	
 	public function updated($id=null)
 	{
 		$satker = $this->session->userdata('satker');
-		$data['head'] 		= 'Edit Program dan Kegiatan SOPD';
+		$data['head'] 		= 'Edit Realisasi Program dan Kegiatan SOPD';
 		$data['record'] 	= $this->data->get_id($id);
 		$data['content'] 	= $this->folder.'form_edit';
 		$data['style'] 		= $this->folder.'style';
@@ -86,9 +86,9 @@ class Program extends CI_Controller {
 			$col[] = $row->kode;
 			$col[] = $row->proker;
 			$col[] = number_format($row->total);
+			$col[] = number_format($row->realisasi);
 			$col[] = $jabatan;
-			$col[] = '<a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('sopd/program/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i></a>
-			<a class="btn btn-xs btn-flat btn-danger" data-toggle="tooltip" title="Hapus" onclick="deleted('."'".$row->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+			$col[] = '<a class="btn btn-xs btn-flat btn-warning" onclick="edit_data();" href="'.site_url('realisasi/program/updated/'.$row->id).'" data-toggle="tooltip" title="Edit"><i class="glyphicon glyphicon-pencil"></i>';
 	  
             $data[] = $col;
         }
@@ -103,62 +103,44 @@ class Program extends CI_Controller {
 		echo json_encode($output);
     }
 	
-	public function ajax_save()
-    {
-       $data = array(
-				'periode_id' => $this->input->post('periode_id'),
-				'tahun' => $this->input->post('tahun'),
-				'kode' => $this->input->post('kode'),
-				'proker' => $this->input->post('proker'),
-				'total' => $this->input->post('total'),
-				'satker_id' => $this->session->userdata('satker')
-        );      
+	// public function ajax_save()
+    // {
+    //    $data = array(
+	// 			'periode_id' => $this->input->post('periode_id'),
+	// 			'tahun' => $this->input->post('tahun'),
+	// 			'kode' => $this->input->post('kode'),
+	// 			'proker' => $this->input->post('proker'),
+	// 			'total' => $this->input->post('total'),
+	// 			'satker_id' => $this->session->userdata('satker')
+    //     );      
 
-		if($this->validation()){
-			$insert = $this->data->insert($data);
-			$jabatan = $this->input->post('jabatan');
-			$result = array();
-			foreach($jabatan AS $key => $val){
-				if($_POST['jabatan'][$key] != ''){
-					$result[] = array(
-						"proker_id"  => $insert,
-						"jabatan"  => $_POST['jabatan'][$key]
-					);
-				}
-			}
-			$this->db->insert_batch('proker_jabatan', $result);
-			helper_log("add", "Menambah Program / Kegiatan SOPD");
-		}
-    }
+	// 	if($this->validation()){
+	// 		$insert = $this->data->insert($data);
+	// 		$jabatan = $this->input->post('jabatan');
+	// 		$result = array();
+	// 		foreach($jabatan AS $key => $val){
+	// 			if($_POST['jabatan'][$key] != ''){
+	// 				$result[] = array(
+	// 					"proker_id"  => $insert,
+	// 					"jabatan"  => $_POST['jabatan'][$key]
+	// 				);
+	// 			}
+	// 		}
+	// 		$this->db->insert_batch('proker_jabatan', $result);
+	// 		helper_log("add", "Menambah Program / Kegiatan SOPD");
+	// 	}
+    // }
     
     public function ajax_update($id=null)
     {
 		
 		$data = array(
-			'periode_id' => $this->input->post('periode_id'),
-			'tahun' => $this->input->post('tahun'),
-			'kode' => $this->input->post('kode'),
-			'proker' => $this->input->post('proker'),
-			'total' => $this->input->post('total'),
-			'satker_id' => $this->session->userdata('satker')
+			'realisasi' => $this->input->post('realisasi')
 		);
 
 		if($this->validation($id)){
 			$update = $this->data->update($data, $id);
-			$bidang = $this->input->post('jabatan');
-			$delete = $this->db->delete('proker_jabatan', array('proker_id'=>$id));
-			if($delete){
-				foreach($bidang AS $key => $val){
-					if($_POST['jabatan'][$key] != ''){
-						$result[] = array(
-						 "proker_id"  => $id,
-						 "jabatan"  => $_POST['jabatan'][$key]
-						);
-					}
-				}
-				$this->db->insert_batch('proker_jabatan', $result);
-			}
-			helper_log("edit", "Merubah Program / Kegiatan SOPD");
+			helper_log("edit", "Merubah Realisasi Program / Kegiatan SOPD");
 		}
     }
     
