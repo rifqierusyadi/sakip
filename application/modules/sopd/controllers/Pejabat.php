@@ -38,6 +38,7 @@ class Pejabat extends CI_Controller {
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
+		$data['pangkat']	= $this->data->get_pangkat();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -51,6 +52,7 @@ class Pejabat extends CI_Controller {
 		$data['style'] 		= $this->folder.'style';
 		$data['js'] 		= $this->folder.'js';
 		$data['periode']	= $this->data->get_periode();
+		$data['pangkat']	= $this->data->get_pangkat();
 		
 		$this->load->view('template/default', $data);
 	}
@@ -100,6 +102,7 @@ class Pejabat extends CI_Controller {
 					 "jabatan"  => $_POST['jabatan'][$key],
 					 "nama"  => $_POST['nama'][$key],
 					 "nip"  => $_POST['nip'][$key],
+					 "pangkat"  => $_POST['pangkat'][$key],
 					 "satker_id"  => $this->session->userdata('satker')
 					);
 			}
@@ -198,6 +201,8 @@ class Pejabat extends CI_Controller {
 		$tahun = $this->input->post('tahun');
 		$satker = $this->session->userdata('satker');
 		$jabatan = $this->data->get_jabatan($satker);
+		$pangkat = $this->data->get_pangkat();
+
         if(!empty($jabatan)){
 			foreach($jabatan as $row){
 				echo '<button class="btn btn-sm btn-flat btn-primary btn-block btn-social"><i class="fa fa-file"></i>'.$row->jabatan.'</button><br>';
@@ -207,7 +212,11 @@ class Pejabat extends CI_Controller {
 				echo '<br>';
 				$data = array('class'=>'form-control','name'=>'nip[]','id'=>'nip','type'=>'text','value'=>set_value('nip[]'),'placeholder'=>'NIP');
 				echo form_input($data);
+				echo '<br>';
+				echo form_dropdown('pangkat[]', $pangkat, '', "class='form-control select2' name='pangkat[]' id='pangkat'");
 				echo '</div></div><br>';
+				
+			
 			}  
         }else{
 			echo '<button class="btn btn-sm btn-flat btn-danger btn-block">Belum Ada Misi Tersedia!</button>';

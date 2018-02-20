@@ -104,6 +104,7 @@ $("#tahun").change(function(){
 	},
 	success: function(msg){
 	$('#jabatan').html(msg);
+	$('.select2').select2();
 	}
 	});
 	}

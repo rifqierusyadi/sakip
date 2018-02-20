@@ -35,7 +35,7 @@
 					<div class="col-md-2">
 					<div class="form-group <?php echo form_error('target') ? 'has-error' : null; ?>">
 					<?php
-					echo form_label('Kondisi '.$row['tahun'],'target');
+					echo form_label('Target '.$row['tahun'],'target');
 					$data = array('class'=>'form-control','name'=>'target[]','id'=>'target','type'=>'text','value'=>set_value('target[]',$row['target']));
 					echo form_input($data);
 					echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';

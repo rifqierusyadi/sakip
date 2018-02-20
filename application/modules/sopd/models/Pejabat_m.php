@@ -211,6 +211,21 @@ class Pejabat_m extends MY_Model
             $dropdown[''] = 'Belum Periode Tahun Tersedia'; 
         }
 		return $dropdown;
+    }
+    
+    public function get_pangkat($id=null)
+	{
+        $query = $this->db->where('deleted_at',NULL)->order_by('kode', 'ASC')->get('ref_pangkat');
+        if($query->num_rows() > 0){
+        $dropdown[''] = 'Pilih Pangkat';
+		foreach ($query->result() as $row)
+		{
+			$dropdown[$row->kode] = $row->golongan.'-'.$row->pangkat;
+		}
+        }else{
+            $dropdown[''] = 'Belum Ada Pangkat Tersedia'; 
+        }
+		return $dropdown;
 	}
 
 }

@@ -109,6 +109,7 @@
 							echo form_input($data);
 							echo form_error('target') ? form_error('target', '<p class="help-block">','</p>') : '';
 							?>
+							<input type="hidden" name="tahun[]" value="<?= $i; ?>" />
 							</div>
 							</div>	
 

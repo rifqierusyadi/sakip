@@ -34,7 +34,8 @@
 <?php endif; ?>
 </tbody>
 </table>
-<table class="table table-striped table-bordered" id="tableID" style="width:50%">
+<p>&nbsp;</p>
+<table class="print table table-striped table-bordered" id="tableID" style="width:50%">
 	<thead>
 		<tr>
 			<th>No</th>
