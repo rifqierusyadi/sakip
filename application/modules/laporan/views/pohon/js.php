@@ -58,7 +58,12 @@ $(window).load(function () {
 			parent: '<?php echo $row->parent_id; ?>',
 			title: "KINERJA UTAMA",
 			sasaran: "<?php echo $row->sasaran; ?>",
-			indikator: "<?php echo $row->indikator; ?>",
+			indikator: "<?php if($data = pohon_indikator($row->sasaran_id)){
+				foreach($data as $x){
+					echo ucwords(strtolower($x->indikator));
+					echo '; ';
+				}
+			}  ?>",
 			image: null,
 	        templateName: "Template1"
 		}),

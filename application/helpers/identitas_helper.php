@@ -550,3 +550,28 @@ if (! function_exists('periode'))
 		}
 	}
 }
+
+if (! function_exists('pohon_indikator'))
+{
+	function pohon_indikator($kode=null)
+	{
+		if($kode){
+			$result = array();
+			$CI =& get_instance();
+			$CI->db->where('sasaran_id', $kode);
+			$query = $CI->db->get('pohon_indikator');
+			if($query->num_rows() > 0){
+				//$data = $query->result();
+				// foreach($data as $x){
+				// 	$result = ucwords(strtolower($x->indikator)).';';
+				// 	//$resutl .= ';';
+				// 	//$result = 'hallo';
+				// }
+				//return $result;
+				return $query->result();
+			}else{
+				return FALSE;
+			}
+		}
+	}
+}
