@@ -58,7 +58,12 @@ $(window).load(function () {
 			parent: '<?php echo $row->parent_id; ?>',
 			title: "KINERJA UTAMA",
 			sasaran: "<?php echo $row->sasaran; ?>",
-			indikator: "<?php echo $row->indikator; ?>",
+			indikator: "<?php if($data = pohon_indikator($row->sasaran_id)){
+				foreach($data as $x){
+					echo ucwords(strtolower($x->indikator));
+					echo '; ';
+				}
+			}  ?>",
 			image: null,
 	        templateName: "Template1"
 		}),
@@ -116,14 +121,14 @@ $(window).load(function () {
 	function getTemplate() {
 		var result = new primitives.orgdiagram.TemplateConfig();
 		result.name = "Template1";
-		result.itemSize = new primitives.common.Size(300, 180);
+		result.itemSize = new primitives.common.Size(380, 210);
 		result.minimizedItemSize = new primitives.common.Size(3, 3);
 		result.highlightPadding = new primitives.common.Thickness(3, 3, 3, 3);
 
 
 		var itemTemplate = jQuery(
-		  '<div class="bp-item bp-corner-all bt-item-frame">' + '<div name="title" class="bp-item" style="text-align:center; top: 10px; left: 10px; right: 10px; font-size: 13px;"></div>'
-			+ '<div name="sasaran" class="bp-item" style="text-align:left; top: 40px; left: 10px; right: 10px; font-size: 11px;"></div>' + '<div name="indikator" class="bp-item" style="text-align:left; top: 115px; left: 10px; right: 10px; font-size: 11px;"></div>'
+		  '<div class="bp-item bp-corner-all bt-item-frame">' + '<div name="title" class="bp-item" style="text-align:center; top: 10px; left: 10px; right: 10px; font-size: 12px;"></div>'
+			+ '<div name="sasaran" class="bp-item" style="text-align:left; top: 35px; left: 10px; right: 10px; font-size: 11px;"></div>' + '<div name="indikator" class="bp-item" style="text-align:left; top: 100px; left: 10px; right: 10px; font-size: 11px;"></div>'
 		+ '</div>'
 		).css({
 			width: result.itemSize.width + "px",

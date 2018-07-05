@@ -9,8 +9,8 @@ class Tupoksi_m extends MY_Model
 	public $protected = array(); // ...Or you can set an array with the fields that cannot be filled by insert/update
 	
 	//ajax datatable
-    public $column_order = array('id','tujuan','fungsi',null); //set kolom field database pada datatable secara berurutan
-    public $column_search = array('tujuan','fungsi'); //set kolom field database pada datatable untuk pencarian
+    public $column_order = array('id','tugas','fungsi',null); //set kolom field database pada datatable secara berurutan
+    public $column_search = array('tugas','fungsi'); //set kolom field database pada datatable untuk pencarian
     public $order = array('id' => 'ASC'); //order baku 
 	
 	public function __construct()
@@ -87,6 +87,9 @@ class Tupoksi_m extends MY_Model
     {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
+        $this->db->where('deleted_at', NULL);
+        
+        if($this->session->userdata('level') != 1) $this->db->where('satker_id', $this->session->userdata('satker'));
         $this->db->where('deleted_at', NULL);
 		$this->db->limit($_POST['length'], $_POST['start']);
         $query = $this->db->get();

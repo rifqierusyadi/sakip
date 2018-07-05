@@ -559,6 +559,7 @@ if (! function_exists('pohon_indikator'))
 			$result = array();
 			$CI =& get_instance();
 			$CI->db->where('sasaran_id', $kode);
+			$CI->db->where('deleted_at', null);
 			$query = $CI->db->get('pohon_indikator');
 			if($query->num_rows() > 0){
 				//$data = $query->result();

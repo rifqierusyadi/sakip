@@ -312,7 +312,7 @@ class Program extends CI_Controller {
 
 	public function get_tahun(){
 		//echo 'hallo';
-        $record = $this->data->get_id($this->uri->segment(4));
+        $record = $this->data->get_id($this->input->post('record_id'));
         $periode = $this->input->post('periode_id');
         $tahun = $this->data->get_tahun($periode);
         if(!empty($tahun)){

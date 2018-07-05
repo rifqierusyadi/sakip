@@ -68,9 +68,9 @@ class Iku_m extends MY_Model
 	public function get_data($periode=null,$satker=null, $jabatan=null)
 	{
 		if($jabatan != null){
-			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL LEFT JOIN sakip_pohon_jabatan d ON a.id = d.deskripsi_id WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' AND d.jabatan = '{$jabatan}' ORDER BY c.eselon_id ASC");
+			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id LEFT JOIN sakip_pohon_jabatan d ON a.id = d.deskripsi_id WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' AND d.jabatan = '{$jabatan}' AND c.deleted_at is NULL ORDER BY c.eselon_id ASC");
 		}else{
-			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id AND b.deleted_at is NULL LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id AND c.deleted_at is NULL WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' ORDER BY c.eselon_id ASC");
+			$query = $this->db->query("SELECT a.id, a.deskripsi, a.sumber, b.indikator, b.id as indikator_id, c.sasaran FROM sakip_pohon_deskripsi a LEFT JOIN sakip_pohon_indikator b ON a.indikator_id = b.id LEFT JOIN sakip_pohon c ON c.id = b.sasaran_id WHERE b.periode_id = '{$periode}' AND b.satker_id = '{$satker}' AND c.deleted_at IS NULL ORDER BY c.eselon_id ASC");
 		}
 		if($query->num_rows() > 0)
 		{

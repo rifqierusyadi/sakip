@@ -22,7 +22,7 @@
 								<tr>
 									<th width="5px"><input type="checkbox" id="check-all"></th>
 									<th>Jabatan</th>
-									<th>Tujuan</th>
+									<th>Tugas</th>
 									<th>Fungsi</th>
 									<th width="30px">Aksi</th>
 								</tr>

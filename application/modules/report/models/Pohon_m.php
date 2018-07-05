@@ -52,7 +52,7 @@ class Pohon_m extends MY_Model
 	
 	public function get_data($id=null, $satker=null)
     {
-        $this->db->select('a.*, b.indikator');
+        $this->db->select('a.*, b.sasaran_id, b.indikator');
         $this->db->from('pohon a');
         $this->db->join('pohon_indikator b', 'a.id = b.sasaran_id','LEFT');
         $this->db->where('a.deleted_at', NULL);

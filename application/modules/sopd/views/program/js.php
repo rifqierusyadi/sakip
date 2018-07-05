@@ -87,6 +87,26 @@ $('#tahun').html(msg);
 }
 });
 
+//ready
+$("#periode_id").ready(function(){
+var periode_id = $("#periode_id").val();
+if(periode_id){
+$.ajax({
+type: "POST",
+async: false,
+url : "<?php echo site_url('sopd/program/get_tahun')?>",
+data: {
+'periode_id': periode_id,
+'record_id': <?= $this->uri->segment(4); ?>,
+'<?php echo $this->security->get_csrf_token_name(); ?>' : '<?php echo $this->security->get_csrf_hash(); ?>'
+},
+success: function(msg){
+$('#tahun').html(msg);
+}
+});
+}
+});
+
 // $("#total").focus(function() {
 //     var arr = document.getElementsByName('nilai[]');
 //     var tot=0;
